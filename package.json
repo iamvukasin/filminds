@@ -1,0 +1,12 @@
+{
+  "name": "Filminds",
+  "version": "0.1.0",
+  "description": "Personal assistant for movie recommendations",
+  "scripts": {
+    "serve": "gulp serve"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^4.0.0"
+  }
+}
