@@ -1,0 +1,29 @@
+.logo {
+    width: 32px;
+}
+
+.logo-text {
+    margin-left: 12px;
+    font-size: 24px;
+    font-family: "Cabin";
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.service {
+    display: flex;
+    flex-direction: column;
+}
+
+.service__content {
+    width: 100%;
+    margin: 0 auto;
+    padding-top: 64px;
+    display: flex;
+    flex-grow: 1;
+    overflow: hidden;
+}
+
+.service__main-content {
+    flex-grow: 1;
+}

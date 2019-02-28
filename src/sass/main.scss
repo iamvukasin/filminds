@@ -1,0 +1,16 @@
+$mdc-theme-primary: #2e2a5d !default;
+$mdc-theme-primary-light: #897fbb;
+$mdc-theme-secondary: #00b0ff !default;
+
+@import "@material/theme/mdc-theme";
+@import "@material/layout-grid/mdc-layout-grid";
+@import "@material/top-app-bar/mdc-top-app-bar";
+@import "@material/drawer/mdc-drawer";
+@import "@material/list/mdc-list";
+@import "@material/textfield/mdc-text-field";
+@import "@material/elevation/mdc-elevation";
+@import "@material/top-app-bar/mdc-top-app-bar";
+
+@import "_common";
+@import "_layout";
+@import "_chat";

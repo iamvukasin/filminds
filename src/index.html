@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Filminds</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons|Cabin:600">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body class="service">
+    <!-- Top App Bar -->
+    <header class="mdc-top-app-bar">
+        <div class="mdc-top-app-bar__row">
+            <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+                <img class="material-icons logo" src="images/logo.svg"/>
+                <span class="logo-text">Filminds</span>
+            </section>
+            <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
+                <a href="#" class="material-icons mdc-top-app-bar__action-item" aria-label="Sign out" alt="Sign out">exit_to_app</a>
+            </section>
+        </div>
+    </header>
+
+    <div class="service__content">
+        <!-- Drawer menu bar -->
+        <aside class="mdc-drawer">
+            <div class="mdc-drawer__content">
+                <nav class="mdc-list">
+                    <a class="mdc-list-item mdc-list-item--activated" href="#" aria-selected="true">
+                        <i class="material-icons mdc-list-item__graphic" aria-hidden="true">chat_bubble</i>
+                        <span class="mdc-list-item__text">Chat</span>
+                    </a>
+                    <a class="mdc-list-item" href="#">
+                        <i class="material-icons mdc-list-item__graphic" aria-hidden="true">favorite</i>
+                        <span class="mdc-list-item__text">Favorites</span>
+                    </a>
+                    <a class="mdc-list-item" href="#">
+                        <i class="material-icons mdc-list-item__graphic" aria-hidden="true">movie</i>
+                        <span class="mdc-list-item__text">Watched</span>
+                    </a>
+                    <a class="mdc-list-item" href="#">
+                        <i class="material-icons mdc-list-item__graphic" aria-hidden="true">stars</i>
+                        <span class="mdc-list-item__text">Expert picks</span>
+                    </a>
+                    <hr class="mdc-list-divider">
+                    <a class="mdc-list-item" href="#">
+                        <i class="material-icons mdc-list-item__graphic" aria-hidden="true">library_add</i>
+                        <span class="mdc-list-item__text">Add expert picks</span>
+                    </a>
+                    <a class="mdc-list-item" href="#">
+                        <i class="material-icons mdc-list-item__graphic" aria-hidden="true">bar_chart</i>
+                        <span class="mdc-list-item__text">Statistics</span>
+                    </a>
+                </nav>
+            </div>
+        </aside>
+
+        <!-- Content -->
+        <main class="service__main-content">
+            <div class="chat">
+                <div class="chat__content">
+                    <div class="message__list">
+                        <div class="message__item message__item--user">
+                            <span class="message message--user">Hello</span>
+                        </div>
+                    </div>
+                    <div class="message__list">
+                        <img class="bot__image" src="images/logo.svg">
+                        <div class="message__item message__item--bot">
+                            <span class="message message--bot">Hello!</span>
+                        </div>
+                        <div class="message__item message__item--bot">
+                            <span class="message message--bot">How can I help you?</span>
+                        </div>
+                    </div>
+                    <div class="message__list">
+                        <div class="message__item message__item--user">
+                            <span class="message message--user">I want to watch a movie</span>
+                        </div>
+                    </div>
+                    <div class="message__list">
+                        <img class="bot__image" src="images/logo.svg">
+                        <div class="message__item message__item--bot">
+                            <span class="message message--bot">I recommend you 'A star is born'</span>
+                        </div>
+                        <div class="message__item message__item--bot">
+                            <span class="message message--bot">Bradley Cooper and Lady Gaga cast</span>
+                        </div>
+                    </div>
+                    <div class="message__list">
+                        <div class="message__item message__item--user">
+                            <span class="message message--user">Thank you</span>
+                        </div>
+                    </div>
+                    <div class="message__list">
+                        <img class="bot__image" src="images/logo.svg">
+                        <div class="message__item message__item--bot">
+                            <span class="message message--bot">Have a nice day</span>
+                        </div>
+                        <div class="message__item message__item--bot">
+                            <span class="message message--bot">Bye</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Field for sending text -->
+                <div class="chat__send-field mdc-elevation--z10">
+                    <div class="mdc-text-field text-field mdc-text-field--outlined mdc-text-field--with-trailing-icon mdc-text-field--no-label">
+                        <input type="text" class="mdc-text-field__input" placeholder="Send message...">
+                        <i class="material-icons mdc-text-field__icon mdc-theme--secondary">send</i>
+                        <div class="mdc-notched-outline mdc-notched-outline--no-label">
+                            <div class="mdc-notched-outline__leading"></div>
+                            <div class="mdc-notched-outline__trailing"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
