@@ -1,6 +1,7 @@
 const { src, dest, parallel, series, watch } = require("gulp");
 const sass = require("gulp-sass");
 const minifyCSS = require("gulp-csso");
+const svgo = require("gulp-svgo");
 const browsersync = require("browser-sync").create();
 
 function html() {
@@ -13,6 +14,12 @@ function css() {
         .pipe(sass({ includePaths: ['node_modules/'] }))
         .pipe(minifyCSS())
         .pipe(dest("dist/css"))
+}
+
+function svgImages() {
+    return src("src/images/*.svg")
+        .pipe(svgo())
+        .pipe(dest("dist/images"));
 }
 
 function run(done) {
@@ -33,13 +40,15 @@ function reload(done) {
 function watchFiles() {
     watch("src/sass/**/*.scss", series(css, reload));
     watch("src/**/*.html", series(html, reload));
+    watch("src/images/*.svg", series(svgImages, reload));
 }
 
 // complex tasks
-const build = parallel(html, css);
+const build = parallel(html, css, svgImages);
 const serve = parallel(watchFiles, run);
 
 exports.css = css;
 exports.html = html;
+exports.images = svgImages;
 exports.serve = serve;
 exports.default = build;
