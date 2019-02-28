@@ -1,7 +1,7 @@
 .chat {
-	height: 100%;
-	display: flex;
-	flex-direction: column;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .chat__content {
@@ -11,12 +11,12 @@
 }
 
 .chat__send-field {
-	height: 55px;
-	padding: 8px;
+    height: 55px;
+    padding: 8px;
 
-	.mdc-text-field {
-		width: 100%;
-	}
+    .mdc-text-field {
+        width: 100%;
+    }
 }
 
 .message__list {
