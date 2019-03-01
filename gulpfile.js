@@ -45,7 +45,10 @@ function watchFiles() {
 
 // complex tasks
 const build = parallel(html, css, svgImages);
-const serve = parallel(watchFiles, run);
+const serve = series(
+    build,
+    parallel(watchFiles, run)
+);
 
 exports.css = css;
 exports.html = html;
