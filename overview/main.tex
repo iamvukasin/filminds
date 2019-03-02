@@ -1,0 +1,78 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[serbianc]{babel}
+\usepackage{fullwidth}
+\usepackage{tabularx}
+\usepackage{makecell}
+
+% section prefixes
+\makeatletter
+\renewcommand{\@seccntformat}[1]{%
+    \ifcsname prefix@#1\endcsname
+        \csname prefix@#1\endcsname
+    \else
+        \csname the#1\endcsname\quad
+    \fi}
+% define \prefix@section
+\newcommand\prefix@section{\thesection. }
+\makeatother
+
+\begin{document}
+
+\begin{titlepage}
+\begin{center}
+    Универзитет у Београду \\
+    Електротехнички факултет \\
+    Катедра за рачунарску технику и информатику \\
+    \vfill
+
+    {\fontsize{50}{60}\selectfont Filminds}
+    \vskip 0.6cm
+
+    {\large Пројекат из предмета Принципи софтверског инжењерства }
+    \vskip 0.3cm
+
+    {\large Тим: Super Trio Mario}
+    \vskip 0.3cm
+
+    {\large Верзија 1.0}
+
+    \vfill
+    \vfill
+
+    Март 2019.
+    \hfill
+\end{center}
+\end{titlepage}
+
+\section*{Историја измена}
+\noindent
+\setcellgapes{4pt}
+\makegapedcells
+\begin{tabularx}{\linewidth}{|l|l|X|l|}
+    \hline
+    \textbf{Датум} & \textbf{Верзија} & \textbf{Кратак опис} & \textbf{Аутор} \\
+    \hline
+    2.3.2019. & 1.0 & Опис & Вукашин Манојловић \\
+    \hline
+    & & & \\
+    \hline
+\end{tabularx}
+\newpage
+
+\tableofcontents
+\newpage
+
+\input{_intro.tex}
+\input{_description.tex}
+\input{_users.tex}
+\input{_project.tex}
+\input{_requests.tex}
+\input{_limits.tex}
+\input{_quality.tex}
+\input{_other-requests.tex}
+\input{_docs.tex}
+\input{_plan.tex}
+
+\end{document}
