@@ -1,0 +1,55 @@
+@import "chartist/dist/scss/chartist";
+
+$color-collection: ("#6f40e0", "#656be8", "#3a86f1", "#00bff6", "#22d1da", $mdc-theme-primary, "#080942");
+
+.statistics {
+    height: 100%;
+    overflow-y: auto;
+    background: #f7f7f7;
+
+    &:after {
+        content: '';
+        display: table;
+        clear: both;
+    }
+}
+
+.statistics__card {
+    padding: 16px;
+
+    h3 {
+        margin: 0 0 8px 0;
+        color: #3a3a3a;
+        text-align: center;
+    }
+}
+
+@for $i from 0 to length($color-collection) {
+    $color: unquote(nth($color-collection, $i+1));
+
+    .statistics__item--#{$i} {
+        fill: $color;
+    }
+
+    .ct-label {
+        fill: rgba(255, 255, 255, 0.8);
+    }
+}
+
+.statistics__users {
+    height: 300px;
+}
+
+.ct-series-a .ct-bar {
+    stroke-width: 20px;
+}
+
+.ct-series-a .ct-line,
+.ct-series-a .ct-bar,
+.ct-series-a .ct-point {
+    stroke: unquote(nth($color-collection, 3));
+}
+
+.ct-series-a .ct-area {
+    fill: unquote(nth($color-collection, 3));
+}

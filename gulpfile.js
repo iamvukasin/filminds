@@ -1,6 +1,7 @@
 const { src, dest, parallel, series, watch } = require("gulp");
 const sass = require("gulp-sass");
 const minifyCSS = require("gulp-csso");
+const concat = require("gulp-concat");
 const svgo = require("gulp-svgo");
 const browsersync = require("browser-sync").create();
 
@@ -14,6 +15,16 @@ function css() {
         .pipe(sass({ includePaths: ['node_modules/'] }))
         .pipe(minifyCSS())
         .pipe(dest("dist/css"))
+}
+
+function scripts() {
+    return src([
+            "node_modules/chartist/**/*.min.js",
+            "src/scripts/*.js"
+        ])
+        .pipe(concat("main.js"))
+        .pipe(dest("dist/scripts"))
+        .pipe(browsersync.stream());
 }
 
 function svgImages() {
@@ -40,11 +51,12 @@ function reload(done) {
 function watchFiles() {
     watch("src/sass/**/*.scss", series(css, reload));
     watch("src/**/*.html", series(html, reload));
+    watch("src/scripts/*.js", series(scripts, reload));
     watch("src/images/*.svg", series(svgImages, reload));
 }
 
 // complex tasks
-const build = parallel(html, css, svgImages);
+const build = parallel(html, css, scripts, svgImages);
 const serve = series(
     build,
     parallel(watchFiles, run)
@@ -52,6 +64,7 @@ const serve = series(
 
 exports.css = css;
 exports.html = html;
+exports.scripts = scripts;
 exports.images = svgImages;
 exports.serve = serve;
 exports.default = build;

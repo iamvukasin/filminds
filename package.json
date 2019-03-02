@@ -9,17 +9,21 @@
   "devDependencies": {
     "browser-sync": "^2.26.3",
     "gulp": "^4.0.0",
+    "gulp-concat": "^2.6.1",
     "gulp-csso": "^3.0.1",
     "gulp-sass": "^4.0.2",
     "gulp-svgo": "^2.1.0"
   },
   "dependencies": {
+    "@material/card": "^0.44.1",
     "@material/drawer": "^0.44.1",
     "@material/elevation": "^0.44.1",
     "@material/layout-grid": "^0.41.0",
     "@material/textfield": "^0.44.1",
     "@material/theme": "^0.43.0",
     "@material/toolbar": "^0.44.1",
-    "@material/top-app-bar": "^0.44.1"
+    "@material/top-app-bar": "^0.44.1",
+    "@material/typography": "^0.44.1",
+    "chartist": "^0.11.0"
   }
 }

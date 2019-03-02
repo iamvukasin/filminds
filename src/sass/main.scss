@@ -10,7 +10,11 @@ $mdc-theme-secondary: #00b0ff !default;
 @import "@material/textfield/mdc-text-field";
 @import "@material/elevation/mdc-elevation";
 @import "@material/top-app-bar/mdc-top-app-bar";
+@import "@material/layout-grid/mdc-layout-grid";
+@import "@material/typography/mdc-typography";
+@import "@material/card/mdc-card";
 
 @import "_common";
 @import "_layout";
 @import "_chat";
+@import "_stats";

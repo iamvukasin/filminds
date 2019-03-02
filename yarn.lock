@@ -12,6 +12,18 @@
   resolved "https://registry.yarnpkg.com/@material/base/-/base-0.41.0.tgz#badadce711b4c25b1eb889a5e7581e32cd07c421"
   integrity sha512-tEyzwBRu3d1H120SfKsDVYZHcqT5lKohh/7cWKR93aAaPDkSvjpKJIjyu2yuSkjpDduVZGzVocYbOvhUKhhzXQ==
 
+"@material/card@^0.44.1":
+  version "0.44.1"
+  resolved "https://registry.yarnpkg.com/@material/card/-/card-0.44.1.tgz#e72efba79e716143d530c75ecf18216aaa3c7499"
+  integrity sha512-SNun2DrzYMXTRfGUSTKkKRCO+2MIuRd+2j3FhjyBUDCaPDoqaHbDIK75vTSXlsE/xCXuJ4Uv4M/w0XS7RRHM0g==
+  dependencies:
+    "@material/elevation" "^0.44.1"
+    "@material/feature-targeting" "^0.44.1"
+    "@material/ripple" "^0.44.1"
+    "@material/rtl" "^0.42.0"
+    "@material/shape" "^0.44.1"
+    "@material/theme" "^0.43.0"
+
 "@material/dom@^0.41.0":
   version "0.41.0"
   resolved "https://registry.yarnpkg.com/@material/dom/-/dom-0.41.0.tgz#6756865f97bad4c91ee75e69d769d7cdc25398ae"
@@ -770,6 +782,11 @@ chalk@^2.3.0, chalk@^2.4.1:
     escape-string-regexp "^1.0.5"
     supports-color "^5.3.0"
 
+chartist@^0.11.0:
+  version "0.11.0"
+  resolved "https://registry.yarnpkg.com/chartist/-/chartist-0.11.0.tgz#84ba5e05490d096d93dcfa9343ebc31ef6a3bd28"
+  integrity sha1-hLpeBUkNCW2T3PqTQ+vDHvajvSg=
+
 chokidar@^2.0.0, chokidar@^2.0.4:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-2.1.2.tgz#9c23ea40b01638439e0513864d362aeacc5ad058"
@@ -926,6 +943,13 @@ concat-stream@^1.6.0:
     inherits "^2.0.3"
     readable-stream "^2.2.2"
     typedarray "^0.0.6"
+
+concat-with-sourcemaps@^1.0.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/concat-with-sourcemaps/-/concat-with-sourcemaps-1.1.0.tgz#d4ea93f05ae25790951b99e7b3b09e3908a4082e"
+  integrity sha512-4gEjHJFT9e+2W/77h/DS5SGUgwDaOwprX8L/gl5+3ixnzkVJJsZWDSelmN3Oilw3LNDZjZV0yqH1hLG3k6nghg==
+  dependencies:
+    source-map "^0.6.1"
 
 connect-history-api-fallback@^1:
   version "1.6.0"
@@ -1870,6 +1894,15 @@ gulp-cli@^2.0.0:
     semver-greatest-satisfied-range "^1.1.0"
     v8flags "^3.0.1"
     yargs "^7.1.0"
+
+gulp-concat@^2.6.1:
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/gulp-concat/-/gulp-concat-2.6.1.tgz#633d16c95d88504628ad02665663cee5a4793353"
+  integrity sha1-Yz0WyV2IUEYorQJmVmPO5aR5M1M=
+  dependencies:
+    concat-with-sourcemaps "^1.0.0"
+    through2 "^2.0.0"
+    vinyl "^2.0.0"
 
 gulp-csso@^3.0.1:
   version "3.0.1"
@@ -3887,6 +3920,11 @@ source-map@^0.5.1, source-map@^0.5.3, source-map@^0.5.6:
   version "0.5.7"
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.5.7.tgz#8a039d2d1021d22d1ea14c80d8ea468ba2ef3fcc"
   integrity sha1-igOdLRAh0i0eoUyA2OpGi6LvP8w=
+
+source-map@^0.6.1:
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.6.1.tgz#74722af32e9614e9c287a8d0bbde48b5e2f1a263"
+  integrity sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==
 
 sparkles@^1.0.0:
   version "1.0.1"
