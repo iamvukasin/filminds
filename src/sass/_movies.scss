@@ -1,0 +1,39 @@
+$card-spacing: 16px;
+
+.favorites {
+	height: 100%;
+	overflow-y: auto;
+	background: #f7f7f7;
+
+	&:after {
+        content: '';
+        display: table;
+        clear: both;
+    }
+}
+
+.movie-card {
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+
+    img {
+    	width: 100%;
+    }
+}
+
+.movie-card__content {
+    padding: $card-spacing $card-spacing 0 $card-spacing;
+    box-sizing: border-box;
+    flex-grow: 1;
+
+    .mdc-typography--headline6 {
+        margin: 0 0 $card-spacing / 2 0;
+    }
+}
+
+.movie-card__actions {
+    margin-bottom: $card-spacing / 2;
+    display: flex;
+    justify-content: flex-end;
+}

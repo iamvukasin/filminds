@@ -13,8 +13,11 @@ $mdc-theme-secondary: #00b0ff !default;
 @import "@material/layout-grid/mdc-layout-grid";
 @import "@material/typography/mdc-typography";
 @import "@material/card/mdc-card";
+@import "@material/button/mdc-button";
+@import "@material/icon-button/mdc-icon-button";
 
 @import "_common";
 @import "_layout";
 @import "_chat";
 @import "_stats";
+@import "_movies";
