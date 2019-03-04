@@ -1,3 +1,5 @@
+$bot-messages-left-offset: 35px;
+
 .chat {
     height: 100%;
     display: flex;
@@ -6,7 +8,7 @@
 
 .chat__content {
     padding: 15px 10px;
-    overflow-y: scroll;
+    overflow: hidden scroll;
     flex-grow: 1;
 }
 
@@ -25,11 +27,15 @@
     list-style: none;
     width: 100%;
     position: relative;
-    
+
     &:after {
         content: '';
         display: table;
         clear: both;
+    }
+
+    & > :first-child {
+        margin-top: 16px;
     }
 }
 
@@ -57,13 +63,28 @@
 .message--bot {
     background-color: #eee;
     border-radius: 20px;
-    margin-left: 35px;
+    margin-left: $bot-messages-left-offset;
 }
 
 .message--user {
     background-color: $mdc-theme-primary-light;
     color: #fff;
     border-radius: 20px;
+}
+
+.message__movie-list {
+    width: 100%;
+    margin-left: $bot-messages-left-offset;
+    padding: 2px 0;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+
+    .movie-card {
+        max-width: 400px;
+        margin: 0 4px;
+        flex: 0 0 auto;
+    }
 }
 
 .bot__image {
