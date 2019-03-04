@@ -1,11 +1,11 @@
 $card-spacing: 16px;
 
-.favorites {
-	height: 100%;
-	overflow-y: auto;
-	background: #f7f7f7;
+.favorites, .watched {
+    height: 100%;
+    overflow-y: auto;
+    background: #f7f7f7;
 
-	&:after {
+    &:after {
         content: '';
         display: table;
         clear: both;
@@ -18,7 +18,7 @@ $card-spacing: 16px;
     flex-direction: column;
 
     img {
-    	width: 100%;
+        width: 100%;
     }
 }
 
