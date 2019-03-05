@@ -33,6 +33,14 @@ function svgImages() {
         .pipe(dest("dist/images"));
 }
 
+function rasterImages() {
+    return src([
+            "src/images/*.png",
+            "src/images/*.jpg"
+        ])
+        .pipe(dest("dist/images"));
+}
+
 function run(done) {
     browsersync.init({
         server: {
@@ -53,10 +61,11 @@ function watchFiles() {
     watch("src/**/*.html", series(html, reload));
     watch("src/scripts/*.js", series(scripts, reload));
     watch("src/images/*.svg", series(svgImages, reload));
+    watch(["src/images/*.png", "src/images/*.jpg"], series(rasterImages, reload));
 }
 
 // complex tasks
-const build = parallel(html, css, scripts, svgImages);
+const build = parallel(html, css, scripts, svgImages, rasterImages);
 const serve = series(
     build,
     parallel(watchFiles, run)
