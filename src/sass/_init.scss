@@ -1,3 +1,14 @@
+.home {
+    background-image: url("../images/background.png");
+    background-position: right bottom;
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    
+    .mdc-top-app-bar {
+        background: rgba($mdc-theme-primary, 0.9);
+    }
+}
+
 .init .mdc-top-app-bar__row,
 .init__grid {
     margin: 0 auto;
