@@ -1,0 +1,38 @@
+.init .mdc-top-app-bar__row,
+.init__grid {
+    margin: 0 auto;
+}
+
+.init .mdc-top-app-bar__row,
+.home__grid {
+    width: 70%;
+}
+
+.register__grid {
+    width: 25%;
+}
+
+.init__content,
+.init__main-content,
+.init__grid,
+.init__grid > .mdc-layout-grid__inner {
+    height: 100%;
+}
+
+.init__grid .mdc-layout-grid__cell {
+    align-self: center;
+}
+
+.init__text-input {
+    height: 50px;
+    display: flex;
+    margin-bottom: 40px;
+}
+
+.register-button {
+    float: right;
+}
+
+.proceed-button {
+    margin-top: 40px;
+}

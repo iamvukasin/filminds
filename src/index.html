@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Filminds</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons|Cabin:600">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body class="init home">
+    <!-- Top App Bar -->
+    <header class="mdc-top-app-bar">
+        <div class="mdc-top-app-bar__row">
+            <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+                <img class="material-icons logo" src="images/logo.svg"/>
+                <span class="logo-text">Filminds</span>
+            </section>
+        </div>
+    </header>
+
+    <div class="init__content">
+        <!-- Content -->
+        <main class="init__main-content">
+            <div class="mdc-layout-grid init__grid home__grid">
+                <div class="mdc-layout-grid__inner">
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
+                        <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--no-label init__text-input">
+                            <input type="text" class="mdc-text-field__input" aria-label="Label" placeholder="Username">
+                            <div class="mdc-notched-outline">
+                                <div class="mdc-notched-outline__leading"></div>
+                                <div class="mdc-notched-outline__trailing"></div>
+                            </div>
+                        </div>
+
+                        <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--no-label init__text-input">
+                            <input type="password" class="mdc-text-field__input" aria-label="Label" placeholder="Password">
+                            <div class="mdc-notched-outline">
+                                <div class="mdc-notched-outline__leading"></div>
+                                <div class="mdc-notched-outline__trailing"></div>
+                            </div>
+                        </div>
+
+                        <button class="mdc-button mdc-button--raised">
+                            <span class="mdc-button__label">Login</span>
+                        </button>
+                        <a href="register.html">
+                            <button class="mdc-button register-button">
+                                <span class="mdc-button__label">Register</span>
+                            </button>
+                        </a>
+                        <div class="proceed-button">
+                            <a href="chat.html">Proceed without login</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
