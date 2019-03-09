@@ -36,3 +36,80 @@ $card-spacing: 16px;
     display: flex;
     justify-content: flex-end;
 }
+
+.movie-info-header {
+    background: none;
+    position: relative;
+}
+
+.movie-info__grid {
+    max-width: 1350px;
+    margin: 0 auto;
+
+    .mdc-typography--headline6 {
+        margin: $card-spacing 0 $card-spacing / 2 0;
+    }
+}
+
+.movie-info__poster {
+    width: 90%;
+
+    @include mdc-layout-grid-media-query_(phone) {
+        width: 100%;
+    }
+}
+
+.movie-info__name {
+    margin: $card-spacing / 2 0;
+    font-family: "Cabin", sans-serif;
+    font-weight: bold;
+}
+
+.movie-info__year {
+    color: lighten(#000000, 40%);
+    font-size: 0.75em;
+    font-weight: normal;
+}
+
+.movie-info__rating {
+    display: flex;
+    align-items: flex-end;
+
+    .movie-info__number-rating {
+        font-size: 18px;
+        margin-left: 8px;
+    }
+}
+
+.movie-info__star {
+    color: #fdd835;
+}
+
+.movie-info__overview {
+    margin: 16px 0;
+}
+
+.movie-info__cast {
+    @include mdc-layout-grid-cell("phone", 2, 16px);
+
+    @include mdc-layout-grid-media-query_(desktop) {
+        @include mdc-layout-grid-cell("desktop", 3, 16px);
+    }
+
+    @include mdc-layout-grid-media-query_(tablet) {
+        @include mdc-layout-grid-cell("tablet", 2, 16px);
+    }
+
+    img {
+        width: 100%;
+    }
+
+    p:first-of-type {
+        margin: 16px 16px 8px 16px;
+    }
+
+    p:last-of-type {
+        margin: 0 16px 16px 16px;
+    }
+}
+
