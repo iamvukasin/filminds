@@ -22,6 +22,7 @@
     "@material/elevation": "^0.44.1",
     "@material/icon-button": "^0.44.1",
     "@material/layout-grid": "^0.41.0",
+    "@material/select": "^1.0.0",
     "@material/textfield": "^0.44.1",
     "@material/theme": "^0.43.0",
     "@material/toolbar": "^0.44.1",

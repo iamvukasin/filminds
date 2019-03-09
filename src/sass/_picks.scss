@@ -1,0 +1,48 @@
+.expert-picks {
+    height: 100%;
+    overflow-y: auto;
+    background: #f7f7f7;
+}
+
+.expert-picks__header {
+    display: flex;
+    justify-content: space-between;
+    margin: 8px 16px 0 16px;
+
+    & > * {
+        margin: 0;
+        align-self: center;
+    }
+}
+
+.expert-picks__content {
+    margin: 16px;
+}
+
+.expert-pick {
+    height: 80px;
+    padding: 8px;
+    display: flex;
+
+    &:nth-child(2n) {
+        background: #f6f6f5;
+    }
+}
+
+.movie-poster {
+    height: 100%;
+
+    img {   
+        height: 100%;
+    }
+}
+
+.movie-title {
+    margin-left: 16px;
+    flex-grow: 1;
+    align-self: center;
+}
+
+.movie-actions {
+    align-self: center;
+}

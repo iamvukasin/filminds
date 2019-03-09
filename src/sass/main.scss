@@ -15,6 +15,7 @@ $mdc-theme-secondary: #00b0ff !default;
 @import "@material/card/mdc-card";
 @import "@material/button/mdc-button";
 @import "@material/icon-button/mdc-icon-button";
+@import "@material/select/mdc-select";
 
 @import "_common";
 @import "_layout";
@@ -22,3 +23,4 @@ $mdc-theme-secondary: #00b0ff !default;
 @import "_chat";
 @import "_stats";
 @import "_movies";
+@import "_picks";
