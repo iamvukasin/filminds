@@ -26,6 +26,7 @@
     "@material/toolbar": "^0.44.1",
     "@material/top-app-bar": "^0.44.1",
     "@material/typography": "^0.44.1",
-    "chartist": "^0.11.0"
+    "chartist": "^0.11.0",
+    "del": "^4.0.0"
   }
 }

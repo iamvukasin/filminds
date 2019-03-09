@@ -4,6 +4,7 @@ const minifyCSS = require("gulp-csso");
 const concat = require("gulp-concat");
 const svgo = require("gulp-svgo");
 const browsersync = require("browser-sync").create();
+const del = require("del");
 
 function html() {
     return src("src/*.html")
@@ -56,6 +57,10 @@ function reload(done) {
     done();
 }
 
+function clean() {
+    return del(["dist/"]);
+}
+
 function watchFiles() {
     watch("src/sass/**/*.scss", series(css, reload));
     watch("src/**/*.html", series(html, reload));
@@ -65,7 +70,10 @@ function watchFiles() {
 }
 
 // complex tasks
-const build = parallel(html, css, scripts, svgImages, rasterImages);
+const build = series(
+    clean,
+    parallel(html, css, scripts, svgImages, rasterImages)
+);
 const serve = series(
     build,
     parallel(watchFiles, run)
@@ -76,4 +84,5 @@ exports.html = html;
 exports.scripts = scripts;
 exports.images = svgImages;
 exports.serve = serve;
+exports.clean = clean;
 exports.default = build;
