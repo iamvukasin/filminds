@@ -44,16 +44,23 @@
     margin-bottom: 32px;
 }
 
-.service-slogan {
+.service-slogan,
+.register__heading {
     margin: -32px 0 0 0;
     color: lighten(#000000, 20%);
     font-family: "Cabin", sans-serif;
     font-weight: bold;
 }
 
-.service-description {
+.service-description,
+.register__terms {
     margin: 24px 0 32px 0;
     color: lighten(#000000, 40%);
+
+    a {
+        color: lighten(#000000, 40%);
+        font-weight: bold;
+    }
 }
 
 .home .register-button {
