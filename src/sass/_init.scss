@@ -3,10 +3,14 @@
     background-position: right bottom;
     background-size: auto 100%;
     background-repeat: no-repeat;
-    
+
     .mdc-top-app-bar {
         background: rgba($mdc-theme-primary, 0.9);
     }
+}
+
+.init a {
+    text-decoration: none;
 }
 
 .init .mdc-top-app-bar__row,
@@ -37,11 +41,23 @@
 .init__text-input {
     height: 50px;
     display: flex;
-    margin-bottom: 40px;
+    margin-bottom: 32px;
 }
 
-.register-button {
-    float: right;
+.service-slogan {
+    margin: -32px 0 0 0;
+    color: lighten(#000000, 20%);
+    font-family: "Cabin", sans-serif;
+    font-weight: bold;
+}
+
+.service-description {
+    margin: 24px 0 32px 0;
+    color: lighten(#000000, 40%);
+}
+
+.home .register-button {
+    margin-left: 8px;
 }
 
 .proceed-button {
