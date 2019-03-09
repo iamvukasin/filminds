@@ -8,6 +8,7 @@
   "license": "MIT",
   "devDependencies": {
     "browser-sync": "^2.26.3",
+    "del": "^4.0.0",
     "gulp": "^4.0.0",
     "gulp-concat": "^2.6.1",
     "gulp-csso": "^3.0.1",
@@ -26,7 +27,6 @@
     "@material/toolbar": "^0.44.1",
     "@material/top-app-bar": "^0.44.1",
     "@material/typography": "^0.44.1",
-    "chartist": "^0.11.0",
-    "del": "^4.0.0"
+    "chartist": "^0.11.0"
   }
 }
