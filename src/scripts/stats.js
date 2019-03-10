@@ -1,3 +1,5 @@
+import * as Chartist from 'chartist';
+
 /**
  * Creates a horizontal bar chart inside the element selected with the
  * selector with provided data.

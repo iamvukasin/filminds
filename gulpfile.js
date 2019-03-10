@@ -1,8 +1,11 @@
 const { src, dest, parallel, series, watch } = require("gulp");
 const sass = require("gulp-sass");
 const minifyCSS = require("gulp-csso");
-const concat = require("gulp-concat");
 const svgo = require("gulp-svgo");
+const babelify = require("babelify")
+const browserify = require("browserify");
+const source = require("vinyl-source-stream");
+const buffer = require("vinyl-buffer");
 const browsersync = require("browser-sync").create();
 const del = require("del");
 
@@ -19,11 +22,15 @@ function css() {
 }
 
 function scripts() {
-    return src([
-            "node_modules/chartist/**/*.min.js",
-            "src/scripts/*.js"
-        ])
-        .pipe(concat("main.js"))
+    return browserify({
+            entries: ["src/scripts/main.js"]
+        })
+        .transform(babelify.configure({
+            presets: ["@babel/preset-env"]
+        }))
+        .bundle()
+        .pipe(source("main.js"))
+        .pipe(buffer())
         .pipe(dest("dist/scripts"))
         .pipe(browsersync.stream());
 }
