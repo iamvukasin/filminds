@@ -36,12 +36,12 @@
                         <i class="material-icons mdc-list-item__graphic" aria-hidden="true">movie</i>
                         <span class="mdc-list-item__text">Watched</span>
                     </a>
-                    <a class="mdc-list-item mdc-list-item--activated" href="#" aria-selected="true">
+                    <a class="mdc-list-item" href="expert-picks.html">
                         <i class="material-icons mdc-list-item__graphic" aria-hidden="true">stars</i>
                         <span class="mdc-list-item__text">Expert picks</span>
                     </a>
                     <hr class="mdc-list-divider">
-                    <a class="mdc-list-item" href="add-expert-picks.html">
+                    <a class="mdc-list-item mdc-list-item--activated" href="#" aria-selected="true">
                         <i class="material-icons mdc-list-item__graphic" aria-hidden="true">library_add</i>
                         <span class="mdc-list-item__text">Add expert picks</span>
                     </a>
@@ -58,19 +58,15 @@
             <div class="expert-picks">
                 <div class="expert-picks__header">
                     <h2 class="mdc-typography--headline5">Expert picks: Classics</h2>
-                    <div class="mdc-select expert-picks__select">
-                        <select class="mdc-select__native-control">
-                            <option value="classics" selected>
-                                Classics
-                            </option>
-                            <option value="comedies">
-                                Comedies
-                            </option>
-                            <option value="oscars">
-                                Oscars
-                            </option>
-                        </select>
-                        <div class="mdc-line-ripple"></div>
+                    <div>
+                        <button class="mdc-button mdc-button--raised" id="add-pick-button">
+                            <i class="material-icons mdc-button__icon" aria-hidden="true">add</i>
+                            <span class="mdc-button__label">Add movie</span>
+                        </button>
+                        <button class="mdc-button mdc-button--raised">
+                            <i class="material-icons mdc-button__icon" aria-hidden="true">save</i>
+                            <span class="mdc-button__label">Save</span>
+                        </button>
                     </div>
                 </div>
 
@@ -83,9 +79,9 @@
                             <h3>1. The Shawshank Redemption (1994)</h3>
                         </div>
                         <div class="table__column--shrinked table__column--multi-items">
-                            <button class="mdc-icon-button material-icons">done</button>
-                            <button class="mdc-icon-button material-icons">favorite</button>
-                            <button class="mdc-icon-button material-icons">info</button>
+                            <button class="mdc-icon-button material-icons expert-pick__up">arrow_upward</button>
+                            <button class="mdc-icon-button material-icons expert-pick__down">arrow_downward</button>
+                            <button class="mdc-icon-button material-icons expert-pick__delete">delete</button>
                         </div>
                     </div>
 
@@ -97,9 +93,9 @@
                             <h3>2. The Godfather (1972)</h3>
                         </div>
                         <div class="table__column--shrinked table__column--multi-items">
-                            <button class="mdc-icon-button material-icons">done</button>
-                            <button class="mdc-icon-button material-icons">favorite</button>
-                            <button class="mdc-icon-button material-icons">info</button>
+                            <button class="mdc-icon-button material-icons expert-pick__up">arrow_upward</button>
+                            <button class="mdc-icon-button material-icons expert-pick__down">arrow_downward</button>
+                            <button class="mdc-icon-button material-icons expert-pick__delete">delete</button>
                         </div>
                     </div>
 
@@ -111,9 +107,9 @@
                             <h3>3. Your Name. (2016)</h3>
                         </div>
                         <div class="table__column--shrinked table__column--multi-items">
-                            <button class="mdc-icon-button material-icons">done</button>
-                            <button class="mdc-icon-button material-icons">favorite</button>
-                            <button class="mdc-icon-button material-icons">info</button>
+                            <button class="mdc-icon-button material-icons expert-pick__up">arrow_upward</button>
+                            <button class="mdc-icon-button material-icons expert-pick__down">arrow_downward</button>
+                            <button class="mdc-icon-button material-icons expert-pick__delete">delete</button>
                         </div>
                     </div>
 
@@ -125,9 +121,9 @@
                             <h3>4. Schindler's List (1993)</h3>
                         </div>
                         <div class="table__column--shrinked table__column--multi-items">
-                            <button class="mdc-icon-button material-icons">done</button>
-                            <button class="mdc-icon-button material-icons">favorite</button>
-                            <button class="mdc-icon-button material-icons">info</button>
+                            <button class="mdc-icon-button material-icons expert-pick__up">arrow_upward</button>
+                            <button class="mdc-icon-button material-icons expert-pick__down">arrow_downward</button>
+                            <button class="mdc-icon-button material-icons expert-pick__delete">delete</button>
                         </div>
                     </div>
 
@@ -139,9 +135,9 @@
                             <h3>5. Life Is Beautiful (1997)</h3>
                         </div>
                         <div class="table__column--shrinked table__column--multi-items">
-                            <button class="mdc-icon-button material-icons">done</button>
-                            <button class="mdc-icon-button material-icons">favorite</button>
-                            <button class="mdc-icon-button material-icons">info</button>
+                            <button class="mdc-icon-button material-icons expert-pick__up">arrow_upward</button>
+                            <button class="mdc-icon-button material-icons expert-pick__down">arrow_downward</button>
+                            <button class="mdc-icon-button material-icons expert-pick__delete">delete</button>
                         </div>
                     </div>
 
@@ -153,9 +149,9 @@
                             <h3>6. Fight Club (1999)</h3>
                         </div>
                         <div class="table__column--shrinked table__column--multi-items">
-                            <button class="mdc-icon-button material-icons">done</button>
-                            <button class="mdc-icon-button material-icons">favorite</button>
-                            <button class="mdc-icon-button material-icons">info</button>
+                            <button class="mdc-icon-button material-icons expert-pick__up">arrow_upward</button>
+                            <button class="mdc-icon-button material-icons expert-pick__down">arrow_downward</button>
+                            <button class="mdc-icon-button material-icons expert-pick__delete">delete</button>
                         </div>
                     </div>
 
@@ -167,9 +163,9 @@
                             <h3>7. Forrest Gump (1994)</h3>
                         </div>
                         <div class="table__column--shrinked table__column--multi-items">
-                            <button class="mdc-icon-button material-icons">done</button>
-                            <button class="mdc-icon-button material-icons">favorite</button>
-                            <button class="mdc-icon-button material-icons">info</button>
+                            <button class="mdc-icon-button material-icons expert-pick__up">arrow_upward</button>
+                            <button class="mdc-icon-button material-icons expert-pick__down">arrow_downward</button>
+                            <button class="mdc-icon-button material-icons expert-pick__delete">delete</button>
                         </div>
                     </div>
 
@@ -181,9 +177,9 @@
                             <h3>8. 12 Angry Men (1957)</h3>
                         </div>
                         <div class="table__column--shrinked table__column--multi-items">
-                            <button class="mdc-icon-button material-icons">done</button>
-                            <button class="mdc-icon-button material-icons">favorite</button>
-                            <button class="mdc-icon-button material-icons">info</button>
+                            <button class="mdc-icon-button material-icons expert-pick__up">arrow_upward</button>
+                            <button class="mdc-icon-button material-icons expert-pick__down">arrow_downward</button>
+                            <button class="mdc-icon-button material-icons expert-pick__delete">delete</button>
                         </div>
                     </div>
 
@@ -195,9 +191,9 @@
                             <h3>9. One Flew Over the Cuckoo's Nest (1975)</h3>
                         </div>
                         <div class="table__column--shrinked table__column--multi-items">
-                            <button class="mdc-icon-button material-icons">done</button>
-                            <button class="mdc-icon-button material-icons">favorite</button>
-                            <button class="mdc-icon-button material-icons">info</button>
+                            <button class="mdc-icon-button material-icons expert-pick__up">arrow_upward</button>
+                            <button class="mdc-icon-button material-icons expert-pick__down">arrow_downward</button>
+                            <button class="mdc-icon-button material-icons expert-pick__delete">delete</button>
                         </div>
                     </div>
 
@@ -209,14 +205,45 @@
                             <h3>10. GoodFellas (1990)</h3>
                         </div>
                         <div class="table__column--shrinked table__column--multi-items">
-                            <button class="mdc-icon-button material-icons">done</button>
-                            <button class="mdc-icon-button material-icons">favorite</button>
-                            <button class="mdc-icon-button material-icons">info</button>
+                            <button class="mdc-icon-button material-icons expert-pick__up">arrow_upward</button>
+                            <button class="mdc-icon-button material-icons expert-pick__down">arrow_downward</button>
+                            <button class="mdc-icon-button material-icons expert-pick__delete">delete</button>
                         </div>
                     </div>
                 </div>
             </div>
         </main>
     </div>
+
+    <!-- Add movie dialog -->
+    <div id="add-movie-dialog" class="mdc-dialog" role="alertdialog" aria-modal="true" aria-labelledby="my-dialog-title" aria-describedby="my-dialog-content">
+        <div class="mdc-dialog__container">
+            <div class="mdc-dialog__surface">
+                <h2 class="mdc-dialog__title" id="my-dialog-title">Choose a Movie</h2>
+                <div class="mdc-dialog__content" id="my-dialog-content">
+                    <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--no-label movie-title-input">
+                        <input type="text" class="mdc-text-field__input" aria-label="Label" placeholder="Enter movie title">
+                        <div class="mdc-notched-outline">
+                            <div class="mdc-notched-outline__leading"></div>
+                            <div class="mdc-notched-outline__trailing"></div>
+                        </div>
+                    </div>
+
+                    <footer class="mdc-dialog__actions">
+                        <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="close">
+                            <span class="mdc-button__label">Cancel</span>
+                        </button>
+                        <button type="button" class="mdc-button mdc-dialog__button mdc-button--raised" data-mdc-dialog-action="accept">
+                            <span class="mdc-button__label">Add</span>
+                        </button>
+                  </footer>
+                </div>
+            </div>
+        </div>
+        <div class="mdc-dialog__scrim"></div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="scripts/main.js"></script>
 </body>
 </html>
