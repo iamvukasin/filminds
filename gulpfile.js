@@ -8,6 +8,7 @@ const source = require("vinyl-source-stream");
 const buffer = require("vinyl-buffer");
 const browsersync = require("browser-sync").create();
 const del = require("del");
+const uglify = require("gulp-uglify");
 
 function html() {
     return src("src/*.html")
@@ -31,6 +32,7 @@ function scripts() {
         .bundle()
         .pipe(source("main.js"))
         .pipe(buffer())
+        .pipe(uglify())
         .pipe(dest("dist/scripts"))
         .pipe(browsersync.stream());
 }
