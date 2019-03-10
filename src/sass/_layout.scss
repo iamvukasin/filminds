@@ -29,3 +29,30 @@
 .service__main-content {
     flex-grow: 1;
 }
+
+/* Table */
+
+.table__row {
+    height: 64px;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+
+    &:nth-child(2n) {
+        background: #f6f6f5;
+    }
+
+    & > * {
+        flex: 1;  // all columns have same width and height
+    }
+}
+
+.table__column--shrinked {
+    flex: 0
+}
+
+.table__column--multi-items {
+    display: flex;
+}
