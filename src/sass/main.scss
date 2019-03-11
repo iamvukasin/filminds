@@ -18,6 +18,7 @@ $mdc-theme-secondary: #00b0ff !default;
 @import "@material/top-app-bar/mdc-top-app-bar";
 @import "@material/typography/mdc-typography";
 
+@import "_admin";
 @import "_chat";
 @import "_common";
 @import "_init";

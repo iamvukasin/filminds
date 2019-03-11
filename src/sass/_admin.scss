@@ -1,0 +1,16 @@
+.admin-dashboard {
+    height: 100%;
+    padding: 16px;
+    overflow-y: auto;
+    background: #f7f7f7;
+}
+
+#remove-users-heading {
+    margin-top: 0;
+}
+
+.admin__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
