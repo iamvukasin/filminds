@@ -1,2 +1,2 @@
-import * as stats from "./stats";
+import "./stats";
 import "./add-expert-picks";

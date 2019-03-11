@@ -1,7 +1,5 @@
 import { MDCDialog } from "@material/dialog";
 
-const addMovieDialog = new MDCDialog(document.querySelector('#add-movie-dialog'));
-
 function replaceMovieTitle(element, index, promote) {
     var movieTitle = $(element).find(".movie-title h3");
     var newIndex = (promote ? index : index + 2);
@@ -50,16 +48,15 @@ function onAddButtonClick() {
     addMovieDialog.open();
 }
 
-$(".expert-pick__up").each(function (i, obj) {
-    obj.onclick = onUpButtonClick(obj);
-})
+const dialog = new MDCDialog(document.querySelector(".mdc-dialog"));
+const expertPicksUpButtons = $(".expert-pick__up");
+const expertPicksDownButtons = $(".expert-pick__down");
+const expertPicksDeleteButtons = $(".expert-pick__delete");
+const addPickButton = $("#add-pick-button");
+const addExpertButton = $("#add-expert-button");
 
-$(".expert-pick__down").each(function (i, obj) {
-    obj.onclick = onDownButtonClick(obj);
-})
+expertPicksUpButtons.each((i, obj) => obj.onclick = onUpButtonClick(obj));
+expertPicksDownButtons.each((i, obj) => obj.onclick = onDownButtonClick(obj));
+expertPicksDeleteButtons.each((i, obj) => obj.onclick = onDeleteButtonClick(obj));
 
-$(".expert-pick__delete").each(function (i, obj) {
-    obj.onclick = onDeleteButtonClick(obj);
-})
-
-$("#add-pick-button").click(onAddButtonClick);
+addPickButton?.click(() => dialog.open());
