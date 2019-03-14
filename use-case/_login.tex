@@ -1,0 +1,143 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[serbianc]{babel}
+\usepackage{fullwidth}
+\usepackage{tabularx}
+\usepackage{makecell}
+\usepackage{enumitem}
+
+% section prefixes
+\makeatletter
+\renewcommand{\@seccntformat}[1]{%
+  \ifcsname prefix@#1\endcsname
+    \csname prefix@#1\endcsname
+  \else
+    \csname the#1\endcsname\quad
+  \fi}
+% define \prefix@section
+\newcommand\prefix@section{\thesection. }
+\makeatother
+
+\begin{document}
+
+\begin{titlepage}
+\begin{center}
+  Универзитет у Београду \\
+  Електротехнички факултет \\
+  Катедра за рачунарску технику и информатику \\
+  \vfill
+
+  {\fontsize{50}{60}\selectfont Filminds}
+  \vskip 0.6cm
+
+  {\large Спецификација сценарија употребе функционалности ауторизације и пријављивања корисника }
+  \vskip 0.3cm
+  
+  {\large Тим: Super Trio Mario}
+  \vskip 0.3cm
+
+  {\large Верзија 1.0}
+
+  \vfill
+  \vfill
+
+  Март 2019.
+\hfill
+
+\end{center}
+\end{titlepage}
+
+\section*{Историја измена}
+\noindent
+\setcellgapes{4pt}
+\makegapedcells
+\begin{tabularx}{\linewidth}{|l|l|X|X|}
+    \hline
+    \textbf{Датум} & \textbf{Верзија} & \textbf{Кратак опис} & \textbf{Аутор} \\
+    \hline
+    13.3.2019. & 1.0 & Иницијална верзија & Немања Дивнић \\
+    \hline
+    & & & \\
+    \hline
+\end{tabularx}
+\newpage
+
+\tableofcontents
+\newpage
+
+\section{Увод}
+\subsection{Резиме}
+Документ дефинише сценарио употребе за ауторизацију и пријављивања корисника.
+\subsection{Намена документа и циљне групе}
+Документ ће користити чланови тима који буду радили на имплементацији и тестирању овог случаја употребе. Такође, документ се може користити и при писању корисничког упутства за коришћење сервиса.
+\subsection{Референце}
+ 
+\begin{enumerate}
+  \item Пројектни задатак
+  \item Упутство за писање спецификације сценарија употребе
+  \item Guidelines - Use Case, Rational Unified Process 2000
+  \item Guidelines - Use Case Storyboard, Rational Unified Process 2000
+\end{enumerate}
+
+\subsection{Отворена питања}
+
+\noindent
+\setcellgapes{4pt}
+\makegapedcells
+\begin{tabularx}{\linewidth}{|l|X|X|}
+    \hline
+    \textbf{Редни број} & \textbf{Опис} & \textbf{Решење} \\
+    \hline
+     &  &  \\
+    \hline
+\end{tabularx}
+\section{Сценарио ауторизације и пријављивања корисника}
+\subsection{Кратак опис}Регистровани корисници се пријављују коришћењем свог корисничког имена и шифре. Унети подаци морају да се
+подударају са вредностима који су сачувани у бази података.
+
+\subsubsection{Администратор}
+ Администратор може да користи бота за захтеве предлагања филмова, да
+прати историју прегледаних и сачуваних филмова, да прегледа издвојене филмове од стране експерата, као и да
+поставља и уклања експерте и прати статистику о коришћењу сајта и прегледаним и сачуваним филмовима.
+\subsubsection{Експерт}
+Експерт може да користи бота за захтеве предлагања филмова, да
+прати историју прегледаних и сачуваних филмова, да прегледа издвојене филмове од стране експерата, као и да
+додаје и уклања филмове са експертске листе филмова своје категорије и прати статистику о прегледаним и
+сачуваним филмовима.
+
+\subsubsection{Регистровани корисник}
+Регистровани корисник, који није експерт и није администратор,
+може да користи бота за захтеве предлагања филмова, да прати историју прегледаних и сачуваних филмова и
+да прегледа издвојене филмове од стране експерата.
+\subsection{Ток догађаја}
+
+   \subsubsection{Главни ток догађаја} 
+ \begin{enumerate}
+        \item {Корисник се налази на прозору за пријављивање.}\newline
+          Пред гостом су два поља, вертикално распоређена (одозго на доле: \textit{Username} и \textit{Password}), док је испод тих поља дугме \textit{Login}. При дну екрана налази се линк \textit{Proceed without login}.
+      
+        \item {Корисник уноси тражене податке.}
+        \item {Корисник притиска дугме \textit{Login}.}
+        \item {Пријављивање је успешно.}\newline
+            Када корисник унесе валидне податке, што подразумева корисничко име и одговарајућу лозинку, биће успешно пријављен.
+   
+\end{enumerate}
+\subsubsection {Алтернативни ток: Пријављивање је неуспешно }
+ \begin{enumerate}
+    \item[4а.1.]  Уколико корисник не унесе корисничко име или лозинку, унесе корисничко име које не постоји у бази или унесе лозинку, која није одговарајућа за корисничко име, добиће поруку да је унео невалидне податке.
+    \item[4а.2.] Систем исписује поруку о грешци.
+    \item[4а.3.] Повратак на корак 2.
+    \end{enumerate}
+\subsection{Посебни захтеви}
+Нема посебних захтева.
+\subsection{Предуслови}
+ \begin{itemize}
+     \item Корисник не сме бити пријављен на систем у том тренутку.
+ \end{itemize}
+ 
+ 
+\subsection{Последице}
+Нема последица.
+
+\end{document}

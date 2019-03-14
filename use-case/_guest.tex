@@ -1,0 +1,124 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[serbianc]{babel}
+\usepackage{fullwidth}
+\usepackage{tabularx}
+\usepackage{makecell}
+\usepackage{enumitem}
+
+% section prefixes
+\makeatletter
+\renewcommand{\@seccntformat}[1]{%
+  \ifcsname prefix@#1\endcsname
+    \csname prefix@#1\endcsname
+  \else
+    \csname the#1\endcsname\quad
+  \fi}
+% define \prefix@section
+\newcommand\prefix@section{\thesection. }
+\makeatother
+
+\begin{document}
+
+\begin{titlepage}
+\begin{center}
+  Универзитет у Београду \\
+  Електротехнички факултет \\
+  Катедра за рачунарску технику и информатику \\
+  \vfill
+
+  {\fontsize{50}{60}\selectfont Filminds}
+  \vskip 0.6cm
+
+  {\large Спецификација сценарија употребе функционалности ауторизације и пријављивања гостију }
+  \vskip 0.3cm
+  
+  {\large Тим: Super Trio Mario}
+  \vskip 0.3cm
+
+  {\large Верзија 1.0}
+
+  \vfill
+  \vfill
+
+  Март 2019.
+\hfill
+
+\end{center}
+\end{titlepage}
+
+\section*{Историја измена}
+\noindent
+\setcellgapes{4pt}
+\makegapedcells
+\begin{tabularx}{\linewidth}{|l|l|X|X|}
+    \hline
+    \textbf{Датум} & \textbf{Верзија} & \textbf{Кратак опис} & \textbf{Аутор} \\
+    \hline
+    12.3.2019. & 1.0 & Иницијална верзија & Немања Дивнић \\
+    \hline
+    & & & \\
+    \hline
+\end{tabularx}
+\newpage
+
+\tableofcontents
+\newpage
+
+\section{Увод}
+\subsection{Резиме}
+Документ дефинише сценарио употребе за ауторизацију и пријављивања гостију.
+\subsection{Намена документа и циљне групе}
+Документ ће користити чланови тима који буду радили на имплементацији и тестирању овог случаја употребе. Такође, документ се може користити и при писању корисничког упутства за коришћење сервиса.
+\subsection{Референце}
+ 
+\begin{enumerate}
+  \item Пројектни задатак
+  \item Упутство за писање спецификације сценарија употребе
+  \item Guidelines - Use Case, Rational Unified Process 2000
+  \item Guidelines - Use Case Storyboard, Rational Unified Process 2000
+\end{enumerate}
+
+\subsection{Отворена питања}
+
+\noindent
+\setcellgapes{4pt}
+\makegapedcells
+\begin{tabularx}{\linewidth}{|l|X|X|}
+    \hline
+    \textbf{Редни број} & \textbf{Опис} & \textbf{Решење} \\
+    \hline
+    & &  \\
+    \hline
+    & &  \\
+    \hline
+\end{tabularx}
+\section{Сценарио ауторизације и пријављивања гостију }
+\subsection{Кратак опис}
+
+Гости (нерегистровани корисници) се не пријављују коришћењем свог корисничког имена и шифре, већ им је приступ
+сервису омогућен, али лимитиран. Гост може само да користи бота за захтеве предлагања филмова.
+
+\subsection{Ток догађаја}
+
+   \subsubsection{Главни ток догађаја} 
+ \begin{enumerate}
+        \item {Корисник се налази на прозору за пријављивање.}\newline
+          Пред гостом су два поља, вертикално распоређена (одозго на доле:  \textit{Username} и \textit{Password}), док је испод тих поља дугме \textit{Login}. При дну екрана налази се линк  \textit{Proceed without login}.
+        \item {Корисник кликне на линк \textit{Proceed without login}.}
+        \item {Појављује се екран за дописивање.}
+   
+\end{enumerate}
+
+\subsection{Посебни захтеви}
+Нема посебних захтева.
+\subsection{Предуслови}
+ \begin{itemize}
+     \item Корисник не сме бити пријављен на систем у том тренутку.
+ \end{itemize}
+ 
+\subsection{Последице}
+Нема последица.
+
+\end{document}
