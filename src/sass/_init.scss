@@ -9,6 +9,16 @@
     }
 }
 
+.register {
+    display: flex;
+    flex-direction: column;
+
+    .mdc-top-app-bar {
+        display: block;
+        position: relative;
+    }
+}
+
 .init a {
     text-decoration: none;
 }
@@ -20,11 +30,11 @@
 
 .init .mdc-top-app-bar__row,
 .home__grid {
-    width: 70%;
-}
+    width: 100%;
 
-.register__grid {
-    width: 25%;
+    @media screen and (min-width: 600px) {
+        width: 70%;
+    }
 }
 
 .init__content,
@@ -46,10 +56,14 @@
 
 .service-slogan,
 .register__heading {
-    margin: -32px 0 0 0;
+    margin: 0;
     color: lighten(#000000, 20%);
     font-family: "Cabin", sans-serif;
     font-weight: bold;
+}
+
+.service-slogan {
+    margin: -32px 0 0 0;
 }
 
 .service-description,
@@ -69,4 +83,23 @@
 
 .proceed-button {
     margin-top: 40px;
+}
+
+.register__container {
+    width: 100%;
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.register__inner {
+    overflow-y: auto;
+}
+
+.register__content {
+    max-width: 400px;
+    padding: 16px;
+    margin: auto;
+    flex-shrink: 0;
 }
