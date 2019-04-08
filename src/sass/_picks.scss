@@ -1,13 +1,22 @@
 .expert-picks {
     height: 100%;
+    padding: map-get($mdc-layout-grid-default-margin, phone);
     overflow-y: auto;
     background: #f7f7f7;
+
+    @include mdc-layout-grid-media-query_(tablet) {
+        padding: map-get($mdc-layout-grid-default-margin, tablet);
+    }
+
+    @include mdc-layout-grid-media-query_(desktop) {
+        padding: map-get($mdc-layout-grid-default-margin, desktop);
+    }
 }
 
 .expert-picks__header {
     display: flex;
     justify-content: space-between;
-    margin: 8px 16px 0 16px;
+    margin-bottom: 16px;
 
     & > * {
         margin: 0;
@@ -16,7 +25,7 @@
 }
 
 .expert-picks__content {
-    margin: 16px;
+    margin: 16px 0;
 }
 
 .expert-pick {

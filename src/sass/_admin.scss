@@ -1,8 +1,16 @@
 .admin-dashboard {
     height: 100%;
-    padding: 16px;
+    padding: map-get($mdc-layout-grid-default-margin, phone);
     overflow-y: auto;
     background: #f7f7f7;
+
+    @include mdc-layout-grid-media-query_(tablet) {
+        padding: map-get($mdc-layout-grid-default-margin, tablet);
+    }
+
+    @include mdc-layout-grid-media-query_(desktop) {
+        padding: map-get($mdc-layout-grid-default-margin, desktop);
+    }
 }
 
 #remove-users-heading {
