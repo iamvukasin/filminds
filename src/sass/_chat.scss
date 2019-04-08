@@ -6,7 +6,7 @@ $bot-messages-left-offset: 35px;
     flex-direction: column;
 }
 
-.chat__content {
+#chat__content {
     padding: 15px 10px;
     overflow: hidden scroll;
     flex-grow: 1;
@@ -18,6 +18,19 @@ $bot-messages-left-offset: 35px;
 
     .mdc-text-field {
         width: 100%;
+    }
+}
+
+.text-field {
+    display: flex;
+    align-items: center;
+}
+
+#send-message-button {
+    color: $mdc-theme-secondary;
+
+    &:disabled {
+        color: rgba($mdc-theme-secondary, 0.38);
     }
 }
 

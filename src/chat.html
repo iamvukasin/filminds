@@ -62,7 +62,7 @@
         <!-- Content -->
         <main class="service__main-content">
             <div class="chat">
-                <div class="chat__content">
+                <div id="chat__content">
                     <div class="message__list">
                         <div class="message__item message__item--user">
                             <span class="message message--user">Hello</span>
@@ -169,8 +169,8 @@
                 <!-- Field for sending text -->
                 <div class="chat__send-field mdc-elevation--z10">
                     <div class="mdc-text-field text-field mdc-text-field--outlined mdc-text-field--with-trailing-icon mdc-text-field--no-label">
-                        <input type="text" class="mdc-text-field__input" placeholder="Send message...">
-                        <i class="material-icons mdc-text-field__icon mdc-theme--secondary">send</i>
+                        <input type="text" class="mdc-text-field__input" id="send-message-text-field" placeholder="Send message...">
+                        <button class="mdc-icon-button material-icons" id="send-message-button">send</button>
                         <div class="mdc-notched-outline mdc-notched-outline--no-label">
                             <div class="mdc-notched-outline__leading"></div>
                             <div class="mdc-notched-outline__trailing"></div>
@@ -180,5 +180,8 @@
             </div>
         </main>
     </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="scripts/main.js"></script>
 </body>
 </html>
