@@ -1,6 +1,11 @@
 import { MDCDialog } from "@material/dialog";
 
-const dialog = new MDCDialog(document.querySelector(".mdc-dialog"));
+const dialogs = document.querySelector(".mdc-dialog");
+const dialog = null;
 const addExpertButton = $("#add-expert-button");
 
-addExpertButton?.click(() => dialog.open());
+if (dialogs) {
+	dialog = new MDCDialog(dialogs);
+}
+
+addExpertButton?.click(() => dialog?.open());
