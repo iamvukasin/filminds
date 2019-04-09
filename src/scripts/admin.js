@@ -24,6 +24,11 @@ function deleteButtonClick(element) {
 }
 
 const deleteButtons = $(".remove-expert");
+const removeUserButton = $(".remove-user");
+const removeUserTextField = $("#remove-user-text-field");
 
 deleteButtons.each((i, obj) => obj.onclick = deleteButtonClick(obj));
 
+removeUserButton?.click(() => {
+    removeUserTextField.val("");
+});
