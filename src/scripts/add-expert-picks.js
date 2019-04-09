@@ -52,7 +52,7 @@ function onAddButtonClick() {
 }
 
 const allDialogs = document.querySelector(".mdc-dialog");
-const dialog = null;
+var dialog = null;
 const expertPicksUpButtons = $(".expert-pick__up");
 const expertPicksDownButtons = $(".expert-pick__down");
 const expertPicksDeleteButtons = $(".expert-pick__delete");
@@ -64,7 +64,7 @@ expertPicksDownButtons.each((i, obj) => obj.onclick = onDownButtonClick(obj));
 expertPicksDeleteButtons.each((i, obj) => obj.onclick = onDeleteButtonClick(obj));
 
 if (allDialogs) {
-    dialog = new MDCDialog(dialogs);
+    dialog = new MDCDialog(allDialogs);
 }
 
 addPickButton?.click(() => dialog?.open());

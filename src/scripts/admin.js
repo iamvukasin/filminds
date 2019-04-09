@@ -1,7 +1,7 @@
 import { MDCDialog } from "@material/dialog";
 
 const dialogs = document.querySelector(".mdc-dialog");
-const dialog = null;
+var dialog = null;
 const addExpertButton = $("#add-expert-button");
 
 if (dialogs) {
