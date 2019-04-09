@@ -9,3 +9,21 @@ if (dialogs) {
 }
 
 addExpertButton?.click(() => dialog?.open());
+
+
+function deleteButtonClick(element) {
+    return function () {
+        var index = $(".remove-expert")?.index(element);
+        var experts = $(".expert-content");
+
+        if (!experts)
+            return;
+
+        $(experts[index]).remove();
+    }
+}
+
+const deleteButtons = $(".remove-expert");
+
+deleteButtons.each((i, obj) => obj.onclick = deleteButtonClick(obj));
+
