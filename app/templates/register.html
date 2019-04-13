@@ -4,14 +4,7 @@
 {% block body %}
 <body class="init register">
     <!-- Top App Bar -->
-    <header class="mdc-top-app-bar">
-        <div class="mdc-top-app-bar__row">
-            <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-                <a href="/"><img class="material-icons logo" src="{% static 'images/logo.svg' %}"/></a>
-                <a class="logo-text" href="/">Filminds</a>
-            </section>
-        </div>
-    </header>
+    {% include 'components/top-app-bar.html' %}
 
     <!-- Content -->
     <main class="register__container">

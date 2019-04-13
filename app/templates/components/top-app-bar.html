@@ -1,0 +1,15 @@
+{% load static %}
+
+<header class="mdc-top-app-bar">
+    <div class="mdc-top-app-bar__row">
+        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+            <a href="/"><img class="material-icons logo" src="{% static 'images/logo.svg' %}"/></a>
+            <a class="logo-text" href="/">Filminds</a>
+        </section>
+        {% if user.is_authenticated %}
+        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
+            <a href="/" class="material-icons mdc-top-app-bar__action-item" aria-label="Sign out" alt="Sign out">exit_to_app</a>
+        </section>
+        {% endif %}
+    </div>
+</header>
