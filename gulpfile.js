@@ -10,16 +10,18 @@ const browsersync = require("browser-sync").create();
 const del = require("del");
 const uglify = require("gulp-uglify");
 
+const destinationFolder = "app/static";
+
 function html() {
     return src("src/*.html")
-        .pipe(dest("dist/"))
+        .pipe(dest(destinationFolder))
 }
 
 function css() {
     return src("src/sass/*.scss")
         .pipe(sass({ includePaths: ['node_modules/'] }))
         .pipe(minifyCSS())
-        .pipe(dest("dist/css"))
+        .pipe(dest(destinationFolder + "/css"))
 }
 
 function scripts() {
@@ -33,14 +35,14 @@ function scripts() {
         .pipe(source("main.js"))
         .pipe(buffer())
         .pipe(uglify())
-        .pipe(dest("dist/scripts"))
+        .pipe(dest(destinationFolder + "/scripts"))
         .pipe(browsersync.stream());
 }
 
 function svgImages() {
     return src("src/images/*.svg")
         .pipe(svgo())
-        .pipe(dest("dist/images"));
+        .pipe(dest(destinationFolder + "/images"));
 }
 
 function rasterImages() {
@@ -48,7 +50,7 @@ function rasterImages() {
             "src/images/*.png",
             "src/images/*.jpg"
         ])
-        .pipe(dest("dist/images"));
+        .pipe(dest(destinationFolder + "/images"));
 }
 
 function run(done) {
@@ -67,7 +69,7 @@ function reload(done) {
 }
 
 function clean() {
-    return del(["dist/"]);
+    return del([destinationFolder]);
 }
 
 function watchFiles() {
@@ -81,7 +83,7 @@ function watchFiles() {
 // complex tasks
 const build = series(
     clean,
-    parallel(html, css, scripts, svgImages, rasterImages)
+    parallel(css, scripts, svgImages, rasterImages)
 );
 const serve = series(
     build,

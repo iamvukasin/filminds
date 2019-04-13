@@ -1,5 +1,6 @@
 node_modules/
 dist/
+app/static/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
