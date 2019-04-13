@@ -1,18 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>Filminds</title>
-    <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons|Cabin:600,700">
-    <link rel="stylesheet" href="css/main.css">
-</head>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
 <body class="init register">
     <!-- Top App Bar -->
     <header class="mdc-top-app-bar">
         <div class="mdc-top-app-bar__row">
             <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-                <a href="/"><img class="material-icons logo" src="images/logo.svg"/></a>
+                <a href="/"><img class="material-icons logo" src="{% static 'images/logo.svg' %}"/></a>
                 <a class="logo-text" href="/">Filminds</a>
             </section>
         </div>
@@ -77,4 +72,4 @@
         </div>
     </main>
 </body>
-</html>
+{% endblock %}
