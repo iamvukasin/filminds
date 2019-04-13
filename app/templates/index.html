@@ -19,8 +19,8 @@
             <div class="mdc-layout-grid init__grid home__grid">
                 <div class="mdc-layout-grid__inner">
                     <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
-                        <h2 class="service-slogan mdc-typography--headline4">{{ login_headline }}</h2>
-                        <p class="service-description mdc-typography--body1">Decide which movie to watch next just by asking our personal movie assistant.</p>
+                        <h2 class="service-slogan mdc-typography--headline4">{{ view.login_headline }}</h2>
+                        <p class="service-description mdc-typography--body1">{{ view.login_description_text }}</p>
 
                         <form action="/chat.html" method="post">
                             <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--no-label init__text-input">
