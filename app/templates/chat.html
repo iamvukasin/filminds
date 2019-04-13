@@ -1,18 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>Filminds</title>
-    <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons|Cabin:600">
-    <link rel="stylesheet" href="css/main.css">
-</head>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
 <body class="service">
     <!-- Top App Bar -->
     <header class="mdc-top-app-bar">
         <div class="mdc-top-app-bar__row">
             <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-                <a href="/"><img class="material-icons logo" src="images/logo.svg"/></a>
+                <a href="/"><img class="material-icons logo" src="{% static 'images/logo.svg' %}"/></a>
                 <a class="logo-text" href="/">Filminds</a>
             </section>
             <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
@@ -69,7 +64,7 @@
                         </div>
                     </div>
                     <div class="message__list">
-                        <img class="bot__image" src="images/logo.svg">
+                        <img class="bot__image" src="{% static 'images/logo.svg' %}">
                         <div class="message__item message__item--bot">
                             <span class="message message--bot">Hello!</span>
                         </div>
@@ -83,7 +78,7 @@
                         </div>
                     </div>
                     <div class="message__list">
-                        <img class="bot__image" src="images/logo.svg">
+                        <img class="bot__image" src="{% static 'images/logo.svg' %}">
                         <div class="message__item message__item--bot">
                             <span class="message message--bot">These movies are popular right now:</span>
                         </div>
@@ -156,7 +151,7 @@
                         </div>
                     </div>
                     <div class="message__list">
-                        <img class="bot__image" src="images/logo.svg">
+                        <img class="bot__image" src="{% static 'images/logo.svg' %}">
                         <div class="message__item message__item--bot">
                             <span class="message message--bot">Have a nice day</span>
                         </div>
@@ -184,4 +179,4 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="scripts/main.js"></script>
 </body>
-</html>
+{% endblock %}

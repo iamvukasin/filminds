@@ -7,3 +7,7 @@ class IndexView(TemplateView):
 
 class RegisterView(TemplateView):
     template_name = "register.html"
+
+
+class ChatView(TemplateView):
+    template_name = "chat.html"
