@@ -1,19 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>Filminds</title>
-    <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons|Cabin:600,700">
-    <link rel="stylesheet" href="css/main.css">
-</head>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
 <body class="init home">
     <!-- Top App Bar -->
     <header class="mdc-top-app-bar">
         <div class="mdc-top-app-bar__row">
             <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-                <a href="/"><img class="material-icons logo" src="images/logo.svg"/></a>
-                <a class="logo-text" href="/">Filminds</a>
+                <a href="/"><img class="material-icons logo" src="{% static 'images/logo.svg' %}"/></a>
+                <a class="logo-text" href="{% url 'index' %}">Filminds</a>
             </section>
         </div>
     </header>
@@ -24,7 +19,7 @@
             <div class="mdc-layout-grid init__grid home__grid">
                 <div class="mdc-layout-grid__inner">
                     <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
-                        <h2 class="service-slogan mdc-typography--headline4">Smart movie recommendations for you!</h2>
+                        <h2 class="service-slogan mdc-typography--headline4">{{ login_headline }}</h2>
                         <p class="service-description mdc-typography--body1">Decide which movie to watch next just by asking our personal movie assistant.</p>
 
                         <form action="/chat.html" method="post">
@@ -47,14 +42,14 @@
                             <button type="submit" class="mdc-button mdc-button--raised">
                                 <span class="mdc-button__label">Login</span>
                             </button>
-                            <a href="register.html">
+                            <a href="../../src/register.html">
                                 <button type="button" class="mdc-button register-button">
                                     <span class="mdc-button__label">Register</span>
                                 </button>
                             </a>
                         </form>
                         <div class="proceed-button">
-                            <a href="chat.html">Proceed without login</a>
+                            <a href="../../src/chat.html">Proceed without login</a>
                         </div>
                     </div>
                 </div>
@@ -62,4 +57,4 @@
         </main>
     </div>
 </body>
-</html>
+{% endblock %}
