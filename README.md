@@ -37,7 +37,7 @@ We use Django as our back-end framework. Before running the project make sure yo
 [Pipenv](https://pipenv.readthedocs.io/en/latest/install/#installing-pipenv). To download the dependencies, just type:
 
 ```bash
-$ pipenv install
+$ pipenv install --dev
 ```
 
 To run the project, make sure you're in the project's root and type:
@@ -48,4 +48,4 @@ $ python manage.py runserver
 
 ## License
 
-Flagnet is released under the [MIT license](LICENSE).
+Filminds is released under the [MIT license](LICENSE).
