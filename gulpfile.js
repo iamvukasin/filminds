@@ -9,13 +9,9 @@ const buffer = require("vinyl-buffer");
 const browsersync = require("browser-sync").create();
 const del = require("del");
 const uglify = require("gulp-uglify");
+const exec = require('child_process').exec;
 
 const destinationFolder = "app/static";
-
-function html() {
-    return src("src/*.html")
-        .pipe(dest(destinationFolder))
-}
 
 function css() {
     return src("src/sass/*.scss")
@@ -53,12 +49,16 @@ function rasterImages() {
         .pipe(dest(destinationFolder + "/images"));
 }
 
+function runServer(done) {
+    exec("python manage.py runserver");
+    done();
+}
+
 function run(done) {
     browsersync.init({
-        server: {
-            baseDir: "dist/"
-        },
-        port: 3000
+        notify: false,
+        port: 8000,
+        proxy: "localhost:8000"
     });
     done();
 }
@@ -74,7 +74,7 @@ function clean() {
 
 function watchFiles() {
     watch("src/sass/**/*.scss", series(css, reload));
-    watch("src/**/*.html", series(html, reload));
+    watch("**/*.html", reload);
     watch("src/scripts/*.js", series(scripts, reload));
     watch("src/images/*.svg", series(svgImages, reload));
     watch(["src/images/*.png", "src/images/*.jpg"], series(rasterImages, reload));
@@ -87,11 +87,11 @@ const build = series(
 );
 const serve = series(
     build,
+    runServer,
     parallel(watchFiles, run)
 );
 
 exports.css = css;
-exports.html = html;
 exports.scripts = scripts;
 exports.images = svgImages;
 exports.serve = serve;
