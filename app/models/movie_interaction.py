@@ -2,6 +2,7 @@ from django.db import models
 
 from .user import User
 from .movie import Movie
+from .expert_picks import ExpertPicksCategory
 
 
 class SearchedMovie(models.Model):
@@ -25,3 +26,9 @@ class CollectedMovie(models.Model):
         max_length=2,
         default=TYPE_WISH
     )
+
+
+class ExpertPickMovie(models.Model):
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+    category = models.ForeignKey(ExpertPicksCategory, on_delete=models.CASCADE)
+    order = models.IntegerField(default=1)
