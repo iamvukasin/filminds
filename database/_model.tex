@@ -1,0 +1,36 @@
+\newpage
+\section{Модел података}
+
+\subsection{IE нотација}
+
+\begin{figure}[h]
+  \includegraphics[width=\linewidth]{model.png}
+\end{figure}
+
+\subsection{Шема релационе базе података}
+
+\textbf{User}(\underline{id}, type, user\_id)
+\vspace{0.2cm}
+
+\textbf{Message}(\underline{id}, type, sender\_type, timestamp, content, user\_id)
+\vspace{0.2cm}
+
+\textbf{MovieGenre}(\underline{id}, name)
+\vspace{0.2cm}
+
+\textbf{Movie}(\underline{id}, title, description, rating, release\_date, trailer)
+\vspace{0.2cm}
+
+\textbf{MovieGenres}(\underline{id}, movie\_id, moviegenre\_id)
+\vspace{0.2cm}
+
+\textbf{ExpertPicksCategory}(\underline{id}, name, expert\_id)
+\vspace{0.2cm}
+
+\textbf{ExpertPickMovie}(\underline{id}, order, category\_id, movie\_id)
+\vspace{0.2cm}
+
+\textbf{CollectedMovie}(\underline{id}, date, type, movie\_id, user\_id)
+\vspace{0.2cm}
+
+\textbf{SearchedMovie}(\underline{id}, count, movie\_id, user\_id)

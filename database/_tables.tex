@@ -1,0 +1,212 @@
+\section{Табеле}
+\subsection{User}
+
+Садржи податке о кориснику сервиса. Ради искоришћења аутентификације имплементиране за радни оквир 
+\textit{Django}, ова табела поред додатних поља садржи и референцу ка креираном кориснику у оквиру
+табеле \textit{User} радног оквира која енкапсулира основне податке о кориснику, као и податке за
+аутентификацију.
+
+\vspace{0.5cm}
+
+\noindent
+\setcellgapes{4pt}
+\makegapedcells
+\begin{tabularx}{\linewidth}{|X|X|X|X|}
+    \hline
+    \textbf{Name} & \textbf{Datatype} & \textbf{Is PK} & \textbf{Is FK} \\
+    \hline
+    id & integer & Yes & No \\
+    \hline
+    user\_id & integer & No & Yes \\
+    \hline
+    type & varchar(1) & No & No \\
+    \hline
+\end{tabularx}
+
+\subsection{Message}
+
+Садржи информације о историји порука за одређеног корисника.
+
+\vspace{0.5cm}
+
+\noindent
+\setcellgapes{4pt}
+\makegapedcells
+\begin{tabularx}{\linewidth}{|X|X|X|X|}
+    \hline
+    \textbf{Name} & \textbf{Datatype} & \textbf{Is PK} & \textbf{Is FK} \\
+    \hline
+    id & integer & Yes & No \\
+    \hline
+    user\_id & integer & No & Yes \\
+    \hline
+    type & varchar(1) & No & No \\
+    \hline
+    sender\_type & varchar(1) & No & No \\
+    \hline
+    timestamp & timestamptz & No & No \\
+    \hline
+    content & jsonb & No & No \\
+    \hline
+\end{tabularx}
+
+\subsection{Movie}
+
+Садржи податке о филмовима референцираним у оквиру апликације који се прикупљају из
+екстерне базе филмова \textit{The Movie Database}. Примарни кључ има исту вредност као
+и шифра филма у екстерној бази.
+
+\vspace{0.5cm}
+
+\noindent
+\setcellgapes{4pt}
+\makegapedcells
+\begin{tabularx}{\linewidth}{|X|X|X|X|}
+    \hline
+    \textbf{Name} & \textbf{Datatype} & \textbf{Is PK} & \textbf{Is FK} \\
+    \hline
+    id & integer & Yes & No \\
+    \hline
+    title & varchar(100) & No & No \\
+    \hline
+    description & varchar(200) & No & No \\
+    \hline
+    rating & decimal(3, 1) & No & No \\
+    \hline
+    release\_date & date & No & No \\
+    \hline
+    trailer & varchar(70) & No & No \\
+    \hline
+\end{tabularx}
+
+\subsection{ExpertPickMovie}
+
+Садржи информације које филмове су експерти предложили и за коју категорију.
+
+\vspace{0.5cm}
+
+\noindent
+\setcellgapes{4pt}
+\makegapedcells
+\begin{tabularx}{\linewidth}{|X|X|X|X|}
+    \hline
+    \textbf{Name} & \textbf{Datatype} & \textbf{Is PK} & \textbf{Is FK} \\
+    \hline
+    id & integer & Yes & No \\
+    \hline
+    order & integer & No & No \\
+    \hline
+    category\_id & integer & No & Yes \\
+    \hline
+    movie\_id & integer & No & Yes \\
+    \hline
+\end{tabularx}
+
+\subsection{MovieGenre}
+
+Садржи имена жанрова филмова који постоје у бази.
+
+\vspace{0.5cm}
+
+\noindent
+\setcellgapes{4pt}
+\makegapedcells
+\begin{tabularx}{\linewidth}{|X|X|X|X|}
+    \hline
+    \textbf{Name} & \textbf{Datatype} & \textbf{Is PK} & \textbf{Is FK} \\
+    \hline
+    id & integer & Yes & No \\
+    \hline
+    name & varchar(20) & No & No \\
+    \hline
+\end{tabularx}
+
+\subsection{ExpertPickCategory}
+
+Садржи списак свих категорија и експерте који су задужени за одговарајућу категорију. 
+
+\vspace{0.5cm}
+
+\noindent
+\setcellgapes{4pt}
+\makegapedcells
+\begin{tabularx}{\linewidth}{|X|X|X|X|}
+    \hline
+    \textbf{Name} & \textbf{Datatype} & \textbf{Is PK} & \textbf{Is FK} \\
+    \hline
+    id & integer & Yes & No \\
+    \hline
+    name & varchar(30) & No & No \\
+    \hline
+    expert\_id & integer & No & Yes \\
+    \hline
+\end{tabularx}
+
+\subsection{SearchedMovie}
+
+Садржи информације о филмовима које су корисници претраживали, као и број претраживања једног филма од стране корисника.
+
+\vspace{0.5cm}
+
+\noindent
+\setcellgapes{4pt}
+\makegapedcells
+\begin{tabularx}{\linewidth}{|X|X|X|X|}
+    \hline
+    \textbf{Name} & \textbf{Datatype} & \textbf{Is PK} & \textbf{Is FK} \\
+    \hline
+    id & integer & Yes & No \\
+    \hline
+    count & integer & No & No \\
+    \hline
+    user\_id & integer & No & Yes \\
+    \hline
+    movie\_id & integer & No & Yes \\
+    \hline
+\end{tabularx}
+
+\subsection{CollectedMovie}
+
+Садржи информације о филмовима које су корисници одгледали или ставили у листу за гледање, као и датум када су то учинили.
+
+\vspace{0.5cm}
+
+\noindent
+\setcellgapes{4pt}
+\makegapedcells
+\begin{tabularx}{\linewidth}{|X|X|X|X|}
+    \hline
+    \textbf{Name} & \textbf{Datatype} & \textbf{Is PK} & \textbf{Is FK} \\
+    \hline
+    id & integer & Yes & No \\
+    \hline
+    date & date & No & No \\
+    \hline
+    type & varchar(2) & No & No \\
+    \hline
+    user\_id & integer & No & Yes \\
+    \hline
+    movie\_id & integer & No & Yes \\
+    \hline
+\end{tabularx}
+
+\subsection{MovieGenres}
+
+Садржи за сваки филм којим жанровима припада.
+
+\vspace{0.5cm}
+
+\noindent
+\setcellgapes{4pt}
+\makegapedcells
+\begin{tabularx}{\linewidth}{|X|X|X|X|}
+    \hline
+    \textbf{Name} & \textbf{Datatype} & \textbf{Is PK} & \textbf{Is FK} \\
+    \hline
+    id & integer & Yes & No \\
+    \hline
+    moviegenre\_id & integer & No & Yes \\
+    \hline
+    movie\_id & integer & No & Yes \\
+    \hline
+\end{tabularx}
