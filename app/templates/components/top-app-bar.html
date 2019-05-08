@@ -8,7 +8,7 @@
         </section>
         {% if user.is_authenticated %}
         <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
-            <a href="/" class="material-icons mdc-top-app-bar__action-item" aria-label="Sign out" alt="Sign out">exit_to_app</a>
+            <a href="{% url 'logout' %}" class="material-icons mdc-top-app-bar__action-item" aria-label="Log out">exit_to_app</a>
         </section>
         {% endif %}
     </div>

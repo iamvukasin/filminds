@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -69,6 +71,9 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'filminds.wsgi.application'
+
+LOGIN_REDIRECT_URL = 'chat'
+LOGOUT_REDIRECT_URL = 'index'
 
 
 # Database

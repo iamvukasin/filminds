@@ -1,0 +1,38 @@
+{% load widget_tweaks %}
+
+<form action="{% url 'register' %}" method="post">
+    {% csrf_token %}
+
+    {% for error in form.non_field_errors %}
+        {{ error|escape }}
+    {% endfor %}
+
+    {% for field in form %}
+        {% if field.errors %}
+            <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--invalid mdc-text-field--with-trailing-icon init__text-input">
+        {% else %}
+            <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--no-label init__text-input">
+        {% endif %}
+                {% render_field field class="mdc-text-field__input" aria-label="label" placeholder=field.label %}
+
+                {% if field.errors %}
+                      <i class="material-icons mdc-text-field__icon">error</i>
+                {% endif %}
+
+                <div class="mdc-notched-outline">
+                    <div class="mdc-notched-outline__leading"></div>
+                    <div class="mdc-notched-outline__trailing"></div>
+                </div>
+            </div>
+        {% for error in field.errors %}
+            <div class="mdc-text-field-helper-text mdc-theme--error mdc-text-field-helper-text--persistent">{{ error }}</div>
+        {% endfor %}
+    {% endfor %}
+
+    <p class="register__terms mdc-typography--body1">By registering with Filminds, you accept and agree our <a href="#">Privacy Policy</a>
+        and <a href="#">Terms of use</a>.</p>
+
+    <button class="mdc-button mdc-button--raised register-button">
+        <span class="mdc-button__label">Register</span>
+    </button>
+</form>

@@ -2,18 +2,18 @@
 {% load static %}
 
 {% block body %}
-<body class="register">
+<body class="init login">
     <!-- Top App Bar -->
     {% include 'components/top-app-bar.html' %}
 
-    <!-- Content -->
     <main class="register__container">
         <div class="register__inner">
             <div class="register__content">
-                <h2 class="register__heading mdc-typography--headline4">Register your account</h2>
+                <h2 class="register__heading mdc-typography--headline4">Log in</h2>
                 <p class="service-description mdc-typography--body1">Get the best movie recommendations and keep track of your movie watching history.</p>
 
-                {% include 'components/registration-form.html' %}
+                <!-- login form -->
+                {% include 'components/login-form.html' %}
             </div>
         </div>
     </main>

@@ -1,0 +1,27 @@
+{% load widget_tweaks %}
+
+<form action="{% url 'login' %}" method="post">
+    {% csrf_token %}
+
+    {% for error in form.non_field_errors %}
+        <p class="mdc-typography--body1 mdc-theme--error">{{ error|escape }}</p>
+    {% endfor %}
+
+    {% for field in form %}
+        <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--no-label init__text-input">
+            {% render_field field class="mdc-text-field__input" aria-label="Label" placeholder=field.label %}
+            <div class="mdc-notched-outline">
+                <div class="mdc-notched-outline__leading"></div>
+                <div class="mdc-notched-outline__trailing"></div>
+            </div>
+        </div>
+    {% endfor %}
+
+    <button type="submit" class="mdc-button mdc-button--raised login-button">
+        <span class="mdc-button__label">Login</span>
+    </button>
+
+    <a class="mdc-button register-button" href="{% url 'register' %}">
+        <span class="mdc-button__label">Register</span>
+    </a>
+</form>

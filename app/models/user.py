@@ -25,9 +25,10 @@ class User(models.Model):
 @receiver(post_save, sender=AuthUser)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
-        User.objects.create(user=instance)
+        user_type = User.ADMIN if sender.is_superuser else User.REGISTERED_USER
+        User.objects.create(user=instance, type=user_type)
 
 
 @receiver(post_save, sender=AuthUser)
 def save_user_profile(sender, instance, **kwargs):
-    instance.profile.save()
+    instance.user.save()

@@ -12,35 +12,12 @@
             <div class="mdc-layout-grid init__grid home__grid">
                 <div class="mdc-layout-grid__inner">
                     <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
-                        <h2 class="service-slogan mdc-typography--headline4">{{ view.login_headline }}</h2>
-                        <p class="service-description mdc-typography--body1">{{ view.login_description_text }}</p>
+                        <h2 class="service-slogan mdc-typography--headline4">{{ login_headline }}</h2>
+                        <p class="service-description mdc-typography--body1">{{ login_description_text }}</p>
 
-                        <form action="/chat.html" method="post">
-                            <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--no-label init__text-input">
-                                <input type="text" class="mdc-text-field__input" aria-label="Label" placeholder="Username" required>
-                                <div class="mdc-notched-outline">
-                                    <div class="mdc-notched-outline__leading"></div>
-                                    <div class="mdc-notched-outline__trailing"></div>
-                                </div>
-                            </div>
+                        <!-- login form -->
+                        {% include 'components/login-form.html' %}
 
-                            <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--no-label init__text-input">
-                                <input type="password" class="mdc-text-field__input" aria-label="Label" placeholder="Password" required>
-                                <div class="mdc-notched-outline">
-                                    <div class="mdc-notched-outline__leading"></div>
-                                    <div class="mdc-notched-outline__trailing"></div>
-                                </div>
-                            </div>
-
-                            <button type="submit" class="mdc-button mdc-button--raised">
-                                <span class="mdc-button__label">Login</span>
-                            </button>
-                            <a href="{% url 'register' %}">
-                                <button type="button" class="mdc-button register-button">
-                                    <span class="mdc-button__label">Register</span>
-                                </button>
-                            </a>
-                        </form>
                         <div class="proceed-button">
                             <a href="{% url 'chat' %}">Proceed without login</a>
                         </div>
