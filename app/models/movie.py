@@ -15,5 +15,7 @@ class Movie(models.Model):
         decimal_places=1
     )
     release_date = models.DateField()
+    poster = models.CharField(max_length=50, null=True)
+    backdrop = models.CharField(max_length=50, null=True)
     trailer = models.CharField(max_length=70)
     genres = models.ManyToManyField(MovieGenre)
