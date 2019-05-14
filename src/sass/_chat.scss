@@ -1,4 +1,5 @@
-$bot-messages-left-offset: 35px;
+$chat-margin: 8px;
+$bot-messages-left-offset: $chat-margin + 36px;
 
 .chat {
     height: 100%;
@@ -7,7 +8,6 @@ $bot-messages-left-offset: 35px;
 }
 
 #chat__content {
-    padding: 15px 10px;
     overflow: hidden scroll;
     flex-grow: 1;
 }
@@ -83,10 +83,11 @@ $bot-messages-left-offset: 35px;
     background-color: $mdc-theme-primary-light;
     color: #fff;
     border-radius: 20px;
+    margin-right: $chat-margin;
 }
 
 .message__movie-list {
-    width: 100%;
+    width: calc(100% - #{$bot-messages-left-offset});
     margin-left: $bot-messages-left-offset;
     padding: 2px 0;
     display: flex;
@@ -95,7 +96,7 @@ $bot-messages-left-offset: 35px;
 
     .movie-card {
         max-width: 400px;
-        margin: 0 4px;
+        margin-right: 8px;
         flex: 0 0 auto;
     }
 }
@@ -105,6 +106,6 @@ $bot-messages-left-offset: 35px;
     height: 28px;
     position: absolute;
     bottom: 3px;
-    left: 0;
+    left: $chat-margin;
     border-radius: 20px;
 }
