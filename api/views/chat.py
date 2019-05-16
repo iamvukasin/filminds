@@ -89,17 +89,18 @@ class ChatReply(APIView):
     def post(self, request):
         #get and save user message
         message = request.POST.get('message', '')
-        text_message = TextMessage(message)
-        builder = ResponseBuilder()
-        builder.add(text_message)
+        if request.user.is_authenticated:
+            text_message = TextMessage(message)
+            builder = ResponseBuilder()
+            builder.add(text_message)
 
-        message_to_save = Message(
-            user=User.get_user(request.user),
-            sender_type=Message.SENDER_USER,
-            content=builder.get_response()
-        )
+            message_to_save = Message(
+                user=User.get_user(request.user),
+                sender_type=Message.SENDER_USER,
+                content=builder.get_response()
+            )
 
-        message_to_save.save()
+            message_to_save.save()
 
         # get chat_responses from Wit
         client = Wit(access_token=config.WIT_ACCESS_TOKEN)
@@ -113,12 +114,13 @@ class ChatReply(APIView):
 
         # get and save bot message
         bot_response = response_builder().get(wit_response)
-        message_to_save = Message(
-            user=User.get_user(request.user),
-            type=Message.TYPE_DATA,
-            content=bot_response
-        )
+        if request.user.is_authenticated:
+            message_to_save = Message(
+                user=User.get_user(request.user),
+                type=Message.TYPE_DATA,
+                content=bot_response
+            )
 
-        message_to_save.save()
+            message_to_save.save()
 
         return Response(bot_response)
