@@ -13,7 +13,7 @@ class MovieGenre(models.Model):
 class Movie(models.Model):
     # constraints
     TITLE_MAX_LENGTH = 100
-    DESCRIPTION_MAX_LENGTH = 200
+    DESCRIPTION_MAX_LENGTH = 300
 
     # fields
     id = models.IntegerField(primary_key=True)
