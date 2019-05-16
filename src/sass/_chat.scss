@@ -8,6 +8,7 @@ $bot-messages-left-offset: $chat-margin + 36px;
 }
 
 #chat__content {
+    padding-bottom: $chat-margin;
     overflow: hidden scroll;
     flex-grow: 1;
 }
@@ -99,6 +100,11 @@ $bot-messages-left-offset: $chat-margin + 36px;
         margin-right: 8px;
         flex: 0 0 auto;
     }
+}
+
+.message__movie-list__content {
+  width: 100%;
+  display: flex;
 }
 
 .bot__image {

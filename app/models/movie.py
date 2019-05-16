@@ -9,6 +9,29 @@ class MovieGenre(models.Model):
     id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=20)
 
+    @staticmethod
+    def get_genre_id_by_name(genre_name):
+        """
+        Returns genre ID for genre with the given name, if exists.
+        """
+
+        genre = MovieGenre.objects.filter(name__iexact=genre_name).first()
+        return genre.id if genre is not None else None
+
+    @staticmethod
+    def get_genre_ids_by_names(genre_names):
+        """
+        Returns list of genre IDs for the given names.
+
+        :param genre_names: a list of genre names
+        :return: a list of genre IDs
+        """
+
+        if not genre_names:
+            return []
+
+        return MovieGenre.objects.filter(name__iregex=r'(' + '|'.join(genre_names) + ')').values_list('id', flat=True)
+
 
 class Movie(models.Model):
     # constraints

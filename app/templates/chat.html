@@ -152,21 +152,44 @@
                 </div>
 
                 <!-- Field for sending text -->
-                <div class="chat__send-field mdc-elevation--z10">
-                    <div class="mdc-text-field text-field mdc-text-field--outlined mdc-text-field--with-trailing-icon mdc-text-field--no-label">
-                        <input type="text" class="mdc-text-field__input" id="send-message-text-field" placeholder="Send message...">
-                        <button class="mdc-icon-button material-icons" id="send-message-button">send</button>
-                        <div class="mdc-notched-outline mdc-notched-outline--no-label">
-                            <div class="mdc-notched-outline__leading"></div>
-                            <div class="mdc-notched-outline__trailing"></div>
+                <form method="post" id="chat-form">
+                    <div class="chat__send-field mdc-elevation--z10">
+                        <div class="mdc-text-field text-field mdc-text-field--outlined mdc-text-field--with-trailing-icon mdc-text-field--no-label">
+                            <input type="text" class="mdc-text-field__input" id="send-message-text-field" placeholder="Send message..." autocomplete="off">
+                            <button class="mdc-icon-button material-icons" id="send-message-button" type="submit">send</button>
+                            <div class="mdc-notched-outline mdc-notched-outline--no-label">
+                                <div class="mdc-notched-outline__leading"></div>
+                                <div class="mdc-notched-outline__trailing"></div>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </form>
+
             </div>
         </main>
     </div>
 
     {% include 'components/movie-info-overlay.html' %}
+
+    <template id="template-user-message">
+        {% include 'messages/user-message.html' with message='' %}
+    </template>
+
+    <template id="template-user-message-list">
+        {% include 'messages/message-list.html' with is_bot=False messages='' %}
+    </template>
+
+    <template id="template-bot-message">
+        {% include 'messages/bot-message.html' with message='' %}
+    </template>
+
+    <template id="template-bot-message-list">
+        {% include 'messages/message-list.html' with is_bot=True messages='' %}
+    </template>
+
+    <template id="template-movie-card">
+        {% include 'messages/movie-card.html' with movie='' %}
+    </template>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="{% static 'scripts/main.js' %}"></script>

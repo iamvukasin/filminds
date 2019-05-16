@@ -9,7 +9,7 @@ psycopg2-binary = "*"
 tmdbsimple = "*"
 django-widget-tweaks = "*"
 djangorestframework = "*"
-simpletmdb = "*"
+wit = "*"
 
 [dev-packages]
 pytest = "*"

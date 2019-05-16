@@ -1,0 +1,12 @@
+<div class="mdc-card movie-card" data-movie-id="{{ movie.id }}">
+    <img class="movie-card__backdrop" src="https://image.tmdb.org/t/p/w400{{ movie.backdrop }}">
+    <div class="movie-card__content">
+        <h3 class="mdc-typography--headline6 movie-card__title">{{ movie.title }}</h3>
+        <p class="mdc-typography--body2 movie-card__description">{{ move.description }}</p>
+    </div>
+    <div class="movie-card__actions">
+        <button class="mdc-icon-button material-icons">done</button>
+        <button class="mdc-icon-button material-icons">favorite</button>
+        <button class="mdc-icon-button material-icons movie-info-button">info</button>
+    </div>
+</div>

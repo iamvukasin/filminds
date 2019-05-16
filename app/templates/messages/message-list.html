@@ -1,0 +1,9 @@
+{% load static %}
+
+<div class="message__list">
+    {% if is_bot %}
+        <img class="bot__image" src="{% static 'images/logo.svg' %}">
+    {% endif %}
+
+    {{ messages }}
+</div>
