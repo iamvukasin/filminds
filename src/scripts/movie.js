@@ -79,7 +79,7 @@ function showMovie(data) {
 }
 
 // open movie info overlay
-$(".movie-info-button").click((e) => {
+$("body").on("click", ".movie-info-button", (e) => {
     const movieId = $(e.target).parent().parent().attr("data-movie-id");
 
     // fetch the movie
