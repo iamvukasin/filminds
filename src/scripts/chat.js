@@ -4,6 +4,8 @@ const sendMessageButton = $("#send-message-button");
 const sendMessageTextField = $("#send-message-text-field");
 const chatContent = $("#chat__content");
 
+const delayBetweenMessages = 800;
+
 $(document).ready(() => {
     sendMessageButton.prop("disabled", true);
     scrollContent();
@@ -87,7 +89,7 @@ function presentUserMessage(message) {
         },
         success: function (result) {
             for (let i = 0; i < result.messages.length; i++) {
-                presentBotMessage(result.messages[i]);
+                setTimeout(() => presentBotMessage(result.messages[i]), i * delayBetweenMessages);
             }
         }
     });
