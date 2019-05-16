@@ -1,4 +1,8 @@
 from django.db import models
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
+
+from app import utils
 
 
 class MovieGenre(models.Model):
@@ -7,9 +11,14 @@ class MovieGenre(models.Model):
 
 
 class Movie(models.Model):
+    # constraints
+    TITLE_MAX_LENGTH = 100
+    DESCRIPTION_MAX_LENGTH = 200
+
+    # fields
     id = models.IntegerField(primary_key=True)
-    title = models.CharField(max_length=100)
-    description = models.CharField(max_length=200)
+    title = models.CharField(max_length=TITLE_MAX_LENGTH)
+    description = models.CharField(max_length=DESCRIPTION_MAX_LENGTH)
     rating = models.DecimalField(
         max_digits=3,
         decimal_places=1
@@ -19,3 +28,15 @@ class Movie(models.Model):
     backdrop = models.CharField(max_length=50, null=True)
     trailer = models.CharField(max_length=70)
     genres = models.ManyToManyField(MovieGenre)
+
+
+@receiver(pre_save, sender=Movie)
+def limit_movie_char_fields(sender, instance, *args, **kwargs):
+    """
+    Limits Movie's character fields based on maximum length.
+    """
+
+    if len(instance.title) > Movie.TITLE_MAX_LENGTH:
+        instance.title = instance.title[:Movie.TITLE_MAX_LENGTH-1] + '…'
+
+    instance.description = utils.trim_text_by_sentence(instance.description, Movie.DESCRIPTION_MAX_LENGTH)
