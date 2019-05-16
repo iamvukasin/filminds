@@ -71,11 +71,39 @@ function presentBotMessage(message) {
 }
 
 /**
- * Presents user message on chat screen.
+ * Presents user message on chat screen and requests for response.
  *
  * @param message a text representation of user message
  */
 function presentUserMessage(message) {
+    appendUserMessage(message);
+
+    $.ajax({
+        type: "POST",
+        url: "/api/chat/reply",
+        headers: {"X-CSRFToken": Cookies.get("csrftoken")},
+        data: {
+            message: message
+        },
+        success: function (result) {
+            for (let i = 0; i < result.messages.length; i++) {
+                presentBotMessage(result.messages[i]);
+            }
+        }
+    });
+
+    // reset input text
+    sendMessageTextField.val("");
+    sendMessageButton.prop("disabled", true);
+}
+
+/**
+ * Presents user message on chat screen.
+ *
+ * @param message a text representation of user message
+ */
+function appendUserMessage(message) {
+    console.log("PU " + message);
     const lastElement = chatContent.children().last();
 
     const messageElement = $("#template-user-message").contents("div")[0].cloneNode(true);
@@ -91,26 +119,6 @@ function presentUserMessage(message) {
 
     // scroll content to present new message
     scrollContent();
-
-    $.ajax({
-        type: "POST",
-        url: "/api/chat/reply",
-        headers: {"X-CSRFToken": Cookies.get("csrftoken")},
-        data: {
-            message: message
-        },
-        success: function (result) {
-            const messages = JSON.parse(result);
-            for (let i = 0; i < messages.messages.length; i++) {
-                // appendMessage(messages.messages[i], true);
-                presentBotMessage(messages.messages[i]);
-            }
-        }
-    });
-
-    // reset input text
-    sendMessageTextField.val("");
-    sendMessageButton.prop("disabled", true);
 }
 
 /**
@@ -120,3 +128,27 @@ function scrollContent() {
     const contentHeight = chatContent.prop("scrollHeight");
     chatContent.animate({scrollTop: contentHeight}, 50);
 }
+
+function loadMessages() {
+    $.ajax({
+        type: "POST",
+        url: "/api/chat/load",
+        headers: {"X-CSRFToken": Cookies.get("csrftoken")},
+        success: function (result) {
+            for (const message of result) {
+                console.log(message);
+                if (message.sender_type === "U") {
+                    for (const singleMessage of message.content.messages)
+                        appendUserMessage(singleMessage.content);
+                } else {
+                    for (const singleMessage of message.content.messages)
+                        presentBotMessage(singleMessage);
+                }
+            }
+        }
+    });
+}
+
+$(".chat").ready(() => {
+    loadMessages();
+});

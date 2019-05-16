@@ -1,5 +1,6 @@
 import calendar
 import datetime
+import json
 
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -124,3 +125,12 @@ class ChatReply(APIView):
             message_to_save.save()
 
         return Response(bot_response)
+
+
+class ChatLoad(APIView):
+    def post(self, request):
+        if request.user.is_authenticated:
+            user_messages = Message.get_messages(user=User.get_user(request.user))
+            return Response(user_messages)
+        else:
+            return Response()

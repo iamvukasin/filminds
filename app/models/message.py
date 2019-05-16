@@ -1,3 +1,5 @@
+import json
+
 from django.contrib.postgres.fields import JSONField
 from django.db import models
 
@@ -32,3 +34,7 @@ class Message(models.Model):
     )
     timestamp = models.DateTimeField(auto_now_add=True)
     content = JSONField()
+
+    @staticmethod
+    def get_messages(user):
+        return Message.objects.filter(user=user).values('sender_type', 'content')

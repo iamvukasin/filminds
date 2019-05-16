@@ -46,5 +46,4 @@ class ResponseBuilder:
         Retrieves a JSON object of previously added messages.
         """
 
-        data = {'messages': self.messages}
-        return json.dumps(data)
+        return {'messages': self.messages}
