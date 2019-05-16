@@ -1,3 +1,5 @@
+import * as Cookies from "js-cookies";
+
 const sendMessageButton = $("#send-message-button");
 const sendMessageTextField = $("#send-message-text-field");
 const chatContent = $("#chat__content");
@@ -93,6 +95,7 @@ function presentUserMessage(message) {
     $.ajax({
         type: "POST",
         url: "/api/chat/reply",
+        headers: {"X-CSRFToken": Cookies.get("csrftoken")},
         data: {
             message: message
         },

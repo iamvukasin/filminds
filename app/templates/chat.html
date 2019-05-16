@@ -153,6 +153,7 @@
 
                 <!-- Field for sending text -->
                 <form method="post" id="chat-form">
+                    {% csrf_token %}
                     <div class="chat__send-field mdc-elevation--z10">
                         <div class="mdc-text-field text-field mdc-text-field--outlined mdc-text-field--with-trailing-icon mdc-text-field--no-label">
                             <input type="text" class="mdc-text-field__input" id="send-message-text-field" placeholder="Send message..." autocomplete="off">

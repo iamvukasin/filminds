@@ -7,6 +7,9 @@ from wit import Wit
 
 import config
 from api import chat_responses
+from api.chat_responses.builder import TextMessage, ResponseBuilder
+
+from app.models import Message, User
 
 RESPONSE_BUILDERS = {
     'greetings': chat_responses.ResponseGreeting,
@@ -84,7 +87,19 @@ class ChatReply(APIView):
             return None
 
     def post(self, request):
+        #get and save user message
         message = request.POST.get('message', '')
+        text_message = TextMessage(message)
+        builder = ResponseBuilder()
+        builder.add(text_message)
+
+        message_to_save = Message(
+            user=User.get_user(request.user),
+            sender_type=Message.SENDER_USER,
+            content=builder.get_response()
+        )
+
+        message_to_save.save()
 
         # get chat_responses from Wit
         client = Wit(access_token=config.WIT_ACCESS_TOKEN)
@@ -96,4 +111,14 @@ class ChatReply(APIView):
         except (KeyError, TypeError):
             response_builder = RESPONSE_BUILDERS['no_intent']
 
-        return Response(response_builder().get(wit_response))
+        # get and save bot message
+        bot_response = response_builder().get(wit_response)
+        message_to_save = Message(
+            user=User.get_user(request.user),
+            type=Message.TYPE_DATA,
+            content=bot_response
+        )
+
+        message_to_save.save()
+
+        return Response(bot_response)

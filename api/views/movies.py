@@ -4,6 +4,7 @@ from requests import HTTPError
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+import config
 from api.serializers import MovieSerializer
 from app.models import Movie, MovieGenre
 
@@ -30,6 +31,7 @@ class MovieInfo(APIView):
         except Movie.DoesNotExist:
             try:
                 # find all movies with basic information + trailer videos
+                tmdb.API_KEY = config.TMDB_API_KEY
                 found_movie = tmdb.Movies(pk).info(append_to_response='videos')
 
                 movie = Movie(

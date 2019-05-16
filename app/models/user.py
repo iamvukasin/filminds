@@ -21,6 +21,10 @@ class User(models.Model):
         default=REGISTERED_USER
     )
 
+    @staticmethod
+    def get_user(auth_user):
+        return User.objects.get(user=auth_user)
+
 
 @receiver(post_save, sender=AuthUser)
 def create_user_profile(sender, instance, created, **kwargs):
