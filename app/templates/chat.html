@@ -73,7 +73,7 @@
                             <span class="message message--bot">These movies are popular right now:</span>
                         </div>
                         <div class="message__movie-list">
-                            <div class="mdc-card movie-card">
+                            <div class="mdc-card movie-card" data-movie-id="332562">
                                 <img src="https://image.tmdb.org/t/p/w400/wqtaHWOEZ3rXDJ8c6ZZShulbo18.jpg">
                                 <div class="movie-card__content">
                                     <h3 class="mdc-typography--headline6">A star is born</h3>
@@ -82,10 +82,10 @@
                                 <div class="movie-card__actions">
                                     <button class="mdc-icon-button material-icons">done</button>
                                     <button class="mdc-icon-button material-icons">favorite</button>
-                                    <a href="movie.html" class="mdc-icon-button material-icons">info</a>
+                                    <button class="mdc-icon-button material-icons movie-info-button">info</button>
                                 </div>
                             </div>
-                            <div class="mdc-card movie-card">
+                            <div class="mdc-card movie-card" data-movie-id="399579">
                                 <img src="https://image.tmdb.org/t/p/w400/aQXTw3wIWuFMy0beXRiZ1xVKtcf.jpg">
                                 <div class="movie-card__content">
                                     <h3 class="mdc-typography--headline6">Alita: Battle Angel</h3>
@@ -94,10 +94,10 @@
                                 <div class="movie-card__actions">
                                     <button class="mdc-icon-button material-icons">done</button>
                                     <button class="mdc-icon-button material-icons">favorite</button>
-                                    <a href="movie.html" class="mdc-icon-button material-icons">info</a>
+                                    <button class="mdc-icon-button material-icons movie-info-button">info</button>
                                 </div>
                             </div>
-                            <div class="mdc-card movie-card">
+                            <div class="mdc-card movie-card" data-movie-id="490132">
                                 <img src="https://image.tmdb.org/t/p/w400/78PjwaykLY2QqhMfWRDvmfbC6EV.jpg">
                                 <div class="movie-card__content">
                                     <h3 class="mdc-typography--headline6">Green Book</h3>
@@ -106,10 +106,10 @@
                                 <div class="movie-card__actions">
                                     <button class="mdc-icon-button material-icons">done</button>
                                     <button class="mdc-icon-button material-icons">favorite</button>
-                                    <a href="movie.html" class="mdc-icon-button material-icons">info</a>
+                                    <button class="mdc-icon-button material-icons movie-info-button">info</button>
                                 </div>
                             </div>
-                            <div class="mdc-card movie-card">
+                            <div class="mdc-card movie-card" data-movie-id="">
                                 <img src="https://image.tmdb.org/t/p/w400/bUx67M5KgeyuXIQT1OyH8fK4XVq.jpg">
                                 <div class="movie-card__content">
                                     <h3 class="mdc-typography--headline6">If Beale Street Could Talk</h3>
@@ -118,10 +118,10 @@
                                 <div class="movie-card__actions">
                                     <button class="mdc-icon-button material-icons">done</button>
                                     <button class="mdc-icon-button material-icons">favorite</button>
-                                    <a href="movie.html" class="mdc-icon-button material-icons">info</a>
+                                    <button class="mdc-icon-button material-icons movie-info-button">info</button>
                                 </div>
                             </div>
-                            <div class="mdc-card movie-card">
+                            <div class="mdc-card movie-card" data-movie-id="">
                                 <img src="https://image.tmdb.org/t/p/w400/kq23EdE5nUyOsfxnGYDGsAqsl7n.jpg">
                                 <div class="movie-card__content">
                                     <h3 class="mdc-typography--headline6">Jurassic World: Fallen Kingdom</h3>
@@ -130,7 +130,7 @@
                                 <div class="movie-card__actions">
                                     <button class="mdc-icon-button material-icons">done</button>
                                     <button class="mdc-icon-button material-icons">favorite</button>
-                                    <a href="movie.html" class="mdc-icon-button material-icons">info</a>
+                                    <button class="mdc-icon-button material-icons movie-info-button">info</button>
                                 </div>
                             </div>
                         </div>
@@ -166,7 +166,9 @@
         </main>
     </div>
 
+    {% include 'components/movie-info-overlay.html' %}
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="scripts/main.js"></script>
+    <script src="{% static 'scripts/main.js' %}"></script>
 </body>
 {% endblock %}

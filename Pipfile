@@ -8,6 +8,8 @@ django = "*"
 psycopg2-binary = "*"
 tmdbsimple = "*"
 django-widget-tweaks = "*"
+djangorestframework = "*"
+simpletmdb = "*"
 
 [dev-packages]
 pytest = "*"

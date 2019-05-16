@@ -1,0 +1,40 @@
+<div id="movie-info" class="mdc-elevation--z20">
+    <header class="mdc-top-app-bar mdc-top-app-bar--dense movie-info-header">
+        <div class="mdc-top-app-bar__row">
+            <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+                <button class="material-icons mdc-top-app-bar__navigation-icon mdc-theme--text-icon-on-light movie-info__close-button">close</button>
+            </section>
+        </div>
+    </header>
+
+    <div class="mdc-layout-grid movie-info__grid">
+        <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
+                <img class="mdc-elevation--z4 movie-info__poster">
+            </div>
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8">
+                <h1 class="mdc-typography--headline4 movie-info__name"><span class="movie-info__title"></span> <span class="movie-info__year"></span></h1>
+                <div class="movie-info__rating"></div>
+
+                <h2 class="mdc-typography--headline6">Overview</h2>
+                <p class="mdc-typography--body1 movie-info__overview"></p>
+
+                <a href="#" class="mdc-button mdc-button--outlined movie-info__trailer" target="_blank">
+                    <i class="material-icons mdc-button__icon" aria-hidden="true">play_circle_filled</i>
+                    <span class="mdc-button__label">Trailer</span>
+                </a>
+
+                <h2 class="mdc-typography--headline6">Cast</h2>
+                <div class="mdc-layout-grid__inner movie-info__all-cast"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<template id="template-cast-card">
+    <div class="mdc-card mdc-elevation--z4 movie-info__cast">
+        <img class="cast-card__profile">
+        <p class="cast-card__name"></p>
+        <p class="cast-card__character"></p>
+    </div>
+</template>
