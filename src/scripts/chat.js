@@ -1,4 +1,4 @@
-import * as Cookies from "js-cookies";
+import * as Cookies from "js-cookie";
 
 const sendMessageButton = $("#send-message-button");
 const sendMessageTextField = $("#send-message-text-field");
