@@ -7,13 +7,6 @@ from .user import User
 
 
 class Message(models.Model):
-    TYPE_TEXT = 'T'
-    TYPE_DATA = 'D'
-    MESSAGE_TYPE_CHOICES = (
-        (TYPE_TEXT, 'Text message'),
-        (TYPE_DATA, 'Message with data')
-    )
-
     SENDER_USER = 'U'
     SENDER_BOT = 'B'
     MESSAGE_SENDER_CHOICES = (
@@ -22,11 +15,6 @@ class Message(models.Model):
     )
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    type = models.CharField(
-        max_length=1,
-        choices=MESSAGE_TYPE_CHOICES,
-        default=TYPE_TEXT
-    )
     sender_type = models.CharField(
         max_length=1,
         choices=MESSAGE_SENDER_CHOICES,

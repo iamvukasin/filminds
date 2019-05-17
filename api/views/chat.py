@@ -118,7 +118,6 @@ class ChatReply(APIView):
         if request.user.is_authenticated:
             message_to_save = Message(
                 user=User.get_user(request.user),
-                type=Message.TYPE_DATA,
                 content=bot_response
             )
 
