@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<body class="service">
+    <!-- Top App Bar -->
+    {% include 'components/top-app-bar.html' %}
+
+    <div class="service__content">
+        <!-- Drawer menu bar -->
+        {% include 'components/side-menu.html' %}
+
+        <!-- Content -->
+        <main class="service__main-content">
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+
+    {% block bottom %}{% endblock %}
+</body>
+{% endblock %}

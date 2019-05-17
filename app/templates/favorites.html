@@ -1,0 +1,88 @@
+{% extends 'base-with-side-menu.html' %}
+{% load static %}
+
+{% block content %}
+
+    <div class="favorites">
+        <div class="mdc-layout-grid">
+            <div class="mdc-layout-grid__inner">
+                <h2 class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-typography--headline5">Favorites</h2>
+
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-card movie-card">
+                    <img src="https://image.tmdb.org/t/p/w400/wqtaHWOEZ3rXDJ8c6ZZShulbo18.jpg">
+                    <div class="movie-card__content">
+                        <h3 class="mdc-typography--headline6">A star is born</h3>
+                        <p class="mdc-typography--body2">Seasoned musician Jackson Maine discovers — and falls in love with — struggling artist Ally. She has just about given up on her dream to make it big as a singer — until Jack coaxes her into the spotlight...</p>
+                    </div>
+                    <div class="movie-card__actions">
+                        <button class="mdc-icon-button material-icons">done</button>
+                        <button class="mdc-icon-button material-icons">favorite</button>
+                        <button class="mdc-icon-button material-icons movie-info-button">info</button>
+                    </div>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-card movie-card">
+                    <img src="https://image.tmdb.org/t/p/w400/aQXTw3wIWuFMy0beXRiZ1xVKtcf.jpg">
+                    <div class="movie-card__content">
+                        <h3 class="mdc-typography--headline6">Alita: Battle Angel</h3>
+                        <p class="mdc-typography--body2">When Alita awakens with no memory of who she is in a future world she does not recognize, she is taken in by Ido, a compassionate doctor who realizes that somewhere in this abandoned cyborg shell is the heart and soul of a young woman with an extraordinary past.</p>
+                    </div>
+                    <div class="movie-card__actions">
+                        <button class="mdc-icon-button material-icons">done</button>
+                        <button class="mdc-icon-button material-icons">favorite</button>
+                        <button class="mdc-icon-button material-icons movie-info-button">info</button>
+                    </div>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-card movie-card">
+                    <img src="https://image.tmdb.org/t/p/w400/78PjwaykLY2QqhMfWRDvmfbC6EV.jpg">
+                    <div class="movie-card__content">
+                        <h3 class="mdc-typography--headline6">Green Book</h3>
+                        <p class="mdc-typography--body2">Tony Lip, a bouncer in 1962, is hired to drive pianist Don Shirley on a tour through the Deep South in the days when African Americans, forced to find alternate accommodations and services due to segregation laws below the Mason-Dixon Line, relied on a guide called The Negro Motorist Green Book.</p>
+                    </div>
+                    <div class="movie-card__actions">
+                        <button class="mdc-icon-button material-icons">done</button>
+                        <button class="mdc-icon-button material-icons">favorite</button>
+                        <button class="mdc-icon-button material-icons movie-info-button">info</button>
+                    </div>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-card movie-card">
+                    <img src="https://image.tmdb.org/t/p/w400/bUx67M5KgeyuXIQT1OyH8fK4XVq.jpg">
+                    <div class="movie-card__content">
+                        <h3 class="mdc-typography--headline6">If Beale Street Could Talk</h3>
+                        <p class="mdc-typography--body2">After her fiance is falsely imprisoned, a pregnant African-American woman sets out to clear his name and prove his innocence.</p>
+                    </div>
+                    <div class="movie-card__actions">
+                        <button class="mdc-icon-button material-icons">done</button>
+                        <button class="mdc-icon-button material-icons">favorite</button>
+                        <button class="mdc-icon-button material-icons movie-info-button">info</button>
+                    </div>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-card movie-card">
+                    <img src="https://image.tmdb.org/t/p/w400/kq23EdE5nUyOsfxnGYDGsAqsl7n.jpg">
+                    <div class="movie-card__content">
+                        <h3 class="mdc-typography--headline6">Jurassic World: Fallen Kingdom</h3>
+                        <p class="mdc-typography--body2">Three years after the demise of Jurassic World, a volcanic eruption threatens the remaining dinosaurs on the isla Nublar, so Claire Dearing, the former park manager, recruits Owen Grady to help prevent the extinction of the dinosaurs once again.</p>
+                    </div>
+                    <div class="movie-card__actions">
+                        <button class="mdc-icon-button material-icons">done</button>
+                        <button class="mdc-icon-button material-icons">favorite</button>
+                        <button class="mdc-icon-button material-icons movie-info-button">info</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block bottom %}
+
+    {% include 'components/movie-info-overlay.html' %}
+
+    <template id="template-movie-card">
+        {% include 'messages/movie-card.html' with movie='' %}
+    </template>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="{% static 'scripts/main.js' %}"></script>
+
+{% endblock %}

@@ -1,73 +1,30 @@
-{% extends 'base.html' %}
+{% extends 'base-with-side-menu.html' %}
 {% load static %}
 
-{% block body %}
-<body class="service">
-    <!-- Top App Bar -->
-    {% include 'components/top-app-bar.html' %}
+{% block content %}
 
-    <div class="service__content">
-        <!-- Drawer menu bar -->
-        <aside class="mdc-drawer">
-            <div class="mdc-drawer__content">
-                <nav class="mdc-list">
-                    <a class="mdc-list-item mdc-list-item--activated" href="#" aria-selected="true">
-                        <i class="material-icons mdc-list-item__graphic" aria-hidden="true">chat_bubble</i>
-                        <span class="mdc-list-item__text">Chat</span>
-                    </a>
-                    <a class="mdc-list-item" href="favorites.html">
-                        <i class="material-icons mdc-list-item__graphic" aria-hidden="true">favorite</i>
-                        <span class="mdc-list-item__text">Favorites</span>
-                    </a>
-                    <a class="mdc-list-item" href="watched.html">
-                        <i class="material-icons mdc-list-item__graphic" aria-hidden="true">movie</i>
-                        <span class="mdc-list-item__text">Watched</span>
-                    </a>
-                    <a class="mdc-list-item" href="expert-picks.html">
-                        <i class="material-icons mdc-list-item__graphic" aria-hidden="true">stars</i>
-                        <span class="mdc-list-item__text">Expert picks</span>
-                    </a>
-                    <hr class="mdc-list-divider">
-                    <a class="mdc-list-item" href="add-expert-picks.html">
-                        <i class="material-icons mdc-list-item__graphic" aria-hidden="true">library_add</i>
-                        <span class="mdc-list-item__text">Add expert picks</span>
-                    </a>
-                    <a class="mdc-list-item" href="stats.html">
-                        <i class="material-icons mdc-list-item__graphic" aria-hidden="true">bar_chart</i>
-                        <span class="mdc-list-item__text">Statistics</span>
-                    </a>
-                    <a class="mdc-list-item" href="admin.html">
-                        <i class="material-icons mdc-list-item__graphic" aria-hidden="true">supervised_user_circle</i>
-                        <span class="mdc-list-item__text">Admin dashboard</span>
-                    </a>
-                </nav>
-            </div>
-        </aside>
+    <div class="chat">
+        <div id="chat__content"></div>
 
-        <!-- Content -->
-        <main class="service__main-content">
-            <div class="chat">
-                <div id="chat__content">
-                </div>
-
-                <!-- Field for sending text -->
-                <form method="post" id="chat-form">
-                    {% csrf_token %}
-                    <div class="chat__send-field mdc-elevation--z10">
-                        <div class="mdc-text-field text-field mdc-text-field--outlined mdc-text-field--with-trailing-icon mdc-text-field--no-label">
-                            <input type="text" class="mdc-text-field__input" id="send-message-text-field" placeholder="Send message..." autocomplete="off">
-                            <button class="mdc-icon-button material-icons" id="send-message-button" type="submit">send</button>
-                            <div class="mdc-notched-outline mdc-notched-outline--no-label">
-                                <div class="mdc-notched-outline__leading"></div>
-                                <div class="mdc-notched-outline__trailing"></div>
-                            </div>
-                        </div>
+        <!-- Field for sending text -->
+        <form method="post" id="chat-form">
+            {% csrf_token %}
+            <div class="chat__send-field mdc-elevation--z10">
+                <div class="mdc-text-field text-field mdc-text-field--outlined mdc-text-field--with-trailing-icon mdc-text-field--no-label">
+                    <input type="text" class="mdc-text-field__input" id="send-message-text-field" placeholder="Send message..." autocomplete="off">
+                    <button class="mdc-icon-button material-icons" id="send-message-button" type="submit">send</button>
+                    <div class="mdc-notched-outline mdc-notched-outline--no-label">
+                        <div class="mdc-notched-outline__leading"></div>
+                        <div class="mdc-notched-outline__trailing"></div>
                     </div>
-                </form>
-
+                </div>
             </div>
-        </main>
+        </form>
     </div>
+
+{% endblock %}
+
+{% block bottom %}
 
     {% include 'components/movie-info-overlay.html' %}
 
@@ -93,5 +50,5 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="{% static 'scripts/main.js' %}"></script>
-</body>
+
 {% endblock %}

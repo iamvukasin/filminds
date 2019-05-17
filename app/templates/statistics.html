@@ -1,0 +1,48 @@
+{% extends 'base-with-side-menu.html' %}
+{% load static %}
+
+{% block content %}
+
+    <div class="statistics">
+        <div class="mdc-layout-grid statistics__grid">
+            <div class="mdc-layout-grid__inner">
+                <h2 class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-typography--headline5">Movie statistics</h2>
+
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-card statistics__card">
+                    <h3 class="mdc-typography--headline6">Most searched movies</h3>
+                    <div class="statistics__search ct-perfect-fourth"></div>
+                </div>
+
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-card statistics__card">
+                    <h3 class="mdc-typography--headline6">Most watched movies</h3>
+                    <div class=" statistics__watched ct-perfect-fourth"></div>
+                </div>
+
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-card statistics__card">
+                    <h3 class="mdc-typography--headline6">Most liked movies</h3>
+                    <div class="statistics__wishlist ct-perfect-fourth"></div>
+                </div>
+
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-card statistics__card">
+                    <h3 class="mdc-typography--headline6">Popular movie genres</h3>
+                    <div class="statistics__genres ct-perfect-fourth"></div>
+                </div>
+
+                <h2 class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-typography--headline5">Website statistics</h2>
+
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-card statistics__card">
+                    <h3 class="mdc-typography--headline6">Number of users per days</h3>
+                    <div class="statistics__users ct-perfect-fourth"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block bottom %}
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="{% static 'scripts/main.js' %}"></script>
+
+{% endblock %}
