@@ -15,7 +15,7 @@ class RegistrationForm(UserCreationForm):
 
     def clean_email(self):
         """
-        Validates if the entered email is being used by other user.
+        Validates if the entered email is being used by another user.
 
         :return: cleaned email
         :raises: ValidationError if the email already exists
@@ -24,7 +24,7 @@ class RegistrationForm(UserCreationForm):
         email = self.cleaned_data.get('email')
         username = self.cleaned_data.get('username')
 
-        if email and AuthUser.objects.filter(email=email).exclude(username=username).exists():
+        if email and AuthUser.objects.filter(email__iexact=email).exclude(username=username).exists():
             raise forms.ValidationError('A user with that email already exists.')
 
         return email
