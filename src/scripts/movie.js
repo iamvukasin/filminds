@@ -1,3 +1,5 @@
+import * as Cookies from "js-cookie";
+
 const movieInfoOverlay = $("#movie-info");
 const movieInfoPoster = movieInfoOverlay.find(".movie-info__poster");
 const movieInfoTitle = movieInfoOverlay.find(".movie-info__title");
@@ -83,7 +85,16 @@ $("body").on("click", ".movie-info-button", (e) => {
     const movieId = $(e.target).parent().parent().attr("data-movie-id");
 
     // fetch the movie
-    $.get("/api/movies/info/" + movieId, {}, showMovie);
+    $.ajax({
+        type: "GET",
+        url: "/api/movies/info/" + movieId,
+        headers: {"X-CSRFToken": Cookies.get("csrftoken")},
+        success: function (result) {
+            for (let i = 0; i < result.messages.length; i++) {
+                setTimeout(() => presentBotMessage(result.messages[i]), i * delayBetweenMessages);
+            }
+        }
+    });
 });
 
 // close movie info overlay

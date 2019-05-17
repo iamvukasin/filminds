@@ -6,7 +6,7 @@ from rest_framework.views import APIView
 
 import config
 from api.serializers import MovieSerializer
-from app.models import Movie, MovieGenre
+from app.models import Movie, MovieGenre, SearchedMovie, User
 
 MAX_NUM_CASTS = 4
 
@@ -57,6 +57,11 @@ class MovieInfo(APIView):
 
     def get(self, request, pk):
         movie = self._get_object(pk)
+
+        # insert movie into searched movies table
+        if request.user.is_authenticated:
+            SearchedMovie.increment_search_count(User.get_user(request.user), movie)
+
         serializer = MovieSerializer(movie)
         data = serializer.data
 
