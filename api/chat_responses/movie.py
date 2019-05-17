@@ -5,7 +5,8 @@ import tmdbsimple as tmdb
 import config
 from api.chat_responses.builder import TextMessage, Message
 from api.chat_responses.response import Response
-from app.models import MovieGenre
+from app.models import MovieGenre, Movie
+from app.utils import trim_text_by_sentence
 
 
 class MovieMessage(Message):
@@ -29,7 +30,7 @@ class MovieMessage(Message):
                 'id': movie['id'],
                 'title': movie['title'],
                 'backdrop': "https://image.tmdb.org/t/p/w400" + movie['backdrop_path'],
-                'overview': movie['overview']
+                'overview': trim_text_by_sentence(movie['overview'], Movie.DESCRIPTION_MAX_LENGTH)
             }
             movies.append(movie_data)
 
