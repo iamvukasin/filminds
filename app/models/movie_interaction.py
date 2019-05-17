@@ -36,6 +36,15 @@ class CollectedMovie(models.Model):
         default=TYPE_WISH
     )
 
+    @staticmethod
+    def get_favorites(user):
+        movie_ids = CollectedMovie.objects.filter(user=user, type=CollectedMovie.TYPE_WISH).values_list('movie', flat=True)
+        return Movie.objects.filter(id__in=movie_ids)
+
+    @staticmethod
+    def get_watched(user):
+        return CollectedMovie.objects.filter(user=user, type=CollectedMovie.TYPE_WATCH).values_list('movie', flat=True)
+
 
 class ExpertPickMovie(models.Model):
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)

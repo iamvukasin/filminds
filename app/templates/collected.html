@@ -1,0 +1,40 @@
+{% extends 'base-with-side-menu.html' %}
+{% load static %}
+
+{% block content %}
+
+    <div class="favorites">
+        <div class="mdc-layout-grid">
+            <div class="mdc-layout-grid__inner">
+                <h2 class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-typography--headline5">
+                    {{ type }} </h2>
+
+                {% for movie in movies %}
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-card movie-card">
+                    <img src="https://image.tmdb.org/t/p/w400{{ movie.backdrop }}">
+                    <div class="movie-card__content">
+                        <h3 class="mdc-typography--headline6">{{ movie.title }}</h3>
+                        <p class="mdc-typography--body2">{{ movie.description }}</p>
+                    </div>
+                    <div class="movie-card__actions">
+                        <button class="mdc-icon-button material-icons {% if type == "Watched" %}active{% endif %}">done</button>
+                        <button class="mdc-icon-button material-icons {% if type == "Favorites" %}active{% endif %}">favorite</button>
+                        <button class="mdc-icon-button material-icons movie-info-button">info</button>
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block bottom %}
+
+    {% include 'components/movie-info-overlay.html' %}
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="{% static 'scripts/main.js' %}"></script>
+
+{% endblock %}
