@@ -25,4 +25,4 @@ class Message(models.Model):
 
     @staticmethod
     def get_messages(user):
-        return Message.objects.filter(user=user).values('sender_type', 'content')
+        return Message.objects.filter(user=user).values('sender_type', 'content').order_by('timestamp')

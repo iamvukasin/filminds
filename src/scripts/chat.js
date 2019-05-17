@@ -69,7 +69,9 @@ function presentBotMessage(message) {
     }
 
     // scroll content to present new message
-    scrollContent();
+    setTimeout( () => {
+        scrollContent();
+    }, 200);
 }
 
 /**
