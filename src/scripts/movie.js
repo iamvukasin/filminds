@@ -89,11 +89,7 @@ $("body").on("click", ".movie-info-button", (e) => {
         type: "GET",
         url: "/api/movies/info/" + movieId,
         headers: {"X-CSRFToken": Cookies.get("csrftoken")},
-        success: function (result) {
-            for (let i = 0; i < result.messages.length; i++) {
-                setTimeout(() => presentBotMessage(result.messages[i]), i * delayBetweenMessages);
-            }
-        }
+        success: showMovie
     });
 });
 
