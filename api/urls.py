@@ -1,8 +1,6 @@
 from django.urls import path
 
-from api.views import MovieInfo
-from api.views.chat import ChatLoad
-from api.views import ChatReply
+from api.views import MovieInfo, ChatLoad, ChatReply
 
 urlpatterns = [
     path('movies/info/<int:pk>', MovieInfo.as_view()),
