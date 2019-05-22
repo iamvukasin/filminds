@@ -1,4 +1,5 @@
 import { MDCDialog } from "@material/dialog";
+import * as Cookies from "js-cookie";
 
 const dialogs = document.querySelector(".mdc-dialog");
 var dialog = null;
@@ -8,7 +9,12 @@ if (dialogs) {
 	dialog = new MDCDialog(dialogs);
 }
 
-addExpertButton?.click(() => dialog?.open());
+addExpertButton?.click(() => {
+	
+		dialog?.open();
+
+
+});
 
 
 function deleteButtonClick(element) {
@@ -30,5 +36,22 @@ const removeUserTextField = $("#remove-user-text-field");
 deleteButtons.each((i, obj) => obj.onclick = deleteButtonClick(obj));
 
 removeUserButton?.click(() => {
-    removeUserTextField.val("");
+	
+	if( removeUserTextField.val()==""){
+		alert("Please enter valid data");
+	}
+	else{
+        $.ajax({
+            type: "POST",
+            url: "/api/admin_dashboard/delete_user",
+            headers: {"X-CSRFToken": Cookies.get("csrftoken")},
+            data: {
+                message: removeUserTextField.val()
+            },
+            success: (data) => alert(data.message)
+        });
+	    removeUserTextField.val("");
+	}
 });
+
+

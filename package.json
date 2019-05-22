@@ -31,7 +31,7 @@
     "@material/elevation": "^1.1.0",
     "@material/icon-button": "^2.0.0",
     "@material/layout-grid": "^0.41.0",
-    "@material/select": "^2.0.0",
+    "@material/select": "^2.2.0",
     "@material/textfield": "^2.1.0",
     "@material/theme": "^1.1.0",
     "@material/toolbar": "^2.0.0",
