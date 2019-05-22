@@ -9,13 +9,7 @@ if (dialogs) {
 	dialog = new MDCDialog(dialogs);
 }
 
-addExpertButton?.click(() => {
-	
-		dialog?.open();
-
-
-});
-
+addExpertButton?.click(() => dialog?.open());
 
 function deleteButtonClick(element) {
     return function () {
@@ -53,5 +47,6 @@ removeUserButton?.click(() => {
 	    removeUserTextField.val("");
 	}
 });
+
 
 

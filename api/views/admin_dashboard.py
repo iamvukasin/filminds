@@ -1,7 +1,7 @@
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import JsonResponse
-
 from rest_framework.views import APIView
+
 from app.models.user import AuthUser, User
 
 
@@ -15,9 +15,9 @@ class DeleteUser(APIView):
             else:
                 user = AuthUser.objects.get(username=username)
 
-            user = User.get_user(user)
+            check = User.get_user(user)
 
-            if user.type == User.ADMIN:
+            if check.type == User.ADMIN:
                 message = "User is admin."
             else:
                 user.delete()
