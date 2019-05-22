@@ -1,10 +1,8 @@
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import JsonResponse
-from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from app.models.expert_picks import ExpertPicksCategory
-from app.models.movie import MovieGenre
 from app.models.user import AuthUser, User
 
 
@@ -66,3 +64,16 @@ class AddExpert(APIView):
                 message = "Username doesn't exist."
 
         return JsonResponse({'message': message})
+
+
+class RemoveExpert(APIView):
+    def post(self, request):
+        username = request.POST.get('message', '')
+        auth_user = AuthUser.objects.get(username=username)
+        user = User.objects.get(user_id=auth_user.pk)
+        user.type = User.REGISTERED_USER
+        user.save()
+        categorie = ExpertPicksCategory.objects.get(expert_id=auth_user.pk)
+        categorie.delete()
+        return JsonResponse({'message': "Expert is successfully removed"})
+

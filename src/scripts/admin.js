@@ -15,10 +15,19 @@ function deleteButtonClick(element) {
     return function () {
         var index = $(".remove-expert")?.index(element);
         var experts = $(".expert-content");
-
+		
         if (!experts)
             return;
-
+		var expertUsername = $(".expertUsername");
+        $.ajax({
+            type: "POST",
+            url: "/api/admin_dashboard/remove_expert",
+            headers: {"X-CSRFToken": Cookies.get("csrftoken")},
+            data: {
+                message: expertUsername[index].innerHTML
+            },
+            success: (data) => alert(data.message)
+        });
         $(experts[index]).remove();
     }
 }

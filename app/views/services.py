@@ -3,7 +3,8 @@ from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView
 
-from app.models import CollectedMovie, User
+from app.models import CollectedMovie, User, ExpertPicksCategory
+from app.models.user import AuthUser
 
 
 class ChatView(TemplateView):
@@ -46,3 +47,22 @@ class StatisticsView(TemplateView):
 
 class AdminDashboardView(TemplateView):
     template_name = "admin-dashboard.html"
+
+    @method_decorator(login_required)
+    def get(self, request, *args, **kwargs):
+        categories = ExpertPicksCategory.objects.all()
+        experts = []
+
+        for categorie in categories:
+            expert = AuthUser.objects.get(id=categorie.expert_id)
+            experts.append({
+                'first_name': expert.first_name,
+                'last_name': expert.last_name,
+                'username': expert.username,
+                'email': expert.email,
+                'category': categorie.name
+            })
+
+        return render(request, self.template_name, {
+            'experts': experts
+        })
