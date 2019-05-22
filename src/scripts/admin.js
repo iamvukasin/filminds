@@ -49,4 +49,31 @@ removeUserButton?.click(() => {
 });
 
 
+const confirmExpertButton = $("#confirmExpertButton");
+const addExpertTextField = $("#expertInput");
+const categoryTextField = $("#categoryInput");
+
+confirmExpertButton?.click( ()=>{
+	if( addExpertTextField.val()==""){
+		alert("Please enter username or email");
+	}
+	else if(categoryTextField.val() =="" ){
+		alert("Please choose category");
+	}
+	else {
+        $.ajax({
+            type: "POST",
+            url: "/api/admin_dashboard/add_expert",
+            headers: {"X-CSRFToken": Cookies.get("csrftoken")},
+            data: {
+                expert: addExpertTextField.val(),
+				category : categoryTextField.val(),
+            },
+            success: (data) => alert(data.message)
+        });
+	}
+	
+	addExpertTextField.val("");
+	categoryTextField.val("");
+});
 
