@@ -1,0 +1,169 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[serbianc]{babel}
+\usepackage{fullwidth}
+\usepackage{tabularx}
+\usepackage{makecell}
+\usepackage{enumitem}
+
+% section prefixes
+\makeatletter
+\renewcommand{\@seccntformat}[1]{%
+  \ifcsname prefix@#1\endcsname
+    \csname prefix@#1\endcsname
+  \else
+    \csname the#1\endcsname\quad
+  \fi}
+% define \prefix@section
+\newcommand\prefix@section{\thesection. }
+\makeatother
+
+\begin{document}
+
+\begin{titlepage}
+\begin{center}
+  Универзитет у Београду \\
+  Електротехнички факултет \\
+  Катедра за рачунарску технику и информатику \\
+  \vfill
+
+  {\fontsize{50}{60}\selectfont Filminds}
+  \vskip 0.6cm
+
+  {\large Спецификација сценарија употребе функционалности ажурирања листе предлога експерата }
+  \vskip 0.3cm
+  
+  {\large Тим: Super Trio Mario}
+  \vskip 0.3cm
+
+  {\large Верзија 1.0}
+
+  \vfill
+  \vfill
+
+  Март 2019.
+\hfill
+
+\end{center}
+\end{titlepage}
+
+\section*{Историја измена}
+\noindent
+\setcellgapes{4pt}
+\makegapedcells
+\begin{tabularx}{\linewidth}{|l|l|X|X|}
+    \hline
+    \textbf{Датум} & \textbf{Верзија} & \textbf{Кратак опис} & \textbf{Аутор} \\
+    \hline
+    23.5.2019. & 1.0 & Иницијална верзија & Немања Дивнић \\
+    \hline
+    & & & \\
+    \hline
+\end{tabularx}
+\newpage
+
+\tableofcontents
+\newpage
+
+\section{Увод}
+\subsection{Резиме}
+Документ дефинише сценарио употребе ажурирања листе предлога експерата.
+\subsection{Намена документа и циљне групе}
+Документ ће користити чланови тима који буду радили на имплементацији и тестирању овог случаја употребе. Такође, документ се може користити и при писању корисничког упутства за коришћење сервиса.
+\subsection{Референце}
+ 
+\begin{enumerate}
+  \item Пројектни задатак
+  \item Упутство за писање спецификације сценарија употребе
+  \item Guidelines - Use Case, Rational Unified Process 2000
+  \item Guidelines - Use Case Storyboard, Rational Unified Process 2000
+\end{enumerate}
+
+\subsection{Отворена питања}
+
+\noindent
+\setcellgapes{4pt}
+\makegapedcells
+\begin{tabularx}{\linewidth}{|l|X|X|}
+    \hline
+    \textbf{Редни број} & \textbf{Опис} & \textbf{Решење} \\
+    \hline
+     &  &  \\
+    \hline
+    & &  \\
+    \hline
+\end{tabularx}
+\section{Сценарио употребе за ажурирање листе предлога експерата}
+\subsection{Кратак опис}
+Сваки експерт има категорију за коју је задужен. У сваком тренутку он може да дода филм у листу, обрише филм из листе и да мења ранг филма на листи. Када заврши са радом, сачува све измене кликом на дугме предвиђеног за то.
+
+
+
+\subsection{Ток догађаја}
+
+   \subsubsection{Главни ток догађаја} 
+ \begin{enumerate}
+        \item {Корисник се налази на прозору \textit{Add expert picks}.}
+        \item {Корисник ажурира листу.}
+        \item {Корисник притисне дугме (стрелицу) за чување измена.}
+        \item {Систем чува нову листу.} \newline
+   
+\end{enumerate}
+
+\subsubsection{Алтернативни ток: Корисник жели да дода филм} 
+ \begin{enumerate}
+        \item[2а.1.] Корисник притиска дугме \textit{Add movie}
+        \item[2а.2.] Корисник уноси назив филма.   
+        \item[2а.3.] Корисник притиска дугме \textit{Add}.
+        \item[2а.4.] Систем приказује додати филм на прозору.
+        \item[2а.5.] Повратак на корак 2.
+\end{enumerate}
+
+\subsubsection{Алтернативни ток: Корисник одустаје од додавања новог филма} 
+ \begin{enumerate}
+        \item[2б.1.] Корисник притиска дугме \textit{Add movie}
+        \item[2б.2.] Корисник уноси назив филма.   
+        \item[2б.3.] Корисник притиска дугме \textit{Cancel}.
+        \item[2б.4.] Повратак на корак 2.
+\end{enumerate}
+
+\subsubsection{Алтернативни ток: Корисник жели да дода непостојећи филм} 
+ \begin{enumerate}
+        \item[2в.1.] Корисник притиска дугме \textit{Add movie}
+        \item[2в.2.] Корисник уноси назив филма.   
+        \item[2в.3.] Корисник притиска дугме \textit{Add}.
+        \item[2в.4.] Систем приказује поруку о грешци.
+        \item[2в.5.] Повратак на корак 2.
+\end{enumerate}
+
+\subsubsection{Алтернативни ток: Корисник мења ранг филма} 
+ \begin{enumerate}
+        \item[2г.1.] Корисник притиска стрелицу на горе или на доле
+        \item[2г.2.] Систем приказује нови ранг филма.
+        \item[2г.3.] Повратак на корак 2.
+\end{enumerate}
+
+\subsubsection{Алтернативни ток: Корисник брише филм} 
+ \begin{enumerate}
+        \item[2д.1.] Корисник притиска стрелицу на горе или на доле
+        \item[2д.2.] Систем уклања филм из листе.
+        \item[2д.3.] Повратак на корак 2.
+\end{enumerate}
+
+\subsubsection{Алтернативни ток: Корисник није направио промене} 
+ \begin{enumerate}
+        \item[4а.1.]Корисник добија поруку да није правио промене.
+        \item[4а.2.] Повратак на корак 1.
+\end{enumerate}
+
+\subsection{Посебни захтеви}
+Нема посебних захтева.
+\subsection{Предуслови}
+Корисник је улогован на систем, има титулу експерта и категорију за коју је експерт
+ 
+ 
+\subsection{Последице}
+Ажурирана листа се чува у базу. 
+
+\end{document}
