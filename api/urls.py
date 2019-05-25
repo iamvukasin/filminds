@@ -1,6 +1,6 @@
 from django.urls import path
 
-from api.views import MovieInfo, ChatLoad, ChatReply, DeleteUser, AddExpert, RemoveExpert
+from api.views import MovieInfo, ChatLoad, ChatReply, DeleteUser, AddExpert, RemoveExpert, AddExpertPick, SavePicks
 
 urlpatterns = [
     path('movies/info/<int:pk>', MovieInfo.as_view()),
@@ -9,4 +9,6 @@ urlpatterns = [
     path('admin_dashboard/delete_user', DeleteUser.as_view()),
     path('admin_dashboard/add_expert', AddExpert.as_view()),
     path('admin_dashboard/remove_expert', RemoveExpert.as_view()),
+    path('expert_picks/expert_pick', AddExpertPick.as_view()),
+    path('expert_picks/save_picks', SavePicks.as_view()),
 ]

@@ -73,7 +73,7 @@ class RemoveExpert(APIView):
         user = User.objects.get(user_id=auth_user.pk)
         user.type = User.REGISTERED_USER
         user.save()
-        categorie = ExpertPicksCategory.objects.get(expert_id=auth_user.pk)
-        categorie.delete()
+        category = ExpertPicksCategory.objects.get(expert_id=auth_user.pk)
+        category.delete()
         return JsonResponse({'message': "Expert is successfully removed"})
 

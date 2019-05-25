@@ -4,14 +4,17 @@
 {% block content %}
 
     <div class="expert-picks">
+        <input type="hidden" id ="changes-made" value = "{{changes}}">
+        <input type="hidden" id ="picks-code" value = "{{code}}">
+
         <div class="expert-picks__header">
-            <h2 class="mdc-typography--headline5">Expert picks: Classics</h2>
+            <h2 class="mdc-typography--headline5">Expert picks: {{category}}</h2>
             <div>
                 <button class="mdc-button mdc-button--raised" id="add-pick-button">
                     <i class="material-icons mdc-button__icon" aria-hidden="true">add</i>
                     <span class="mdc-button__label">Add movie</span>
                 </button>
-                <button class="mdc-button mdc-button--raised">
+                <button class="mdc-button mdc-button--raised" id = "save-picks-button">
                     <i class="material-icons mdc-button__icon" aria-hidden="true">save</i>
                     <span class="mdc-button__label">Save</span>
                 </button>
@@ -19,147 +22,43 @@
         </div>
 
         <div class="mdc-card expert-picks__content">
-            <div class="expert-pick table__row">
-                <div class="movie-poster table__column--shrinked">
-                    <img src="https://image.tmdb.org/t/p/w1280/9O7gLzmreU0nGkIB6K3BsJbzvNv.jpg"/>
-                </div>
-                <div class="movie-title">
-                    <h3>1. The Shawshank Redemption (1994)</h3>
-                </div>
-                <div class="table__column--shrinked table__column--multi-items">
-                    <button class="mdc-icon-button material-icons expert-pick__up">arrow_upward</button>
-                    <button class="mdc-icon-button material-icons expert-pick__down">arrow_downward</button>
-                    <button class="mdc-icon-button material-icons expert-pick__delete">delete</button>
-                </div>
-            </div>
+        {% for movie in movies %}
 
             <div class="expert-pick table__row">
                 <div class="movie-poster table__column--shrinked">
-                    <img src="https://image.tmdb.org/t/p/w1280/rPdtLWNsZmAtoZl9PK7S2wE3qiS.jpg"/>
+                    <img src="{{movie.src}}"/>
                 </div>
                 <div class="movie-title">
-                    <h3>2. The Godfather (1972)</h3>
+                    <h3>{{movie.order}}. {{movie.title}} ({{movie.year}}) </h3>
                 </div>
                 <div class="table__column--shrinked table__column--multi-items">
                     <button class="mdc-icon-button material-icons expert-pick__up">arrow_upward</button>
                     <button class="mdc-icon-button material-icons expert-pick__down">arrow_downward</button>
                     <button class="mdc-icon-button material-icons expert-pick__delete">delete</button>
                 </div>
+                <input type="hidden" class="hidden-id" value = "{{movie.id}}">
             </div>
+        {%endfor%}
 
-            <div class="expert-pick table__row">
-                <div class="movie-poster table__column--shrinked">
-                    <img src="https://image.tmdb.org/t/p/w1280/xq1Ugd62d23K2knRUx6xxuALTZB.jpg"/>
-                </div>
-                <div class="movie-title">
-                    <h3>3. Your Name. (2016)</h3>
-                </div>
-                <div class="table__column--shrinked table__column--multi-items">
-                    <button class="mdc-icon-button material-icons expert-pick__up">arrow_upward</button>
-                    <button class="mdc-icon-button material-icons expert-pick__down">arrow_downward</button>
-                    <button class="mdc-icon-button material-icons expert-pick__delete">delete</button>
-                </div>
-            </div>
-
-            <div class="expert-pick table__row">
-                <div class="movie-poster table__column--shrinked">
-                    <img src="https://image.tmdb.org/t/p/w1280/yPisjyLweCl1tbgwgtzBCNCBle.jpg"/>
-                </div>
-                <div class="movie-title">
-                    <h3>4. Schindler's List (1993)</h3>
-                </div>
-                <div class="table__column--shrinked table__column--multi-items">
-                    <button class="mdc-icon-button material-icons expert-pick__up">arrow_upward</button>
-                    <button class="mdc-icon-button material-icons expert-pick__down">arrow_downward</button>
-                    <button class="mdc-icon-button material-icons expert-pick__delete">delete</button>
-                </div>
-            </div>
-
-            <div class="expert-pick table__row">
-                <div class="movie-poster table__column--shrinked">
-                    <img src="https://image.tmdb.org/t/p/w1280/f7DImXDebOs148U4uPjI61iDvaK.jpg"/>
-                </div>
-                <div class="movie-title">
-                    <h3>5. Life Is Beautiful (1997)</h3>
-                </div>
-                <div class="table__column--shrinked table__column--multi-items">
-                    <button class="mdc-icon-button material-icons expert-pick__up">arrow_upward</button>
-                    <button class="mdc-icon-button material-icons expert-pick__down">arrow_downward</button>
-                    <button class="mdc-icon-button material-icons expert-pick__delete">delete</button>
-                </div>
-            </div>
-
-            <div class="expert-pick table__row">
-                <div class="movie-poster table__column--shrinked">
-                    <img src="https://image.tmdb.org/t/p/w1280/adw6Lq9FiC9zjYEpOqfq03ituwp.jpg"/>
-                </div>
-                <div class="movie-title">
-                    <h3>6. Fight Club (1999)</h3>
-                </div>
-                <div class="table__column--shrinked table__column--multi-items">
-                    <button class="mdc-icon-button material-icons expert-pick__up">arrow_upward</button>
-                    <button class="mdc-icon-button material-icons expert-pick__down">arrow_downward</button>
-                    <button class="mdc-icon-button material-icons expert-pick__delete">delete</button>
-                </div>
-            </div>
-
-            <div class="expert-pick table__row">
-                <div class="movie-poster table__column--shrinked">
-                    <img src="https://image.tmdb.org/t/p/w1280/yE5d3BUhE8hCnkMUJOo1QDoOGNz.jpg"/>
-                </div>
-                <div class="movie-title">
-                    <h3>7. Forrest Gump (1994)</h3>
-                </div>
-                <div class="table__column--shrinked table__column--multi-items">
-                    <button class="mdc-icon-button material-icons expert-pick__up">arrow_upward</button>
-                    <button class="mdc-icon-button material-icons expert-pick__down">arrow_downward</button>
-                    <button class="mdc-icon-button material-icons expert-pick__delete">delete</button>
-                </div>
-            </div>
-
-            <div class="expert-pick table__row">
-                <div class="movie-poster table__column--shrinked">
-                    <img src="https://image.tmdb.org/t/p/w1280/3W0v956XxSG5xgm7LB6qu8ExYJ2.jpg"/>
-                </div>
-                <div class="movie-title">
-                    <h3>8. 12 Angry Men (1957)</h3>
-                </div>
-                <div class="table__column--shrinked table__column--multi-items">
-                    <button class="mdc-icon-button material-icons expert-pick__up">arrow_upward</button>
-                    <button class="mdc-icon-button material-icons expert-pick__down">arrow_downward</button>
-                    <button class="mdc-icon-button material-icons expert-pick__delete">delete</button>
-                </div>
-            </div>
-
-            <div class="expert-pick table__row">
-                <div class="movie-poster table__column--shrinked">
-                    <img src="https://image.tmdb.org/t/p/w1280/2Sns5oMb356JNdBHgBETjIpRYy9.jpg"/>
-                </div>
-                <div class="movie-title">
-                    <h3>9. One Flew Over the Cuckoo's Nest (1975)</h3>
-                </div>
-                <div class="table__column--shrinked table__column--multi-items">
-                    <button class="mdc-icon-button material-icons expert-pick__up">arrow_upward</button>
-                    <button class="mdc-icon-button material-icons expert-pick__down">arrow_downward</button>
-                    <button class="mdc-icon-button material-icons expert-pick__delete">delete</button>
-                </div>
-            </div>
-
-            <div class="expert-pick table__row">
-                <div class="movie-poster table__column--shrinked">
-                    <img src="https://image.tmdb.org/t/p/w1280/hAPeXBdGDGmXRPj4OZZ0poH65Iu.jpg"/>
-                </div>
-                <div class="movie-title">
-                    <h3>10. GoodFellas (1990)</h3>
-                </div>
-                <div class="table__column--shrinked table__column--multi-items">
-                    <button class="mdc-icon-button material-icons expert-pick__up">arrow_upward</button>
-                    <button class="mdc-icon-button material-icons expert-pick__down">arrow_downward</button>
-                    <button class="mdc-icon-button material-icons expert-pick__delete">delete</button>
-                </div>
-            </div>
         </div>
     </div>
+
+<template id="template-expert-pick">
+                <div class="expert-pick table__row">
+                    <div class="movie-poster table__column--shrinked">
+                        <img class ="expert-pick-img"/>
+                    </div>
+                    <div class="movie-title">
+                        <h3 class="expert-pick-header"></h3>
+                    </div>
+                    <div class="table__column--shrinked table__column--multi-items">
+                        <button class="mdc-icon-button material-icons expert-pick__up">arrow_upward</button>
+                        <button class="mdc-icon-button material-icons expert-pick__down">arrow_downward</button>
+                        <button class="mdc-icon-button material-icons expert-pick__delete">delete</button>
+                    </div>
+                    <input type="hidden" class="hidden-id">
+                </div>
+            </template>
 
 {% endblock %}
 
