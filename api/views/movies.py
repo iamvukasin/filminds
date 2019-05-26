@@ -1,14 +1,37 @@
 import tmdbsimple as tmdb
+from django.contrib.auth.decorators import login_required
 from django.http import Http404
-from requests import HTTPError
+from django.utils.decorators import method_decorator
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-import config
 from api.serializers import MovieSerializer
-from app.models import Movie, MovieGenre, SearchedMovie, User
+from app.models import Movie, SearchedMovie, User, CollectedMovie
 
 MAX_NUM_CASTS = 4
+
+
+class MovieAddToFavorites(APIView):
+    """
+    Adds the given movie to the user's favorites list.
+    """
+
+    @method_decorator(login_required)
+    def get(self, request, pk):
+        user = User.get_user(request.user)
+        movie = Movie.get_or_create(pk)
+
+        if movie is None:
+            raise Http404
+
+        CollectedMovie.objects.update_or_create(
+            user=user,
+            movie=movie,
+            type=CollectedMovie.TYPE_WISH
+        )
+
+        # success status
+        return Response('')
 
 
 class MovieInfo(APIView):
@@ -19,44 +42,11 @@ class MovieInfo(APIView):
     then returns it.
     """
 
-    @classmethod
-    def _get_trailer(cls, videos):
-        finder = (video['key'] for video in videos if video['site'] == 'YouTube' and video['type'] == 'Trailer')
-        return next(finder, None)
-
-    @classmethod
-    def _get_object(cls, pk):
-        try:
-            return Movie.objects.get(pk=pk)
-        except Movie.DoesNotExist:
-            try:
-                # find all movies with basic information + trailer videos
-                tmdb.API_KEY = config.TMDB_API_KEY
-                found_movie = tmdb.Movies(pk).info(append_to_response='videos')
-
-                movie = Movie(
-                    id=pk,
-                    title=found_movie['title'],
-                    description=found_movie['overview'],
-                    rating=found_movie['vote_average'],
-                    release_date=found_movie['release_date'],
-                    poster=found_movie['poster_path'],
-                    backdrop=found_movie['backdrop_path'],
-                    trailer=cls._get_trailer(found_movie['videos']['results'])
-                )
-                movie.save()
-
-                # add genres
-                for found_genre in found_movie['genres']:
-                    genre = MovieGenre.objects.get(pk=found_genre['id'])
-                    movie.genres.add(genre)
-
-                return movie
-            except HTTPError:
-                raise Http404
-
     def get(self, request, pk):
-        movie = self._get_object(pk)
+        movie = Movie.get_or_create(pk)
+
+        if movie is None:
+            raise Http404
 
         # insert movie into searched movies table
         if request.user.is_authenticated:

@@ -80,6 +80,27 @@ function showMovie(data) {
     movieInfoOverlay.addClass("visible");
 }
 
+// add or remove favorite movie
+$("body").on("click", ".movie-favorite-button", e => {
+    const movieId = $(e.target).parent().parent().attr("data-movie-id");
+    const action = $(e.target).hasClass("active") ? "remove" : "add";
+
+    $.ajax({
+        type: "GET",
+        url: `/api/movies/favorites/${action}/${movieId}`,
+        headers: {
+            "X-CSRFToken": Cookies.get("csrftoken")
+        },
+        success: () => {
+            if (action === "add") {
+                $(e.target).addClass("active");
+            } else if (action === "remove") {
+                $(e.target).removeClass("active");
+            }
+        }
+    });
+});
+
 // open movie info overlay
 $("body").on("click", ".movie-info-button", (e) => {
     const movieId = $(e.target).parent().parent().attr("data-movie-id");

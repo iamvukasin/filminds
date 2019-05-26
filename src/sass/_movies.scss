@@ -132,3 +132,7 @@ $card-spacing: 16px;
 .cast-card__name {
     font-weight: bold;
 }
+
+.movie-favorite-button.active {
+    color: red;
+}

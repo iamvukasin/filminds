@@ -23,7 +23,7 @@ class SearchedMovie(models.Model):
 class CollectedMovie(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
-    date = models.DateField()
+    date = models.DateTimeField(auto_now_add=True)
     TYPE_WATCH = 'WA'
     TYPE_WISH = 'WI'
     TYPE_CHOICES = (

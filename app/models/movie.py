@@ -1,7 +1,10 @@
+import tmdbsimple as tmdb
 from django.db import models
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
+from requests import HTTPError
 
+import config
 from app import utils
 
 
@@ -51,6 +54,42 @@ class Movie(models.Model):
     backdrop = models.CharField(max_length=50, null=True)
     trailer = models.CharField(max_length=70, null=True)
     genres = models.ManyToManyField(MovieGenre)
+
+    @classmethod
+    def _get_trailer(cls, videos):
+        finder = (video['key'] for video in videos if video['site'] == 'YouTube' and video['type'] == 'Trailer')
+        return next(finder, None)
+
+    @classmethod
+    def get_or_create(cls, pk):
+        try:
+            return Movie.objects.get(pk=pk)
+        except Movie.DoesNotExist:
+            try:
+                # find all movies with basic information + trailer videos
+                tmdb.API_KEY = config.TMDB_API_KEY
+                found_movie = tmdb.Movies(pk).info(append_to_response='videos')
+
+                movie = Movie(
+                    id=pk,
+                    title=found_movie['title'],
+                    description=found_movie['overview'],
+                    rating=found_movie['vote_average'],
+                    release_date=found_movie['release_date'],
+                    poster=found_movie['poster_path'],
+                    backdrop=found_movie['backdrop_path'],
+                    trailer=cls._get_trailer(found_movie['videos']['results'])
+                )
+                movie.save()
+
+                # add genres
+                for found_genre in found_movie['genres']:
+                    genre = MovieGenre.objects.get(pk=found_genre['id'])
+                    movie.genres.add(genre)
+
+                return movie
+            except HTTPError:
+                return None
 
 
 @receiver(pre_save, sender=Movie)
