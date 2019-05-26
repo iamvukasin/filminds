@@ -15,6 +15,8 @@ const savePicksButton = $("#save-picks-button");
 const changesMade = $("#changes-made");
 const picksCode = $("#picks-code");
 
+const time = 300;
+
 function replaceMovieTitle(element, index, promote) {
     var movieTitle = $(element).find(".movie-title h3");
     var newIndex = (promote ? index : index + 2);
@@ -96,11 +98,11 @@ addMovieButton?.click( ()=>{
 	
 	if( addMovieTitle.val()==""){
 		addMovieYear.val("");
-		alert("Please enter movie title");
+		showAlertWithTimer("Please enter movie title",time);
 	}
 	else if(addMovieYear.val() =="" ){
 		addMovieTitle.val("");
-		alert("Please enter release date");
+		showAlertWithTimer("Please enter release date",time);
 	}
 	else {
         $.ajax({
@@ -117,7 +119,7 @@ addMovieButton?.click( ()=>{
 					addMovieTitle.val("");
 					addMovieYear.val("");
 				}
-				else alert(data.message);
+				else showAlertWithTimer(data.message,time);
 
 			}
         });
@@ -132,7 +134,7 @@ function addExpertPick(message,picture, id,title,year){
 	hiddenIDs = $(".hidden-id");
 	for (var i = 0 ; i < hiddenIDs.length;i++){
 		if (hiddenIDs[i].getAttribute("value")==id) {
-			alert("The movie is already on the list");
+			showAlertWithTimer("The movie is already on the list",time);
 			return;
 		}
 	}
@@ -156,13 +158,12 @@ function addExpertPick(message,picture, id,title,year){
 	expertPicksUpButtons.each((i, obj) => obj.onclick = onUpButtonClick(obj));
 	expertPicksDownButtons.each((i, obj) => obj.onclick = onDownButtonClick(obj));
 	expertPicksDeleteButtons.each((i, obj) => obj.onclick = onDeleteButtonClick(obj));
-	alert(message);
 }
 
 
 savePicksButton?.click( ()=>{
 	if (changesMade.val()==0){
-		alert("There are no changes");
+		showAlert("There are no changes");
 		return;
 	}
 
@@ -174,11 +175,11 @@ savePicksButton?.click( ()=>{
 	}
 	
 	if (picksCode.val()==str) {
-		alert("There are no changes");
+		showAlert("There are no changes");
 		return;
 	}
 	hiddenIDs = $(".hidden-id");
-	if(hiddenIDs.length==0) alert("There are no movies to save");
+	if(hiddenIDs.length==0) showAlert("There are no movies to save");
 	else{
 		str = "";
 		for (var i = 0; i < hiddenIDs.length-1;i++) { 
@@ -194,7 +195,7 @@ savePicksButton?.click( ()=>{
                 message: str,
             },
             success: (data) => {
-				alert(data.message);
+				showAlert(data.message);
 				changesMade.val(data.changes);
 				var str = "";
 				hiddenIDs = $(".hidden-id");
@@ -202,12 +203,17 @@ savePicksButton?.click( ()=>{
 				for (var i = 0; i < hiddenIDs.length;i++) { 
 					str+=hiddenIDs[i].getAttribute("value")+",";
 				}
-				alert(str);
 				picksCode.val(str);
-				alert(picksCode.val());
 
 			}
         });
 		
 	}
 });
+
+function showAlert(str){
+	alert(str);
+}
+function showAlertWithTimer(str,time){
+	setTimeout(function() { alert(str); }, time);
+}
