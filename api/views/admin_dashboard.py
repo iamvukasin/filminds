@@ -36,6 +36,7 @@ class AddExpert(APIView):
     def post(self, request):
         username = request.POST.get('expert', '')
         category = request.POST.get('category', '')
+        success = 0
         try:
             if '@' in username:
                 user = AuthUser.objects.get(email=username)
@@ -56,6 +57,7 @@ class AddExpert(APIView):
                     user_type.type = User.EXPERT
                     user_type.save()
                     expert.save()
+                    success = 1
                     message = "Expert added."
         except ObjectDoesNotExist:
             if '@' in username:
@@ -63,7 +65,10 @@ class AddExpert(APIView):
             else:
                 message = "Username doesn't exist."
 
-        return JsonResponse({'message': message})
+        return JsonResponse({
+            'message': message,
+            'success': success
+        })
 
 
 class RemoveExpert(APIView):

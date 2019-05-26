@@ -4,6 +4,7 @@ import * as Cookies from "js-cookie";
 const dialogs = document.querySelector(".mdc-dialog");
 var dialog = null;
 const addExpertButton = $("#add-expert-button");
+const time = 300;
 
 if (dialogs) {
 	dialog = new MDCDialog(dialogs);
@@ -26,7 +27,6 @@ function deleteButtonClick(element) {
             data: {
                 message: expertUsername[index].innerHTML
             },
-            success: (data) => alert(data.message)
         });
         $(experts[index]).remove();
     }
@@ -41,7 +41,7 @@ deleteButtons.each((i, obj) => obj.onclick = deleteButtonClick(obj));
 removeUserButton?.click(() => {
 	
 	if( removeUserTextField.val()==""){
-		alert("Please enter valid data");
+		showAlert("Please enter valid data");
 	}
 	else{
         $.ajax({
@@ -51,7 +51,7 @@ removeUserButton?.click(() => {
             data: {
                 message: removeUserTextField.val()
             },
-            success: (data) => alert(data.message)
+            success: (data) => showAlert(data.message)
         });
 	    removeUserTextField.val("");
 	}
@@ -64,10 +64,10 @@ const categoryTextField = $("#categoryInput");
 
 confirmExpertButton?.click( ()=>{
 	if( addExpertTextField.val()==""){
-		alert("Please enter username or email");
+		showAlertWithTimer("Please enter username or email",time);
 	}
 	else if(categoryTextField.val() =="" ){
-		alert("Please choose category");
+		showAlertWithTimer("Please choose category",time);
 	}
 	else {
         $.ajax({
@@ -78,7 +78,10 @@ confirmExpertButton?.click( ()=>{
                 expert: addExpertTextField.val(),
 				category : categoryTextField.val(),
             },
-            success: (data) => alert(data.message)
+            success: (data) => {
+				if (data.success == 0)
+					showAlertWithTimer(data.message,time);
+			}
         });
 	}
 	
@@ -86,3 +89,9 @@ confirmExpertButton?.click( ()=>{
 	categoryTextField.val("");
 });
 
+function showAlert(str){
+	alert(str);
+}
+function showAlertWithTimer(str,time){
+	setTimeout(function() { alert(str); }, time);
+}
