@@ -22,22 +22,14 @@
         </div>
 
         <div class="mdc-card expert-picks__content">
+
         {% for movie in movies %}
 
             <div class="expert-pick table__row">
-                <div class="movie-poster table__column--shrinked">
-                    <img src="{{movie.src}}"/>
-                </div>
-                <div class="movie-title">
-                    <h3>{{movie.order}}. {{movie.title}} ({{movie.year}}) </h3>
-                </div>
-                <div class="table__column--shrinked table__column--multi-items">
-                    <button class="mdc-icon-button material-icons expert-pick__up">arrow_upward</button>
-                    <button class="mdc-icon-button material-icons expert-pick__down">arrow_downward</button>
-                    <button class="mdc-icon-button material-icons expert-pick__delete">delete</button>
-                </div>
-                <input type="hidden" class="hidden-id" value = "{{movie.id}}">
+                {% include 'components/top-picks.html' %}
+                {% include 'components/add-expert-picks-buttons.html' %}
             </div>
+
         {%endfor%}
 
         </div>
@@ -51,12 +43,8 @@
                     <div class="movie-title">
                         <h3 class="expert-pick-header"></h3>
                     </div>
-                    <div class="table__column--shrinked table__column--multi-items">
-                        <button class="mdc-icon-button material-icons expert-pick__up">arrow_upward</button>
-                        <button class="mdc-icon-button material-icons expert-pick__down">arrow_downward</button>
-                        <button class="mdc-icon-button material-icons expert-pick__delete">delete</button>
-                    </div>
                     <input type="hidden" class="hidden-id">
+                     {% include 'components/add-expert-picks-buttons.html' %}
                 </div>
             </template>
 
