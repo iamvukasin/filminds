@@ -6,6 +6,14 @@ from app.models.expert_picks import ExpertPicksCategory
 from app.models.user import AuthUser, User
 
 
+def _get_message(username):
+    if '@' in username:
+        message = "Email doesn't exist."
+    else:
+        message = "Username doesn't exist."
+    return message
+
+
 class DeleteUser(APIView):
     def post(self, request):
         username = request.POST.get('message', '')
@@ -15,19 +23,19 @@ class DeleteUser(APIView):
                 user = AuthUser.objects.get(email=username)
             else:
                 user = AuthUser.objects.get(username=username)
+            if user.is_active:
+                check = User.get_user(user)
 
-            check = User.get_user(user)
-
-            if check.type == User.ADMIN:
-                message = "User is admin."
+                if check.type == User.ADMIN:
+                    message = "User is admin."
+                else:
+                    user.is_active = False
+                    user.save()
+                    message = "User is successfully removed."
             else:
-                user.delete()
-                message = "User is successfully removed."
+                message = _get_message(username)
         except ObjectDoesNotExist:
-            if '@' in username:
-                message = "Email doesn't exist."
-            else:
-                message = "Username doesn't exist."
+            message = _get_message(username)
 
         return JsonResponse({'message': message})
 
@@ -42,28 +50,28 @@ class AddExpert(APIView):
                 user = AuthUser.objects.get(email=username)
             else:
                 user = AuthUser.objects.get(username=username)
-            user_type = User.objects.get(user_id=user.pk)
-            if user_type.type == User.EXPERT:
-                message = "That user is already an expert."
-            elif user.is_staff:
-                message = "That user is admin."
+            if user.is_active:
+                user_type = User.objects.get(user_id=user.pk)
+                if user_type.type == User.EXPERT:
+                    message = "That user is already an expert."
+                elif user.is_staff:
+                    message = "That user is admin."
+                else:
+                    try:
+                        ExpertPicksCategory.objects.get(name__iexact=category)
+                        message = "An expert for that category already exists."
+                    except ObjectDoesNotExist:
+                        expert = ExpertPicksCategory(name=category, expert_id=user.pk)
+                        user_type = User.objects.get(user_id=user.pk)
+                        user_type.type = User.EXPERT
+                        user_type.save()
+                        expert.save()
+                        success = 1
+                        message = "Expert added."
             else:
-                try:
-                    ExpertPicksCategory.objects.get(name__iexact=category)
-                    message = "An expert for that category already exists."
-                except ObjectDoesNotExist:
-                    expert = ExpertPicksCategory(name=category, expert_id=user.pk)
-                    user_type = User.objects.get(user_id=user.pk)
-                    user_type.type = User.EXPERT
-                    user_type.save()
-                    expert.save()
-                    success = 1
-                    message = "Expert added."
+                message = _get_message(username)
         except ObjectDoesNotExist:
-            if '@' in username:
-                message = "Email doesn't exist."
-            else:
-                message = "Username doesn't exist."
+            message = _get_message(username)
 
         return JsonResponse({
             'message': message,
