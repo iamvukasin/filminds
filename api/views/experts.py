@@ -4,9 +4,10 @@ from rest_framework.views import APIView
 import tmdbsimple as tmdb
 import config
 from django.core.exceptions import ObjectDoesNotExist
+
+from app.models import Movie
 from app.models.movie_interaction import ExpertPickMovie
 from app.models.expert_picks import ExpertPicksCategory
-from .movies import MovieInfo
 from app.models.user import AuthUser, User
 
 class AddExpertPick(APIView):
@@ -51,7 +52,7 @@ class SavePicks(APIView):
             i = 1
             for spl in split:
                 ID = int(spl)
-                MovieInfo._get_object(ID)
+                Movie.get_or_create(ID)
                 new_pick = ExpertPickMovie(
                     category_id=category,
                     order=i,
