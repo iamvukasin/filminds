@@ -153,6 +153,8 @@ function loadMessages() {
     });
 }
 
-$(".chat").ready(() => {
-    loadMessages();
+$(() => {
+    if ($(".chat").length) {
+        loadMessages();
+    }
 });
