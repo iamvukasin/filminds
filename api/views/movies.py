@@ -34,6 +34,25 @@ class MovieAddToFavorites(APIView):
         return Response('')
 
 
+class MovieRemoveFromFavorites(APIView):
+    """
+    Removes the given movie to the user's favorites list.
+    """
+
+    @method_decorator(login_required)
+    def get(self, request, pk):
+        user = User.get_user(request.user)
+        movie = Movie.get_or_create(pk)
+
+        if movie is None:
+            raise Http404
+
+        CollectedMovie.objects.filter(user=user, movie=movie).delete()
+
+        # success status
+        return Response('')
+
+
 class MovieInfo(APIView):
     """
     Returns movie information from the database (data defined in Movie
