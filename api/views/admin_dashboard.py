@@ -68,6 +68,15 @@ class AddExpert(APIView):
                         expert.save()
                         success = 1
                         message = "Expert added."
+                        return JsonResponse({
+                            'message': message,
+                            'success': success,
+                            'username': user.username,
+                            'firstName': user.first_name,
+                            'lastName': user.last_name,
+                            'category': expert.name,
+                            'email': user.email,
+                        })
             else:
                 message = _get_message(username)
         except ObjectDoesNotExist:

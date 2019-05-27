@@ -32,7 +32,7 @@ function deleteButtonClick(element) {
     }
 }
 
-const deleteButtons = $(".remove-expert");
+var deleteButtons = $(".remove-expert");
 const removeUserButton = $(".remove-user");
 const removeUserTextField = $("#remove-user-text-field");
 
@@ -57,10 +57,10 @@ removeUserButton?.click(() => {
 	}
 });
 
-
 const confirmExpertButton = $("#confirmExpertButton");
 const addExpertTextField = $("#expertInput");
 const categoryTextField = $("#categoryInput");
+const addExpertTemplate = $("#template-expert");
 
 confirmExpertButton?.click( ()=>{
 	if( addExpertTextField.val()==""){
@@ -81,6 +81,17 @@ confirmExpertButton?.click( ()=>{
             success: (data) => {
 				if (data.success == 0)
 					showAlertWithTimer(data.message,time);
+				else{
+					const content = $(".expert__content");
+					const newPick = addExpertTemplate.contents("div")[0].cloneNode(true);
+					newPick.querySelector(".expertName").innerText = data.firstName + " " + data.lastName;
+					newPick.querySelector(".expertUsername").innerText = data.username;
+					newPick.querySelector(".expertEmail").innerText = data.email;
+					newPick.querySelector(".expertCategory").innerText = data.category;
+					content.append(newPick);
+					deleteButtons = $(".remove-expert");
+					deleteButtons.each((i, obj) => obj.onclick = deleteButtonClick(obj));
+				}
 			}
         });
 	}
