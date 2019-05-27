@@ -74,6 +74,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'filminds.wsgi.application'
 
+LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'chat'
 LOGOUT_REDIRECT_URL = 'index'
 

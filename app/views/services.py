@@ -6,6 +6,7 @@ from django.core.exceptions import ObjectDoesNotExist
 
 from app.models import CollectedMovie, User, ExpertPicksCategory, ExpertPickMovie, Movie
 from app.models.user import AuthUser
+from app.views.utils import expert_required, admin_required
 
 
 class ChatView(TemplateView):
@@ -40,7 +41,8 @@ class ExpertPicksView(TemplateView):
 
 class AddExpertPicksView(TemplateView):
     template_name = "add-expert-picks.html"
-    @method_decorator(login_required)
+
+    @method_decorator(expert_required)
     def get(self, request, *args, **kwargs):
         try:
             category = ExpertPicksCategory.objects.get(expert_id=request.user.pk)
@@ -81,11 +83,15 @@ class AddExpertPicksView(TemplateView):
 class StatisticsView(TemplateView):
     template_name = "statistics.html"
 
+    @method_decorator(admin_required)
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name)
+
 
 class AdminDashboardView(TemplateView):
     template_name = "admin-dashboard.html"
 
-    @method_decorator(login_required)
+    @method_decorator(admin_required)
     def get(self, request, *args, **kwargs):
         categories = ExpertPicksCategory.objects.all()
         experts = []

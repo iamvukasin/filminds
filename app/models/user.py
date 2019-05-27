@@ -25,6 +25,18 @@ class User(models.Model):
     def get_user(auth_user):
         return User.objects.get(user=auth_user)
 
+    @property
+    def is_registered(self):
+        return self.type == self.REGISTERED_USER
+
+    @property
+    def is_expert(self):
+        return self.type == self.EXPERT
+
+    @property
+    def is_admin(self):
+        return self.type == self.ADMIN
+
 
 @receiver(post_save, sender=AuthUser)
 def create_user_profile(sender, instance, created, **kwargs):
