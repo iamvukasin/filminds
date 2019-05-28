@@ -40,8 +40,6 @@
     \hline
     user\_id & integer & No & Yes \\
     \hline
-    type & varchar(1) & No & No \\
-    \hline
     sender\_type & varchar(1) & No & No \\
     \hline
     timestamp & timestamptz & No & No \\
@@ -69,13 +67,17 @@
     \hline
     title & varchar(100) & No & No \\
     \hline
-    description & varchar(200) & No & No \\
+    description & varchar(300) & No & No \\
     \hline
     rating & decimal(3, 1) & No & No \\
     \hline
     release\_date & date & No & No \\
     \hline
     trailer & varchar(70) & No & No \\
+    \hline
+    backdrop & varchar(50) & No & No \\
+    \hline
+    poster & varchar(50) & No & No \\
     \hline
 \end{tabularx}
 
@@ -123,7 +125,7 @@
 
 \subsection{ExpertPickCategory}
 
-Садржи списак свих категорија и експерте који су задужени за одговарајућу категорију. 
+Садржи списак свих категорија и експерте који су задужени за одговарајућу категорију.
 
 \vspace{0.5cm}
 
@@ -180,7 +182,7 @@
     \hline
     id & integer & Yes & No \\
     \hline
-    date & date & No & No \\
+    date & timestamptz & No & No \\
     \hline
     type & varchar(2) & No & No \\
     \hline
