@@ -43,7 +43,8 @@ class CollectedMovie(models.Model):
 
     @staticmethod
     def get_watched(user):
-        return CollectedMovie.objects.filter(user=user, type=CollectedMovie.TYPE_WATCH).values_list('movie', flat=True)
+        movie_ids = CollectedMovie.objects.filter(user=user, type=CollectedMovie.TYPE_WATCH).values_list('movie', flat=True)
+        return Movie.objects.filter(id__in=movie_ids)
 
 
 class ExpertPickMovie(models.Model):

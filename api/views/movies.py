@@ -1,3 +1,5 @@
+from abc import ABC, abstractmethod
+
 import tmdbsimple as tmdb
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
@@ -11,9 +13,10 @@ from app.models import Movie, SearchedMovie, User, CollectedMovie
 MAX_NUM_CASTS = 4
 
 
-class MovieAddToFavorites(APIView):
+class AddCollectedMovie(ABC, APIView):
     """
-    Adds the given movie to the user's favorites list.
+    Adds the given movie to the user's favorites or watch list based
+    on list_type property.
     """
 
     @method_decorator(login_required)
@@ -24,19 +27,46 @@ class MovieAddToFavorites(APIView):
         if movie is None:
             raise Http404
 
-        CollectedMovie.objects.update_or_create(
-            user=user,
-            movie=movie,
-            type=CollectedMovie.TYPE_WISH
-        )
+        try:
+            collected_item = CollectedMovie.objects.filter(user=user, movie=movie).get()
+            collected_item.type = self.list_type
+        except CollectedMovie.DoesNotExist:
+            collected_item = CollectedMovie(
+                user=user,
+                movie=movie,
+                type=self.list_type
+            )
+
+        collected_item.save()
 
         # success status
         return Response('')
 
+    @property
+    @abstractmethod
+    def list_type(self):
+        pass
 
-class MovieRemoveFromFavorites(APIView):
+
+class MovieAddToFavorites(AddCollectedMovie):
     """
-    Removes the given movie to the user's favorites list.
+    Adds the given movie to the user's favorites list.
+    """
+
+    list_type = CollectedMovie.TYPE_WISH
+
+
+class MovieAddToWatched(AddCollectedMovie):
+    """
+    Adds the given movie to the user's watch list.
+    """
+
+    list_type = CollectedMovie.TYPE_WATCH
+
+
+class RemoveCollectedMovie(APIView):
+    """
+    Removes the given movie to the user's favorites or watch list.
     """
 
     @method_decorator(login_required)

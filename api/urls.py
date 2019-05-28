@@ -1,11 +1,13 @@
 from django.urls import path
 
-from api.views import MovieAddToFavorites, MovieRemoveFromFavorites, MovieInfo, ChatLoad, ChatReply, DeleteUser,\
-    AddExpert, RemoveExpert, AddExpertPick, SavePicks
+from api.views import MovieAddToFavorites, MovieAddToWatched, RemoveCollectedMovie, MovieInfo, ChatLoad, ChatReply,\
+    DeleteUser, AddExpert, RemoveExpert, AddExpertPick, SavePicks
 
 urlpatterns = [
     path('movies/favorites/add/<int:pk>', MovieAddToFavorites.as_view()),
-    path('movies/favorites/remove/<int:pk>', MovieRemoveFromFavorites.as_view()),
+    path('movies/favorites/remove/<int:pk>', RemoveCollectedMovie.as_view()),
+    path('movies/watched/add/<int:pk>', MovieAddToWatched.as_view()),
+    path('movies/watched/remove/<int:pk>', RemoveCollectedMovie.as_view()),
     path('movies/info/<int:pk>', MovieInfo.as_view()),
     path('chat/reply', ChatReply.as_view()),
     path('chat/load', ChatLoad.as_view()),

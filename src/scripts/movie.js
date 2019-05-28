@@ -80,26 +80,37 @@ function showMovie(data) {
     movieInfoOverlay.addClass("visible");
 }
 
-// add or remove favorite movie
-$("body").on("click", ".movie-favorite-button", e => {
-    const movieId = $(e.target).parent().parent().attr("data-movie-id");
-    const action = $(e.target).hasClass("active") ? "remove" : "add";
+/**
+ * Saves movie to favorites or watched list for current user.
+ *
+ * @param type "favorites" or "watched"
+ * @param event the button click event
+ */
+function onCollectedMovieButtonClick(type, event) {
+    const movieId = $(event.target).parent().parent().attr("data-movie-id");
+    const action = $(event.target).hasClass("active") ? "remove" : "add";
 
     $.ajax({
         type: "GET",
-        url: `/api/movies/favorites/${action}/${movieId}`,
+        url: `/api/movies/${type}/${action}/${movieId}`,
         headers: {
             "X-CSRFToken": Cookies.get("csrftoken")
         },
         success: () => {
             if (action === "add") {
-                $(e.target).addClass("active");
+                $(event.target).addClass("active");
             } else if (action === "remove") {
-                $(e.target).removeClass("active");
+                $(event.target).removeClass("active");
             }
         }
     });
-});
+}
+
+// add or remove favorites movie
+$("body").on("click", ".movie-favorite-button", e => onCollectedMovieButtonClick("favorites", e));
+
+// add or remove watched movie
+$("body").on("click", ".movie-watched-button", e => onCollectedMovieButtonClick("watched", e));
 
 // open movie info overlay
 $("body").on("click", ".movie-info-button", (e) => {
