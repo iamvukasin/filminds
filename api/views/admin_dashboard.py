@@ -24,9 +24,7 @@ class DeleteUser(APIView):
             else:
                 user = AuthUser.objects.get(username=username)
             if user.is_active:
-                check = User.get_user(user)
-
-                if check.type == User.ADMIN:
+                if User.is_auth_user_admin(user):
                     message = "User is admin."
                 else:
                     user.is_active = False
@@ -51,10 +49,9 @@ class AddExpert(APIView):
             else:
                 user = AuthUser.objects.get(username=username)
             if user.is_active:
-                user_type = User.objects.get(user_id=user.pk)
-                if user_type.type == User.EXPERT:
+                if User.is_auth_user_expert(user):
                     message = "That user is already an expert."
-                elif user.is_staff:
+                elif User.is_auth_user_admin(user):
                     message = "That user is admin."
                 else:
                     try:

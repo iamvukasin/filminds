@@ -34,7 +34,7 @@ def expert_required(function=None, redirect_field_name=REDIRECT_FIELD_NAME, logi
     """
 
     actual_decorator = user_passes_test(
-        lambda u: u is not None and User.get_user(u).is_expert,
+        lambda u: User.is_auth_user_expert(u),
         login_url=login_url,
         redirect_field_name=redirect_field_name
     )
@@ -52,7 +52,7 @@ def admin_required(function=None, redirect_field_name=REDIRECT_FIELD_NAME, login
     """
 
     actual_decorator = user_passes_test(
-        lambda u: u is not None and User.get_user(u).is_admin,
+        lambda u: User.is_auth_user_admin(u),
         login_url=login_url,
         redirect_field_name=redirect_field_name
     )
