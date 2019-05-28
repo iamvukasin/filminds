@@ -25,6 +25,14 @@ class User(models.Model):
     def get_user(auth_user):
         return User.objects.get(user=auth_user)
 
+    @staticmethod
+    def is_auth_user_expert(auth_user):
+        return auth_user.is_authenticated and User.get_user(auth_user).is_expert
+
+    @staticmethod
+    def is_auth_user_admin(auth_user):
+        return auth_user.is_authenticated and User.get_user(auth_user).is_admin
+
     @property
     def is_registered(self):
         return self.type == self.REGISTERED_USER

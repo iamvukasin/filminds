@@ -1,21 +1,9 @@
+{% load menu %}
+
 <aside class="mdc-drawer">
     <div class="mdc-drawer__content">
         <nav class="mdc-list">
-            {% for item in menu %}
-                {% if item.type == 'item' %}
-                    {% if request.resolver_match.url_name == item.url %}
-                        <a class="mdc-list-item mdc-list-item--activated" href="{% url item.url %}" aria-selected="true">
-                    {% else %}
-                        <a class="mdc-list-item" href="{% url item.url %}" aria-hidden="true">
-                    {% endif %}
-                            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">{{ item.icon }}</i>
-                            <span class="mdc-list-item__text">{{ item.title }}</span>
-                        </a>
-                {% elif item.type == 'divider' %}
-                    <hr class="mdc-list-divider">
-                {% endif %}
-            {% endfor %}
-            </a>
+            {% side_menu %}
         </nav>
     </div>
 </aside>
