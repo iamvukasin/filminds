@@ -44,7 +44,8 @@ function svgImages() {
 function rasterImages() {
     return src([
             "src/images/*.png",
-            "src/images/*.jpg"
+            "src/images/*.jpg",
+            "src/images/*.ico"
         ])
         .pipe(dest(destinationFolder + "/images"));
 }
