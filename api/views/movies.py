@@ -119,9 +119,7 @@ class MovieInfo(APIView):
             data['backdrop'] = ''
 
         # create trailer URL
-        if data['trailer'] is None:
-            data['trailer'] = '#'
-        else:
+        if data['trailer'] is not None:
             data['trailer'] = f'https://youtu.be/{data["trailer"]}'
 
         # get actors from TMDB

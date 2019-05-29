@@ -41,9 +41,15 @@ function showMovie(data) {
     movieInfoTitle.text(data.title);
     movieInfoYear.text(`(${data.release_date.substring(0, 4)})`);
     movieInfoOverview.text(data.description);
-    movieInfoTrailer.attr("href", data.trailer);
     movieInfoRating.text("");  // clear previous ratings
     movieInfoCast.text("");  // clear previous cast
+
+    if (data.trailer) {
+        movieInfoTrailer.show();
+        movieInfoTrailer.attr("href", data.trailer);
+    } else {
+        movieInfoTrailer.hide();
+    }
 
     // add rating
     const movieRating = parseFloat(data.rating);
