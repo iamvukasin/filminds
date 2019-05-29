@@ -5,8 +5,10 @@
         <p class="mdc-typography--body2 movie-card__description">{{ move.description }}</p>
     </div>
     <div class="movie-card__actions">
-        <button class="mdc-icon-button material-icons movie-watched-button">done</button>
-        <button class="mdc-icon-button material-icons movie-favorite-button">favorite</button>
+        {% if user.is_authenticated %}
+            <button class="mdc-icon-button material-icons movie-watched-button">done</button>
+            <button class="mdc-icon-button material-icons movie-favorite-button">favorite</button>
+        {% endif %}
         <button class="mdc-icon-button material-icons movie-info-button">info</button>
     </div>
 </div>
