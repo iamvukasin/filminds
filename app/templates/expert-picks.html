@@ -5,163 +5,21 @@
 
     <div class="expert-picks">
         <div class="expert-picks__header">
-            <h2 class="mdc-typography--headline5">Expert picks: Classics</h2>
+            <h2 class="mdc-typography--headline5">Expert picks: <span id="category-header">{{ category_name }}</span></h2>
             <div class="mdc-select expert-picks__select">
-                <select class="mdc-select__native-control">
-                    <option value="classics" selected>
-                        Classics
-                    </option>
-                    <option value="comedies">
-                        Comedies
-                    </option>
-                    <option value="oscars">
-                        Oscars
-                    </option>
+                <select class="mdc-select__native-control select-category">
+                    {% for category in categories %}
+                        <option value={{ category.id }}>{{ category.name }}</option>
+                    {% endfor %}
                 </select>
                 <div class="mdc-line-ripple"></div>
             </div>
         </div>
 
         <div class="mdc-card expert-picks__content">
-            <div class="expert-pick table__row">
-                <div class="movie-poster table__column--shrinked">
-                    <img src="https://image.tmdb.org/t/p/w1280/9O7gLzmreU0nGkIB6K3BsJbzvNv.jpg"/>
-                </div>
-                <div class="movie-title">
-                    <h3>1. The Shawshank Redemption (1994)</h3>
-                </div>
-                <div class="table__column--shrinked table__column--multi-items">
-                    <button class="mdc-icon-button material-icons">done</button>
-                    <button class="mdc-icon-button material-icons">favorite</button>
-                    <button class="mdc-icon-button material-icons movie-info-button">info</button>
-                </div>
-            </div>
-
-            <div class="expert-pick table__row">
-                <div class="movie-poster table__column--shrinked">
-                    <img src="https://image.tmdb.org/t/p/w1280/rPdtLWNsZmAtoZl9PK7S2wE3qiS.jpg"/>
-                </div>
-                <div class="movie-title">
-                    <h3>2. The Godfather (1972)</h3>
-                </div>
-                <div class="table__column--shrinked table__column--multi-items">
-                    <button class="mdc-icon-button material-icons">done</button>
-                    <button class="mdc-icon-button material-icons">favorite</button>
-                    <button class="mdc-icon-button material-icons movie-info-button">info</button>
-                </div>
-            </div>
-
-            <div class="expert-pick table__row">
-                <div class="movie-poster table__column--shrinked">
-                    <img src="https://image.tmdb.org/t/p/w1280/xq1Ugd62d23K2knRUx6xxuALTZB.jpg"/>
-                </div>
-                <div class="movie-title">
-                    <h3>3. Your Name. (2016)</h3>
-                </div>
-                <div class="table__column--shrinked table__column--multi-items">
-                    <button class="mdc-icon-button material-icons">done</button>
-                    <button class="mdc-icon-button material-icons">favorite</button>
-                    <button class="mdc-icon-button material-icons movie-info-button">info</button>
-                </div>
-            </div>
-
-            <div class="expert-pick table__row">
-                <div class="movie-poster table__column--shrinked">
-                    <img src="https://image.tmdb.org/t/p/w1280/yPisjyLweCl1tbgwgtzBCNCBle.jpg"/>
-                </div>
-                <div class="movie-title">
-                    <h3>4. Schindler's List (1993)</h3>
-                </div>
-                <div class="table__column--shrinked table__column--multi-items">
-                    <button class="mdc-icon-button material-icons">done</button>
-                    <button class="mdc-icon-button material-icons">favorite</button>
-                    <button class="mdc-icon-button material-icons movie-info-button">info</button>
-                </div>
-            </div>
-
-            <div class="expert-pick table__row">
-                <div class="movie-poster table__column--shrinked">
-                    <img src="https://image.tmdb.org/t/p/w1280/f7DImXDebOs148U4uPjI61iDvaK.jpg"/>
-                </div>
-                <div class="movie-title">
-                    <h3>5. Life Is Beautiful (1997)</h3>
-                </div>
-                <div class="table__column--shrinked table__column--multi-items">
-                    <button class="mdc-icon-button material-icons">done</button>
-                    <button class="mdc-icon-button material-icons">favorite</button>
-                    <button class="mdc-icon-button material-icons movie-info-button">info</button>
-                </div>
-            </div>
-
-            <div class="expert-pick table__row">
-                <div class="movie-poster table__column--shrinked">
-                    <img src="https://image.tmdb.org/t/p/w1280/adw6Lq9FiC9zjYEpOqfq03ituwp.jpg"/>
-                </div>
-                <div class="movie-title">
-                    <h3>6. Fight Club (1999)</h3>
-                </div>
-                <div class="table__column--shrinked table__column--multi-items">
-                    <button class="mdc-icon-button material-icons">done</button>
-                    <button class="mdc-icon-button material-icons">favorite</button>
-                    <button class="mdc-icon-button material-icons movie-info-button">info</button>
-                </div>
-            </div>
-
-            <div class="expert-pick table__row">
-                <div class="movie-poster table__column--shrinked">
-                    <img src="https://image.tmdb.org/t/p/w1280/yE5d3BUhE8hCnkMUJOo1QDoOGNz.jpg"/>
-                </div>
-                <div class="movie-title">
-                    <h3>7. Forrest Gump (1994)</h3>
-                </div>
-                <div class="table__column--shrinked table__column--multi-items">
-                    <button class="mdc-icon-button material-icons">done</button>
-                    <button class="mdc-icon-button material-icons">favorite</button>
-                    <button class="mdc-icon-button material-icons movie-info-button">info</button>
-                </div>
-            </div>
-
-            <div class="expert-pick table__row">
-                <div class="movie-poster table__column--shrinked">
-                    <img src="https://image.tmdb.org/t/p/w1280/3W0v956XxSG5xgm7LB6qu8ExYJ2.jpg"/>
-                </div>
-                <div class="movie-title">
-                    <h3>8. 12 Angry Men (1957)</h3>
-                </div>
-                <div class="table__column--shrinked table__column--multi-items">
-                    <button class="mdc-icon-button material-icons">done</button>
-                    <button class="mdc-icon-button material-icons">favorite</button>
-                    <button class="mdc-icon-button material-icons movie-info-button">info</button>
-                </div>
-            </div>
-
-            <div class="expert-pick table__row">
-                <div class="movie-poster table__column--shrinked">
-                    <img src="https://image.tmdb.org/t/p/w1280/2Sns5oMb356JNdBHgBETjIpRYy9.jpg"/>
-                </div>
-                <div class="movie-title">
-                    <h3>9. One Flew Over the Cuckoo's Nest (1975)</h3>
-                </div>
-                <div class="table__column--shrinked table__column--multi-items">
-                    <button class="mdc-icon-button material-icons">done</button>
-                    <button class="mdc-icon-button material-icons">favorite</button>
-                    <button class="mdc-icon-button material-icons movie-info-button">info</button>
-                </div>
-            </div>
-
-            <div class="expert-pick table__row">
-                <div class="movie-poster table__column--shrinked">
-                    <img src="https://image.tmdb.org/t/p/w1280/hAPeXBdGDGmXRPj4OZZ0poH65Iu.jpg"/>
-                </div>
-                <div class="movie-title">
-                    <h3>10. GoodFellas (1990)</h3>
-                </div>
-                <div class="table__column--shrinked table__column--multi-items">
-                    <button class="mdc-icon-button material-icons">done</button>
-                    <button class="mdc-icon-button material-icons">favorite</button>
-                    <button class="mdc-icon-button material-icons movie-info-button">info</button>
-                </div>
-            </div>
+            {% for pick in picks %}
+                {% include 'components/movie-info-row.html' with movie=pick %}
+            {% endfor %}
         </div>
     </div>
 
@@ -173,6 +31,10 @@
 
     <template id="template-movie-card">
         {% include 'messages/movie-card.html' with movie='' %}
+    </template>
+
+    <template id="template-movie-info-row">
+        {% include 'components/movie-info-row.html' with movie='' %}
     </template>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

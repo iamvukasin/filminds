@@ -51,3 +51,12 @@ class ExpertPickMovie(models.Model):
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
     category = models.ForeignKey(ExpertPicksCategory, on_delete=models.CASCADE)
     order = models.IntegerField(default=1)
+
+    @classmethod
+    def get(cls, category):
+        movies = ExpertPickMovie.objects\
+            .order_by('order')\
+            .prefetch_related('movie')\
+            .filter(category=category)\
+            .values_list('movie', flat=True)
+        return Movie.objects.filter(id__in=movies).values()

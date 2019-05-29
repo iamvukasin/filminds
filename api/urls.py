@@ -1,7 +1,7 @@
 from django.urls import path
 
 from api.views import MovieAddToFavorites, MovieAddToWatched, RemoveCollectedMovie, MovieInfo, ChatLoad, ChatReply,\
-    DeleteUser, AddExpert, RemoveExpert, AddExpertPick, SavePicks
+    DeleteUser, AddExpert, RemoveExpert, AddExpertPick, SavePicks, ExpertPicksResponseView
 
 urlpatterns = [
     path('movies/favorites/add/<int:pk>', MovieAddToFavorites.as_view()),
@@ -16,4 +16,5 @@ urlpatterns = [
     path('admin_dashboard/remove_expert', RemoveExpert.as_view()),
     path('expert_picks/expert_pick', AddExpertPick.as_view()),
     path('expert_picks/save_picks', SavePicks.as_view()),
+    path('expert-picks/response', ExpertPicksResponseView.as_view()),
 ]

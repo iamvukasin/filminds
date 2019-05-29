@@ -1,8 +1,8 @@
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView
-from django.core.exceptions import ObjectDoesNotExist
 
 from app.models import CollectedMovie, User, ExpertPicksCategory, ExpertPickMovie, Movie
 from app.models.user import AuthUser
@@ -37,6 +37,23 @@ class WatchedView(TemplateView):
 
 class ExpertPicksView(TemplateView):
     template_name = "expert-picks.html"
+
+    @method_decorator(login_required)
+    def get(self, request, *args, **kwargs):
+        categories = ExpertPicksCategory.get_all()
+        picks = []
+        category_name = ''
+        category = ExpertPicksCategory.get_first()
+
+        if category is not None:
+            picks = ExpertPickMovie.get(category)
+            category_name = category.name
+
+        return render(request, self.template_name, {
+            'categories': categories,
+            'picks': list(picks),
+            'category_name': category_name
+        })
 
 
 class AddExpertPicksView(TemplateView):

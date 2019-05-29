@@ -1,14 +1,15 @@
-from requests.exceptions import HTTPError
+from django.http import JsonResponse
+import tmdbsimple as tmdb
+from django.core.exceptions import ObjectDoesNotExist
 from django.http import JsonResponse
 from rest_framework.views import APIView
-import tmdbsimple as tmdb
-import config
-from django.core.exceptions import ObjectDoesNotExist
 
+import config
+from api.serializers import MovieSerializer
 from app.models import Movie
-from app.models.movie_interaction import ExpertPickMovie
 from app.models.expert_picks import ExpertPicksCategory
-from app.models.user import AuthUser, User
+from app.models.movie_interaction import ExpertPickMovie
+
 
 class AddExpertPick(APIView):
     def post(self, request):
@@ -69,3 +70,12 @@ class SavePicks(APIView):
             'message': message,
             'changes': changes
         })
+
+
+class ExpertPicksResponseView(APIView):
+    def post(self, request):
+        category_id = request.POST.get('category', '')
+        picks = ExpertPickMovie.get(category_id)
+
+        serializer = MovieSerializer(picks, many=True)
+        return JsonResponse({'picks': serializer.data})
