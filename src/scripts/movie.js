@@ -93,8 +93,10 @@ function showMovie(data) {
  * @param event the button click event
  */
 function onCollectedMovieButtonClick(type, event) {
-    const movieId = $(event.target).parent().parent().attr("data-movie-id");
-    const action = $(event.target).hasClass("active") ? "remove" : "add";
+    const target = $(event.target);
+    const parentCard = target.parent().parent();
+    const movieId = parentCard.attr("data-movie-id");
+    const action = target.hasClass("active") ? "remove" : "add";
 
     $.ajax({
         type: "GET",
@@ -103,10 +105,21 @@ function onCollectedMovieButtonClick(type, event) {
             "X-CSRFToken": Cookies.get("csrftoken")
         },
         success: () => {
-            if (action === "add") {
-                $(event.target).addClass("active");
-            } else if (action === "remove") {
-                $(event.target).removeClass("active");
+            // only one button can be active at the same time
+            parentCard.find(".movie-watched-button").removeClass("active");
+            parentCard.find(".movie-favorite-button").removeClass("active");
+
+            // target button should be changed to active only in the chat
+            // and in the expert picks lists - otherwise it must be removed
+            // from the page due to not belonging to the current list
+            // (eg. a movie shown in the favorites list is removed when
+            // the watched button is clicked)
+            if ($(".chat").length > 0 || $(".expert-picks").length > 0) {
+                if (action === "add") {
+                    target.addClass("active");
+                }
+            } else {
+                parentCard.hide();
             }
         }
     });

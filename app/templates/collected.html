@@ -3,7 +3,7 @@
 
 {% block content %}
 
-    <div class="favorites">
+    <div class="{{ type|lower }}">
         {% if user.is_authenticated %}
             <div class="mdc-layout-grid">
                 <div class="mdc-layout-grid__inner">
