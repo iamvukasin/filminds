@@ -46,10 +46,12 @@ class MostSearched(APIView):
         favoured_number, favoured_movies, favoured_counts = _get_data(CollectedMovie.TYPE_WISH)
         watched_number, watched_movies, watched_counts = _get_data(CollectedMovie.TYPE_WATCH)
 
-        searched_results = SearchedMovie.objects.values('movie_id').annotate(count=Sum('count')).order_by('-movie_id')
-        collected_results = CollectedMovie.objects.values('movie_id').annotate(count=Count('movie_id')).order_by('-movie_id')
+        searched_results = SearchedMovie.objects.values('movie_id')\
+            .annotate(count=Sum('count')).order_by('-movie_id')
 
-        print("SDADSAA")
+        collected_results = CollectedMovie.objects.values('movie_id')\
+            .annotate(count=Count('movie_id')).order_by('-movie_id')
+
         all_results = {}
 
         for result in searched_results:

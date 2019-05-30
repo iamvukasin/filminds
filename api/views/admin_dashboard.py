@@ -4,6 +4,7 @@ from rest_framework.views import APIView
 
 from app.models.expert_picks import ExpertPicksCategory
 from app.models.user import AuthUser, User
+from app.models.movie_interaction import ExpertPickMovie
 
 
 def _get_message(username):
@@ -54,15 +55,15 @@ class AddExpert(APIView):
                 elif User.is_auth_user_admin(user):
                     message = "That user is admin."
                 else:
-                    try:
-                        ExpertPicksCategory.objects.get(name__iexact=category)
+                    expert = ExpertPicksCategory.objects.get(name__iexact=category)
+                    if expert.expert_id is not None:
                         message = "An expert for that category already exists."
-                    except ObjectDoesNotExist:
-                        expert = ExpertPicksCategory(name=category, expert_id=user.pk)
+                    else:
+                        expert.expert_id = user.pk
+                        expert.save()
                         user_type = User.objects.get(user_id=user.pk)
                         user_type.type = User.EXPERT
                         user_type.save()
-                        expert.save()
                         success = 1
                         message = "Expert added."
                         return JsonResponse({
@@ -93,6 +94,21 @@ class RemoveExpert(APIView):
         user.type = User.REGISTERED_USER
         user.save()
         category = ExpertPicksCategory.objects.get(expert_id=auth_user.pk)
-        category.delete()
+        category.expert_id = None
+        category.save()
+        ExpertPickMovie.objects.filter(category=category.pk).delete()
         return JsonResponse({'message': "Expert is successfully removed"})
 
+
+class GetCategories(APIView):
+    def post(self, request):
+        categories = ExpertPicksCategory.objects.exclude(expert__isnull=False).order_by('name')
+        message = ""
+        values = ""
+        for category in categories:
+            message += category.name + ","
+            values += str(category.pk) + ","
+        return JsonResponse({
+            'message': message,
+            'values': values
+        })

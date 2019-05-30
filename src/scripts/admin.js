@@ -5,12 +5,38 @@ const dialogs = document.querySelector(".mdc-dialog");
 var dialog = null;
 const addExpertButton = $("#add-expert-button");
 const time = 300;
+const categorySelect = document.getElementById("categories-select");
 
 if (dialogs) {
 	dialog = new MDCDialog(dialogs);
 }
 
-addExpertButton?.click(() => dialog?.open());
+addExpertButton?.click(() => {
+	//ajax za expert categories
+	
+	$.ajax({
+            type: "POST",
+            url: "/api/admin_dashboard/get_categories",
+            headers: {"X-CSRFToken": Cookies.get("csrftoken")},
+			success: (data) =>{
+				// data.message i data.values
+				
+				var values = data.values;
+				var categories = data.message;
+				
+				var split_values = values.split(",");
+				var split_categories = categories.split(",");
+				split_values.pop();
+				split_categories.pop();
+				var str = "";
+				for(var i = 0 ; i < split_values.length;i++){
+					str += "<option value=\""+split_values[i]+"\">"+split_categories[i]+"</option>";
+				}
+				categorySelect.innerHTML = str;
+				dialog?.open();
+			}
+    });
+});
 
 function deleteButtonClick(element) {
     return function () {
@@ -59,15 +85,13 @@ removeUserButton?.click(() => {
 
 const confirmExpertButton = $("#confirmExpertButton");
 const addExpertTextField = $("#expertInput");
-const categoryTextField = $("#categoryInput");
 const addExpertTemplate = $("#template-expert");
 
 confirmExpertButton?.click( ()=>{
+	var category = categorySelect.options[categorySelect.selectedIndex].text
+	
 	if( addExpertTextField.val()==""){
 		showAlertWithTimer("Please enter username or email",time);
-	}
-	else if(categoryTextField.val() =="" ){
-		showAlertWithTimer("Please choose category",time);
 	}
 	else {
         $.ajax({
@@ -76,7 +100,7 @@ confirmExpertButton?.click( ()=>{
             headers: {"X-CSRFToken": Cookies.get("csrftoken")},
             data: {
                 expert: addExpertTextField.val(),
-				category : categoryTextField.val(),
+				category : category,
             },
             success: (data) => {
 				if (data.success == 0)
@@ -97,7 +121,7 @@ confirmExpertButton?.click( ()=>{
 	}
 	
 	addExpertTextField.val("");
-	categoryTextField.val("");
+	
 });
 
 function showAlert(str){

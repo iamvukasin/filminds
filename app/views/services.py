@@ -113,7 +113,7 @@ class AdminDashboardView(TemplateView):
 
     @method_decorator(admin_required)
     def get(self, request, *args, **kwargs):
-        categories = ExpertPicksCategory.objects.all()
+        categories = ExpertPicksCategory.objects.exclude(expert__isnull=True)
         experts = []
 
         for categorie in categories:
