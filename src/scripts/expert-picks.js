@@ -16,11 +16,14 @@ categorySelect.change(function () {
         success: function (result) {
             let html = "";
 
-            for (let i = 0; i < result.picks.length; i++) {
+            for (let pick of result.picks) {
                 const messageElement = $("#template-movie-info-row").contents("div")[0].cloneNode(true);
+
+                messageElement.setAttribute("data-movie-id", pick.id);
                 messageElement.querySelector(".movie-poster > img").setAttribute("src",
-                    `https://image.tmdb.org/t/p/w1280${result.picks[i].poster}`);
-                messageElement.querySelector(".movie-title > h3").innerHTML = result.picks[i].title;
+                    `https://image.tmdb.org/t/p/w1280${pick.poster}`);
+                messageElement.querySelector(".movie-title > h3").innerHTML = pick.title;
+                
                 html += messageElement.outerHTML;
             }
 
