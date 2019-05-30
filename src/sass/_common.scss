@@ -8,3 +8,39 @@ html, body {
     font-family: Roboto, sans-serif;
     -webkit-font-smoothing: antialiased;
 }
+
+.full-screen-message {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f7f7f7;
+}
+
+.full-screen-message__content {
+    width: 20%;
+    min-width: 360px;
+
+    @include mdc-layout-grid-media-query_(phone) {
+        width: 60%;
+    }
+}
+
+.full-screen-message__title,
+.full-screen-message__description {
+    text-align: center;
+}
+
+.full-screen-message__title {
+    margin-top: 16px;
+}
+
+.full-screen-message__description {
+    margin-top: 8px;
+}
+
+.full-screen-message__actions {
+    margin-top: 16px;
+    text-align: center;
+}

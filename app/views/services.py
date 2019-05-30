@@ -1,4 +1,3 @@
-from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render
 from django.utils.decorators import method_decorator
@@ -16,29 +15,30 @@ class ChatView(TemplateView):
 class FavoritesView(TemplateView):
     template_name = "collected.html"
 
-    @method_decorator(login_required)
     def get(self, request, *args, **kwargs):
+        is_authenticated = request.user.is_authenticated
+
         return render(request, self.template_name, {
             'type': 'Favorites',
-            'movies': CollectedMovie.get_favorites(User.get_user(request.user))
+            'movies': CollectedMovie.get_favorites(User.get_user(request.user)) if is_authenticated else None
         })
 
 
 class WatchedView(TemplateView):
     template_name = "collected.html"
 
-    @method_decorator(login_required)
     def get(self, request, *args, **kwargs):
+        is_authenticated = request.user.is_authenticated
+
         return render(request, self.template_name, {
-            'type' : 'Watched',
-            'movies': CollectedMovie.get_watched(User.get_user(request.user))
+            'type': 'Watched',
+            'movies': CollectedMovie.get_watched(User.get_user(request.user)) if is_authenticated else None
         })
 
 
 class ExpertPicksView(TemplateView):
     template_name = "expert-picks.html"
 
-    @method_decorator(login_required)
     def get(self, request, *args, **kwargs):
         categories = ExpertPicksCategory.get_all()
         picks = []

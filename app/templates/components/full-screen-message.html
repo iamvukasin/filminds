@@ -1,0 +1,23 @@
+{% load static %}
+
+<div class="full-screen-message">
+    <div class="full-screen-message__content">
+        <img class="full-screen-message__image" src="{% static image %}">
+        <h3 class="mdc-typography mdc-typography--headline5 full-screen-message__title">{{ title }}</h3>
+        <p class="mdc-typography mdc-typography--body1 full-screen-message__description">{{ description }}</p>
+
+        {% if primary_button %}
+            <div class="full-screen-message__actions">
+                <a class="mdc-button mdc-button--raised" href="{{ primary_action }}">
+                    <span class="mdc-button__label">{{ primary_button }}</span>
+                </a>
+
+                {% if secondary_button %}
+                    <a class="mdc-button" href="{{ secondary_action }}">
+                        <span class="mdc-button__label">{{ secondary_button }}</span>
+                    </a>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+</div>

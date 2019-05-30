@@ -3,25 +3,33 @@
 
 {% block content %}
 
-    <div class="expert-picks">
-        <div class="expert-picks__header">
-            <h2 class="mdc-typography--headline5">Expert picks: <span id="category-header">{{ category_name }}</span></h2>
-            <div class="mdc-select expert-picks__select">
-                <select class="mdc-select__native-control select-category">
-                    {% for category in categories %}
-                        <option value={{ category.id }}>{{ category.name }}</option>
-                    {% endfor %}
-                </select>
-                <div class="mdc-line-ripple"></div>
+    {% if user.is_authenticated %}
+        <div class="expert-picks">
+            <div class="expert-picks__header">
+                <h2 class="mdc-typography--headline5">Expert picks: <span id="category-header">{{ category_name }}</span></h2>
+                <div class="mdc-select expert-picks__select">
+                    <select class="mdc-select__native-control select-category">
+                        {% for category in categories %}
+                            <option value={{ category.id }}>{{ category.name }}</option>
+                        {% endfor %}
+                    </select>
+                    <div class="mdc-line-ripple"></div>
+                </div>
+            </div>
+
+            <div class="mdc-card expert-picks__content">
+                {% for pick in picks %}
+                    {% include 'components/movie-info-row.html' with movie=pick %}
+                {% endfor %}
             </div>
         </div>
-
-        <div class="mdc-card expert-picks__content">
-            {% for pick in picks %}
-                {% include 'components/movie-info-row.html' with movie=pick %}
-            {% endfor %}
-        </div>
-    </div>
+    {% else %}
+        {% with image='images/login-error.svg' title='Log in required' description='In order to see the list and add movies to it, you have to be logged in.' %}
+            {% url 'login' as primary_action %}
+            {% url 'register' as secondary_action %}
+            {% include 'components/full-screen-message.html' with primary_button="Log in" secondary_button="Register" %}
+        {% endwith %}
+    {% endif %}
 
 {% endblock %}
 
