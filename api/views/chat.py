@@ -8,7 +8,8 @@ from wit import Wit
 import config
 from api import chat_responses
 from api.chat_responses.builder import TextMessage, ResponseBuilder
-from app.models import Message, User, CollectedMovie, Movie
+from app.models import Message, User
+from app.views.utils import add_collected_data
 
 RESPONSE_BUILDERS = {
     'greetings': chat_responses.ResponseGreeting,
@@ -87,10 +88,11 @@ class ChatReply(APIView):
 
     def post(self, request):
         #get and save user message
-        user = User.get_user(request.user)
         message = request.POST.get('message', '')
+        user = None
 
-        if user.is_authenticated:
+        if request.user.is_authenticated:
+            user = User.get_user(request.user)
             text_message = TextMessage(message)
             builder = ResponseBuilder()
             builder.add(text_message)
@@ -115,11 +117,15 @@ class ChatReply(APIView):
 
         # get and save bot message
         bot_response = response_builder().get(wit_response)
-        insert_collected_info(user, bot_response)
 
-        if user.is_authenticated:
+        for bot_message in bot_response['messages']:
+            if bot_message['type'] == 'movies':
+                add_collected_data(bot_message['content'], request)
+
+
+        if request.user.is_authenticated:
             message_to_save = Message(
-                user=User.get_user(user),
+                user=user,
                 content=bot_response
             )
 
@@ -130,35 +136,16 @@ class ChatReply(APIView):
 
 class ChatLoad(APIView):
     def post(self, request):
-        user = User.get_user(request.user)
-
-        if user.is_authenticated:
+        if request.user.is_authenticated:
+            user = User.get_user(request.user)
             messages_for_user = list(Message.get_messages(user=user))
 
             for message_for_user in messages_for_user:
                 if message_for_user['sender_type'] == Message.SENDER_BOT:
-                    insert_collected_info(user, message_for_user['content'])
+                    for bot_message in message_for_user['content']['messages']:
+                        if bot_message['type'] == 'movies':
+                            add_collected_data(bot_message['content'], request)
 
             return Response(messages_for_user)
         else:
             return Response()
-
-
-def insert_collected_info(user, bot_messages):
-    """
-    Inserts information if the movie from bot message is collected by current user.
-
-    :param user: user from current session
-    :param bot_messages: messages with movie data
-    """
-
-    for bot_message in bot_messages['messages']:
-        if bot_message['type'] == 'movies':
-
-            for movie in bot_message['content']:
-                if Movie.exists(movie['id']):
-                    movie = Movie.get_or_create(movie['id'])
-                    if CollectedMovie.is_favorite(user, movie):
-                        movie['favorite'] = True
-                    elif CollectedMovie.is_watched(user, movie):
-                        movie['watched'] = True
