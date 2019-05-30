@@ -118,12 +118,11 @@ class ChatReply(APIView):
         # get and save bot message
         bot_response = response_builder().get(wit_response)
 
-        for bot_message in bot_response['messages']:
-            if bot_message['type'] == 'movies':
-                add_collected_data(bot_message['content'], request)
-
-
         if request.user.is_authenticated:
+            for bot_message in bot_response['messages']:
+                if bot_message['type'] == 'movies':
+                    add_collected_data(bot_message['content'], user)
+
             message_to_save = Message(
                 user=user,
                 content=bot_response
@@ -144,7 +143,7 @@ class ChatLoad(APIView):
                 if message_for_user['sender_type'] == Message.SENDER_BOT:
                     for bot_message in message_for_user['content']['messages']:
                         if bot_message['type'] == 'movies':
-                            add_collected_data(bot_message['content'], request)
+                            add_collected_data(bot_message['content'], user)
 
             return Response(messages_for_user)
         else:

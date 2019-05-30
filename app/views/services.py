@@ -48,8 +48,9 @@ class ExpertPicksView(TemplateView):
         if category is not None:
             picks = ExpertPickMovie.get(category)
             category_name = category.name
-            
-        add_collected_data(picks, request)
+
+        if request.user.is_authenticated:
+            add_collected_data(picks, User.get_user(request.user))
 
         return render(request, self.template_name, {
             'categories': categories,

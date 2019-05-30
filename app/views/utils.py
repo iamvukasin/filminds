@@ -63,14 +63,13 @@ def admin_required(function=None, redirect_field_name=REDIRECT_FIELD_NAME, login
     return actual_decorator
 
 
-def add_collected_data(recommended_movies, request):
+def add_collected_data(recommended_movies, user):
     """
     Inserts information if the movie is collected by current user.
     """
 
     for recommended_movie in recommended_movies:
-        if request.user.is_authenticated and Movie.exists(recommended_movie['id']):
-            user = User.get_user(request.user)
+        if Movie.exists(recommended_movie['id']):
             movie = Movie.get_or_create(recommended_movie['id'])
 
             if CollectedMovie.is_favorite(user, movie):

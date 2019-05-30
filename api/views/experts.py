@@ -4,7 +4,7 @@ from django.http import JsonResponse
 from rest_framework.views import APIView
 
 import config
-from app.models import Movie
+from app.models import Movie, User
 from app.models.expert_picks import ExpertPicksCategory
 from app.models.movie_interaction import ExpertPickMovie
 from app.views.utils import add_collected_data
@@ -76,6 +76,7 @@ class ExpertPicksResponseView(APIView):
         category_id = request.POST.get('category', '')
         picks = list(ExpertPickMovie.get(category_id))
 
-        add_collected_data(picks, request)
+        if request.user.is_authenticated:
+            add_collected_data(picks, User.get_user(request.user))
 
         return JsonResponse({'picks': picks})
