@@ -6,8 +6,8 @@
         <h3>{{ movie.title }}</h3>
     </div>
     <div class="table__column--shrinked table__column--multi-items">
-        <button class="mdc-icon-button material-icons movie-watched-button">done</button>
-        <button class="mdc-icon-button material-icons movie-favorite-button">favorite</button>
+        <button class="mdc-icon-button material-icons movie-watched-button {% if movie.watched %}active{% endif %}">done</button>
+        <button class="mdc-icon-button material-icons movie-favorite-button {% if movie.favorite %}active{% endif %}">favorite</button>
         <button class="mdc-icon-button material-icons movie-info-button">info</button>
     </div>
 </div>

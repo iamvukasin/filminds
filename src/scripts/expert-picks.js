@@ -24,6 +24,12 @@ categorySelect.change(function () {
                     `https://image.tmdb.org/t/p/w1280${pick.poster}`);
                 messageElement.querySelector(".movie-title > h3").innerHTML = pick.title;
                 
+                if (pick.favorite) {
+                    messageElement.querySelector('.movie-favorite-button').classList.add('active');
+                } else if (pick.watched) {
+                    messageElement.querySelector('.movie-watched-button').classList.add('active');
+                }
+
                 html += messageElement.outerHTML;
             }
 

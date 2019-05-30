@@ -1,14 +1,13 @@
-from django.http import JsonResponse
 import tmdbsimple as tmdb
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import JsonResponse
 from rest_framework.views import APIView
 
 import config
-from api.serializers import MovieSerializer
 from app.models import Movie
 from app.models.expert_picks import ExpertPicksCategory
 from app.models.movie_interaction import ExpertPickMovie
+from app.views.utils import add_collected_data
 
 
 class AddExpertPick(APIView):
@@ -75,7 +74,8 @@ class SavePicks(APIView):
 class ExpertPicksResponseView(APIView):
     def post(self, request):
         category_id = request.POST.get('category', '')
-        picks = ExpertPickMovie.get(category_id)
+        picks = list(ExpertPickMovie.get(category_id))
 
-        serializer = MovieSerializer(picks, many=True)
-        return JsonResponse({'picks': serializer.data})
+        add_collected_data(picks, request)
+
+        return JsonResponse({'picks': picks})

@@ -2,7 +2,7 @@ from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.contrib.auth.decorators import user_passes_test
 from django.shortcuts import redirect
 
-from app.models import User
+from app.models import User, Movie, CollectedMovie
 
 
 def anonymous_required(redirect_page='index'):
@@ -61,3 +61,19 @@ def admin_required(function=None, redirect_field_name=REDIRECT_FIELD_NAME, login
         return actual_decorator(function)
 
     return actual_decorator
+
+
+def add_collected_data(recommended_movies, request):
+    """
+    Inserts information if the movie is collected by current user.
+    """
+
+    for recommended_movie in recommended_movies:
+        if request.user.is_authenticated and Movie.exists(recommended_movie['id']):
+            user = User.get_user(request.user)
+            movie = Movie.get_or_create(recommended_movie['id'])
+
+            if CollectedMovie.is_favorite(user, movie):
+                recommended_movie['favorite'] = True
+            elif CollectedMovie.is_watched(user, movie):
+                recommended_movie['watched'] = True
