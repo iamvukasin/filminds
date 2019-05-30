@@ -91,6 +91,10 @@ class Movie(models.Model):
             except HTTPError:
                 return None
 
+    @classmethod
+    def exists(cls, id):
+        return Movie.objects.filter(id=id).exists()
+
 
 @receiver(pre_save, sender=Movie)
 def limit_movie_char_fields(sender, instance, *args, **kwargs):

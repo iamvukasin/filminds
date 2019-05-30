@@ -43,9 +43,15 @@ function presentBotMessage(message) {
         messageElement = messageElement.outerHTML;
     } else {
         let content = ``;
-
         for (const movie of message.content) {
             const movieElement = $("#template-movie-card").contents("div")[0].cloneNode(true);
+
+            // make favorite or watched buttons active if movie collected
+            if (movie.watched) {
+                movieElement.querySelector(".movie-watched-button").classList.add("active");
+            } else if (movie.favorite) {
+                movieElement.querySelector(".movie-favorite-button").classList.add("active");
+            }
 
             movieElement.setAttribute("data-movie-id", movie.id);
             movieElement.querySelector(".movie-card__backdrop").setAttribute("src", movie.backdrop);
@@ -107,7 +113,6 @@ function presentUserMessage(message) {
  * @param message a text representation of user message
  */
 function appendUserMessage(message) {
-    console.log("PU " + message);
     const lastElement = chatContent.children().last();
 
     const messageElement = $("#template-user-message").contents("div")[0].cloneNode(true);
@@ -140,7 +145,6 @@ function loadMessages() {
         headers: {"X-CSRFToken": Cookies.get("csrftoken")},
         success: function (result) {
             for (const message of result) {
-                console.log(message);
                 if (message.sender_type === "U") {
                     for (const singleMessage of message.content.messages)
                         appendUserMessage(singleMessage.content);

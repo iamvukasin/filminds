@@ -12,8 +12,8 @@ class SearchedMovie(models.Model):
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
     count = models.IntegerField(default=0)
 
-    @staticmethod
-    def increment_search_count(user, movie):
+    @classmethod
+    def increment_search_count(cls, user, movie):
         searched_movie, _ = SearchedMovie.objects.get_or_create(user=user, movie=movie)
 
         SearchedMovie.objects.filter(user=user, movie=movie).update(
@@ -46,6 +46,14 @@ class CollectedMovie(models.Model):
     def get_watched(user):
         movie_ids = CollectedMovie.objects.filter(user=user, type=CollectedMovie.TYPE_WATCH).values_list('movie', flat=True)
         return Movie.objects.filter(id__in=movie_ids)
+
+    @staticmethod
+    def is_favorite(user, movie):
+        return CollectedMovie.objects.filter(user=user, movie=movie, type=CollectedMovie.TYPE_WISH).exists()
+
+    @staticmethod
+    def is_watched(user, movie):
+        return CollectedMovie.objects.filter(user=user, movie=movie, type=CollectedMovie.TYPE_WATCH).exists()
 
 
 class ExpertPickMovie(models.Model):
