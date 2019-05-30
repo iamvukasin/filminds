@@ -1,4 +1,5 @@
 import * as Chartist from 'chartist';
+import * as Cookies from "js-cookie";
 
 /**
  * Creates a horizontal bar chart inside the element selected with the
@@ -60,89 +61,118 @@ function createLineChart(selector, data) {
 }
 
 function createSampleData() {
-    /*
-      Searched statistics
-    */
-    var statisticsSearchedData = {
-        labels: ["The Shawshank Redemption", "The Godfather", "12 Angry Men", "Schindler\"s List", "The Good, the Bad and the Ugly",
-            "Forrest Gump", "Inception"
-        ],
-        series: [
-            [175, 123, 112, 97, 86, 74, 63]
-        ]
-    };
-    createHorizontalBarChart(".statistics__search", statisticsSearchedData);
-
-    /*
-      Watched statistics
-    */
-    var statisticsWatchedData = {
-        labels: ["Goodfellas", "City of God", "The Silence of the Lambs", "The Shawshank Redemption", "The Godfather",
-            "Life Is Beautiful", "Interstellar"
-        ],
-        series: [
-            [155, 134, 121, 107, 90, 65, 32]
-        ]
-    };
-    createHorizontalBarChart(".statistics__watched", statisticsWatchedData);
-
-    /*
-      Wishlist statistics
-    */
-    var statisticsWishlistData = {
-        labels: ["Léon: The Professional", "The Matrix", "Fight Club", "The Godfather: Part II", "The Shawshank Redemption",
-            "Life Is Beautiful", "Casablanca"
-        ],
-        series: [
-            [179, 154, 132, 99, 88, 64, 51]
-        ]
-    };
-    createHorizontalBarChart(".statistics__wishlist", statisticsWishlistData);
-
-    /*
-      Genres statistics
-    */
-    var statisticsGenresData = {
-        labels: ["Drama", "Action", "Comedy", "Romance", "Thriller", "Horror", "Sci-Fi"],
-        series: [{
-                className: "statistics__item--0",
-                value: 20
-            }, {
-                className: "statistics__item--1",
-                value: 4
-            },
-            {
-                className: "statistics__item--2",
-                value: 12
-            }, {
-                className: "statistics__item--3",
-                value: 24
-            },
-            {
-                className: "statistics__item--4",
-                value: 18
-            }, {
-                className: "statistics__item--5",
-                value: 16
-            },
-            {
-                className: "statistics__item--6",
-                value: 6
-            }
-        ]
-    };
-    createDonutChart(".statistics__genres", statisticsGenresData);
-
-    /*
-      User statistics
-    */
-    var statisticsUserData = {
-        labels: ["2019-02-01", "2019-02-02", "2019-02-03", "2019-02-04", "2019-02-05", "2019-02-06", "2019-02-07", "2019-02-08", "2019-02-09"],
-        series: [
-            [267, 192, 45, 56, 111, 23, 75, 89, 162]
-        ]
-    };
-    createLineChart(".statistics__users", statisticsUserData);
+	$.ajax({
+            type: "POST",
+            url: "/api/stats/most_searched",
+            headers: {"X-CSRFToken": Cookies.get("csrftoken")},
+            success: (data) => {
+				mostSearched(data);
+				mostFavoured(data);
+				mostWatched(data);
+				mostPopularGenres(data);
+				perDayUsers(data);
+			}
+        });
 }
 
-$(document).ready(createSampleData);
+function mostPopularGenres(data){
+	var titles = data.top_genres_names;
+	var counts = data.top_genres_counter;
+	var split_titles = titles.split(",");
+	var split_counts = counts.split(",");
+	split_titles.pop();
+	var ints = [];
+	for (var i = 0 ; i < data.top_genres_number;i++){
+		var str = "statistics__item--"+i;
+		var num = Number(split_counts[i]);
+		var item = {
+			className:str, 
+			value: num
+		};
+		ints.push(item);
+	}	
+	var statisticsGenresData = {
+		labels: split_titles,
+		series: ints
+	};			
+    createDonutChart(".statistics__genres", statisticsGenresData);
+}
+
+function mostSearched(data){
+	var titles = data.most_searched_titles;
+	var counts = data.most_searched_counts;
+	var split_titles = titles.split(",");
+	var split_counts = counts.split(",");
+	split_titles.pop();
+	
+	var ints = [];
+	for (var i = 0 ; i < data.most_searched_number;i++){
+		ints.push(Number(split_counts[i]));
+	}
+	var statisticsSearchedData = {
+		labels: split_titles,
+		series: [ints]
+	};			
+	createHorizontalBarChart(".statistics__search", statisticsSearchedData);
+}
+
+function mostFavoured(data){
+	var titles = data.most_favoured_titles;
+	var counts = data.most_favoured_counts;
+	var split_titles = titles.split(",");
+	var split_counts = counts.split(",");
+	split_titles.pop();
+	
+	var ints = [];
+	for (var i = 0 ; i < data.most_favoured_number;i++){
+		ints.push(Number(split_counts[i]));
+	}
+	var statisticsWishListData = {
+		labels: split_titles,
+		series: [ints]
+	};			
+	createHorizontalBarChart(".statistics__wishlist", statisticsWishListData);
+}
+
+function mostWatched(data){
+	var titles = data.most_watched_titles;
+	var counts = data.most_watched_counts;
+	var split_titles = titles.split(",");
+	var split_counts = counts.split(",");
+	split_titles.pop();
+	var ints = [];
+	for (var i = 0 ; i < data.most_watched_number;i++){
+		ints.push(Number(split_counts[i]));
+	}
+	var statisticsWatchListData = {
+		labels: split_titles,
+		series: [ints]
+	};	
+
+	createHorizontalBarChart(".statistics__watched", statisticsWatchListData);
+}
+
+function perDayUsers(data){
+	var dates = data.per_day_dates;
+	var counts = data.per_day_counts;
+	var split_dates = dates.split(",");
+	var split_counts = counts.split(",");
+	split_dates.pop();
+	split_counts.pop();
+	var ints = [];
+	for (var i = 0 ; i < split_counts.length;i++){
+		ints.push(Number(split_counts[i]));
+	}
+	var statisticsPerDayData = {
+		labels: split_dates,
+		series: [ints]
+	};
+	createLineChart(".statistics__users", statisticsPerDayData);
+}
+$(() => {
+    if ($(".statistics").length) {
+        createSampleData();
+    }
+});
+
+// $(document).ready(createSampleData);
