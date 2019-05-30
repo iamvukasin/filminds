@@ -3,14 +3,14 @@
 
 {% block content %}
 
-    <div class="{{ type|lower }}">
+    <div class="collected-list {{ type|lower }}">
         {% if user.is_authenticated %}
             <div class="mdc-layout-grid">
                 <div class="mdc-layout-grid__inner">
                     <h2 class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-typography--headline5">{{ type }} </h2>
 
                     {% for movie in movies %}
-                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-card movie-card" data-movie-id="{{ movie.id }}">
+                        <div class="mdc-layout-grid__cell mdc-card movie-card" data-movie-id="{{ movie.id }}">
                         <img src="https://image.tmdb.org/t/p/w400{{ movie.backdrop }}">
                         <div class="movie-card__content">
                             <h3 class="mdc-typography--headline6">{{ movie.title }}</h3>
