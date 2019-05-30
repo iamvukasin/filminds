@@ -1,9 +1,10 @@
 from django.db import models
 from django.db.models import F
+from django.utils import timezone
 
-from .user import User
-from .movie import Movie
 from .expert_picks import ExpertPicksCategory
+from .movie import Movie
+from .user import User
 
 
 class SearchedMovie(models.Model):
@@ -23,7 +24,7 @@ class SearchedMovie(models.Model):
 class CollectedMovie(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
-    date = models.DateTimeField(auto_now_add=True)
+    date = models.DateTimeField(default=timezone.now)
     TYPE_WATCH = 'WA'
     TYPE_WISH = 'WI'
     TYPE_CHOICES = (

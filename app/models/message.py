@@ -1,7 +1,6 @@
-import json
-
 from django.contrib.postgres.fields import JSONField
 from django.db import models
+from django.utils import timezone
 
 from .user import User
 
@@ -20,7 +19,7 @@ class Message(models.Model):
         choices=MESSAGE_SENDER_CHOICES,
         default=SENDER_BOT
     )
-    timestamp = models.DateTimeField(auto_now_add=True)
+    timestamp = models.DateTimeField(default=timezone.now)
     content = JSONField()
 
     @staticmethod
