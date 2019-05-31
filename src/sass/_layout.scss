@@ -20,15 +20,35 @@
 .service__content {
     width: 100%;
     margin: 0 auto;
-    padding-top: 64px;
+    padding-top: $mdc-top-app-bar-row-height;
     display: flex;
     flex-grow: 1;
     overflow: hidden;
+
+    @media (max-width: $mdc-top-app-bar-mobile-breakpoint) {
+        padding-top: $mdc-top-app-bar-mobile-row-height !important;
+    }
 }
 
 .service__main-content {
     flex-grow: 1;
-    max-width: calc(100% - 256px);
+    max-width: 100%;
+
+    @include mdc-layout-grid-media-query_(desktop) {
+        max-width: calc(100% - #{$mdc-drawer-width});
+    }
+}
+
+@include mdc-layout-grid-media-query_(desktop) {
+    .mdc-drawer {
+        display: block;
+        position: relative;
+        box-shadow: none;
+    }
+
+    .mdc-top-app-bar__navigation-icon {
+        display: none;
+    }
 }
 
 /* Table */

@@ -3,6 +3,9 @@
 <header class="mdc-top-app-bar">
     <div class="mdc-top-app-bar__row">
         <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+            {% if has_sidebar %}
+                <a href="#" class="material-icons mdc-top-app-bar__navigation-icon">menu</a>
+            {% endif %}
             <a href="/"><img class="material-icons logo" src="{% static 'images/logo.svg' %}"/></a>
             <a class="logo-text" href="/">Filminds</a>
         </section>
