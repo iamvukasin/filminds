@@ -9,8 +9,8 @@ class ExpertPicksCategory(models.Model):
 
     @staticmethod
     def get_all():
-        return ExpertPicksCategory.objects.values()
+        return ExpertPicksCategory.objects.exclude(expert__isnull=True).values()
 
     @staticmethod
     def get_first():
-        return ExpertPicksCategory.objects.first()
+        return ExpertPicksCategory.objects.exclude(expert__isnull=True).first()
