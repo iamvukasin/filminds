@@ -49,7 +49,7 @@ class User(models.Model):
 @receiver(post_save, sender=AuthUser)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
-        user_type = User.ADMIN if sender.is_superuser else User.REGISTERED_USER
+        user_type = User.ADMIN if instance.is_superuser else User.REGISTERED_USER
         User.objects.create(user=instance, type=user_type)
 
 
