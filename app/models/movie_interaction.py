@@ -37,15 +37,17 @@ class CollectedMovie(models.Model):
         default=TYPE_WISH
     )
 
+    def save(self, *args, **kwargs):
+        self.date = timezone.now()
+        super(CollectedMovie, self).save(*args, **kwargs)
+
     @staticmethod
     def get_favorites(user):
-        movie_ids = CollectedMovie.objects.filter(user=user, type=CollectedMovie.TYPE_WISH).values_list('movie', flat=True)
-        return Movie.objects.filter(id__in=movie_ids)
+        return CollectedMovie.objects.filter(user=user, type=CollectedMovie.TYPE_WISH).order_by('-date')
 
     @staticmethod
     def get_watched(user):
-        movie_ids = CollectedMovie.objects.filter(user=user, type=CollectedMovie.TYPE_WATCH).values_list('movie', flat=True)
-        return Movie.objects.filter(id__in=movie_ids)
+        return CollectedMovie.objects.filter(user=user, type=CollectedMovie.TYPE_WATCH).order_by('-date')
 
     @staticmethod
     def is_favorite(user, movie):
