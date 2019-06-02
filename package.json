@@ -15,6 +15,7 @@
     "browserify": "^16.2.3",
     "del": "^4.0.0",
     "gulp": "^4.0.0",
+    "gulp-autoprefixer": "^6.1.0",
     "gulp-babel": "^8.0.0-beta.2",
     "gulp-csso": "^3.0.1",
     "gulp-sass": "^4.0.2",

@@ -1,4 +1,5 @@
 const { src, dest, parallel, series, watch } = require("gulp");
+const autoprefixer = require('gulp-autoprefixer');
 const sass = require("gulp-sass");
 const minifyCSS = require("gulp-csso");
 const svgo = require("gulp-svgo");
@@ -16,6 +17,10 @@ const destinationFolder = "app/static";
 function css() {
     return src("src/sass/*.scss")
         .pipe(sass({ includePaths: ['node_modules/'] }))
+        .pipe(autoprefixer({
+            browsers: ['last 3 versions'],
+            cascade: false
+        }))
         .pipe(minifyCSS())
         .pipe(dest(destinationFolder + "/css"))
 }
