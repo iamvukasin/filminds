@@ -79,7 +79,16 @@ removeUserButton?.click(() => {
             },
             success: (data) => showAlert(data.message)
         });
-	    removeUserTextField.val("");
+		// pronadji eksperta medju ekspertima i obrisi ga
+		var experts = $(".expert-content");
+		for (var i = 0 ; i < experts.length;i++){
+			if (experts[i].querySelector(".expertUsername").innerText== removeUserTextField.val()){
+				$(experts[i]).remove();
+				break;
+			}
+		}
+		removeUserTextField.val("");
+
 	}
 });
 

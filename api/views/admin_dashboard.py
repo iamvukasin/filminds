@@ -15,6 +15,17 @@ def _get_message(username):
     return message
 
 
+def _remove_expert(username):
+    auth_user = AuthUser.objects.get(username=username)
+    user = User.objects.get(user_id=auth_user.pk)
+    user.type = User.REGISTERED_USER
+    user.save()
+    category = ExpertPicksCategory.objects.get(expert_id=auth_user.pk)
+    category.expert_id = None
+    category.save()
+    ExpertPickMovie.objects.filter(category=category.pk).delete()
+
+
 class DeleteUser(APIView):
     def post(self, request):
         username = request.POST.get('message', '')
@@ -28,6 +39,9 @@ class DeleteUser(APIView):
                 if User.is_auth_user_admin(user):
                     message = "User is admin."
                 else:
+                    user_user = User.objects.get(user_id=user.pk)
+                    if user_user.type == User.EXPERT:
+                        _remove_expert(user.username)
                     user.is_active = False
                     user.save()
                     message = "User is successfully removed."
@@ -89,14 +103,7 @@ class AddExpert(APIView):
 class RemoveExpert(APIView):
     def post(self, request):
         username = request.POST.get('message', '')
-        auth_user = AuthUser.objects.get(username=username)
-        user = User.objects.get(user_id=auth_user.pk)
-        user.type = User.REGISTERED_USER
-        user.save()
-        category = ExpertPicksCategory.objects.get(expert_id=auth_user.pk)
-        category.expert_id = None
-        category.save()
-        ExpertPickMovie.objects.filter(category=category.pk).delete()
+        _remove_expert(username)
         return JsonResponse({'message': "Expert is successfully removed"})
 
 
