@@ -1,4 +1,5 @@
-.expert-picks {
+.expert-picks,
+.add-expert-picks {
     height: 100%;
     padding: map-get($mdc-layout-grid-default-margin, phone);
     overflow-y: auto;
