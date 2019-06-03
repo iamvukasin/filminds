@@ -229,7 +229,7 @@
 <XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="mJe4YSoCoUmwbv4XriIJJAAA">
 <XPD:OBJ name="NameLabel" type="LabelView" guid="1nAlJN/42kCib42TonyKtwAA">
 <XPD:ATTR name="FontStyle" type="integer">1</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">Pregled filmova sacuvanih kao odgledani</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">Pregled filmova sacuvanih u listi zelja</XPD:ATTR>
 </XPD:OBJ>
 <XPD:OBJ name="StereotypeLabel" type="LabelView" guid="AbC5VTRqzky4fOLCSFDKSgAA">
 <XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
@@ -289,13 +289,13 @@
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
 <XPD:ATTR name="Left" type="integer">410</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">270</XPD:ATTR>
-<XPD:ATTR name="Width" type="integer">319</XPD:ATTR>
+<XPD:ATTR name="Width" type="integer">362</XPD:ATTR>
 <XPD:ATTR name="Height" type="integer">45</XPD:ATTR>
 <XPD:REF name="Model">xwU3QBFje0aIo5TRHRE7AgAA</XPD:REF>
 <XPD:OBJ name="NameCompartment" type="UMLNameCompartmentView" guid="oYOGx+kxHUCOFnUwuoj2MwAA">
 <XPD:OBJ name="NameLabel" type="LabelView" guid="CzJ5Or03DkSj7jBK+ZGNSwAA">
 <XPD:ATTR name="FontStyle" type="integer">1</XPD:ATTR>
-<XPD:ATTR name="Text" type="string">Pregled filmova sacuvanih za gledanje</XPD:ATTR>
+<XPD:ATTR name="Text" type="string">Pregled filmova sacuvanih u listi odgledanih</XPD:ATTR>
 </XPD:OBJ>
 <XPD:OBJ name="StereotypeLabel" type="LabelView" guid="qT0ApUzQAkSf7jgqfQgmcAAA">
 <XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
@@ -346,7 +346,7 @@
 <XPD:OBJ name="OwnedViews[11]" type="UMLGeneralizationView" guid="Jw/sN/DbVUOTklkPYAXGSAAA">
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">633,270;821,206</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">650,270;825,206</XPD:ATTR>
 <XPD:REF name="Model">B54deKVUkkWnPzHFDWHbcQAA</XPD:REF>
 <XPD:REF name="Head">v75jFiGSnUuWLDptR+7B1AAA</XPD:REF>
 <XPD:REF name="Tail">53612N946k6s03hgv+C2ngAA</XPD:REF>
@@ -456,7 +456,7 @@
 <XPD:OBJ name="OwnedViews[13]" type="UMLAssociationView" guid="hzg9wsKIZk6EMvnlr4eKywAA">
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">251,254;410,273</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">251,254;410,272</XPD:ATTR>
 <XPD:REF name="Model">Nv4Z9LqqMEKptIKNRV0RuAAA</XPD:REF>
 <XPD:REF name="Head">53612N946k6s03hgv+C2ngAA</XPD:REF>
 <XPD:REF name="Tail">vdq0+VwiwkuKDV6NLHjoTwAA</XPD:REF>
@@ -631,7 +631,7 @@
 <XPD:REF name="Specializations[1]">B54deKVUkkWnPzHFDWHbcQAA</XPD:REF>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedElements[8]" type="UMLUseCase" guid="Axs1RGtACUqpgRZ+7ghXsAAA">
-<XPD:ATTR name="Name" type="string">Pregled filmova sacuvanih kao odgledani</XPD:ATTR>
+<XPD:ATTR name="Name" type="string">Pregled filmova sacuvanih u listi zelja</XPD:ATTR>
 <XPD:REF name="Namespace">EyIsGMCutEKmAcNcV5zDRwAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">4</XPD:ATTR>
 <XPD:REF name="Views[0]">Exj/oFDiJUimyh3yIFKOMgAA</XPD:REF>
@@ -644,7 +644,7 @@
 <XPD:REF name="Associations[0]">jTx+Yp2y8k+4cfyjrSsAXQAA</XPD:REF>
 </XPD:OBJ>
 <XPD:OBJ name="OwnedElements[9]" type="UMLUseCase" guid="xwU3QBFje0aIo5TRHRE7AgAA">
-<XPD:ATTR name="Name" type="string">Pregled filmova sacuvanih za gledanje</XPD:ATTR>
+<XPD:ATTR name="Name" type="string">Pregled filmova sacuvanih u listi odgledanih</XPD:ATTR>
 <XPD:REF name="Namespace">EyIsGMCutEKmAcNcV5zDRwAA</XPD:REF>
 <XPD:ATTR name="#Views" type="integer">4</XPD:ATTR>
 <XPD:REF name="Views[0]">53612N946k6s03hgv+C2ngAA</XPD:REF>
