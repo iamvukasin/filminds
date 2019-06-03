@@ -69,7 +69,7 @@ class AddExpertPicksView(TemplateView):
                     code += str(pick.movie_id)+","
                     mov = {
                         'id': movie.pk,
-                        'src': "https://image.tmdb.org/t/p/w1280"+movie.poster,
+                        'src': Movie.get_poster_url(movie.poster, is_small=True),
                         'order': i,
                         'title': movie.title,
                         'year': year,

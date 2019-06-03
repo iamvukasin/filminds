@@ -104,20 +104,6 @@ class MovieInfo(APIView):
         serializer = MovieSerializer(movie)
         data = serializer.data
 
-        # set default poster image if no poster
-        # is received from TMDB
-        if data['poster'] is None:
-            data['poster'] = ''
-        else:
-            data['poster'] = f'https://image.tmdb.org/t/p/w600_and_h900_bestv2{data["poster"]}'
-
-        # set default backdrop image if no backdrop
-        # is received from TMDB
-        if data['backdrop'] is None:
-            data['backdrop'] = ''
-        else:
-            data['backdrop'] = ''
-
         # create trailer URL
         if data['trailer'] is not None:
             data['trailer'] = f'https://youtu.be/{data["trailer"]}'

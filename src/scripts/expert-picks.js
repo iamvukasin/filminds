@@ -31,8 +31,7 @@ function sendRequest() {
                 const messageElement = $("#template-movie-info-row").contents("div")[0].cloneNode(true);
 
                 messageElement.setAttribute("data-movie-id", pick.movie.id);
-                messageElement.querySelector(".movie-poster > img").setAttribute("src",
-                    `https://image.tmdb.org/t/p/w1280${pick.movie.poster}`);
+                messageElement.querySelector(".movie-poster > img").setAttribute("src", pick.movie.poster);
                 messageElement.querySelector(".movie-title > h3").innerHTML = pick.movie.title;
 
                 if (pick.favorite) {

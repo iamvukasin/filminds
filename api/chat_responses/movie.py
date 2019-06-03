@@ -29,7 +29,7 @@ class MovieMessage(Message):
             movie_data = {
                 'id': movie['id'],
                 'title': movie['title'],
-                'backdrop': "https://image.tmdb.org/t/p/w400" + movie['backdrop_path'],
+                'backdrop': Movie.get_backdrop_url(movie['backdrop_path']),
                 'overview': trim_text_by_sentence(movie['overview'], Movie.DESCRIPTION_MAX_LENGTH)
             }
             movies.append(movie_data)

@@ -140,9 +140,8 @@ function addExpertPick(message,picture, id,title,year){
 	}
 	
 	const content = $(".expert-picks__content");
-	var link = "https://image.tmdb.org/t/p/w1280";
 	const newPick = addExpertPickTemplate.contents("div")[0].cloneNode(true);
-	newPick.querySelector(".expert-pick-img").setAttribute("src", link+picture);
+	newPick.querySelector(".expert-pick-img").setAttribute("src", picture);
 	var expertPicks = $(".expert-pick"); 
 	var index = expertPicks.length+1;
     newPick.querySelector(".expert-pick-header").innerText = index+". "+title+ " ("+ year+ ") ";

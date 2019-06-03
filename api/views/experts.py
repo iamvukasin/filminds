@@ -1,10 +1,8 @@
 import tmdbsimple as tmdb
 from django.contrib.auth.decorators import login_required
-from django.core import serializers
 from django.core.exceptions import ObjectDoesNotExist
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse
 from django.utils.decorators import method_decorator
-from rest_framework.utils import json
 from rest_framework.views import APIView
 
 import config
@@ -28,7 +26,7 @@ class AddExpertPick(APIView):
             release_date = result['release_date']
             split = release_date.split('-')
             if split[0] == year and result['title'] == title:
-                picture = result['poster_path']
+                picture = Movie.get_poster_url(result['poster_path'], is_small=True)
                 id = result['id']
                 success = 1
                 message = "The film is successfully added"

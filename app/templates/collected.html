@@ -11,7 +11,7 @@
 
                     {% for collected in movies %}
                         <div class="mdc-layout-grid__cell mdc-card movie-card" data-movie-id="{{ collected.movie.id }}">
-                        <img src="https://image.tmdb.org/t/p/w400{{ collected.movie.backdrop }}">
+                        <img src="{{ collected.movie.backdrop_url }}">
                         <div class="movie-card__content">
                             <h3 class="mdc-typography--headline6">{{ collected.movie.title }}</h3>
                             <p class="mdc-typography--body2">{{ collected.movie.description }}</p>

@@ -1,4 +1,5 @@
 import tmdbsimple as tmdb
+from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.db import models
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
@@ -55,8 +56,40 @@ class Movie(models.Model):
     trailer = models.CharField(max_length=70, null=True)
     genres = models.ManyToManyField(MovieGenre)
 
+    @property
+    def poster_url(self):
+        return self.get_poster_url(self.poster)
+
+    @property
+    def backdrop_url(self):
+        return self.get_backdrop_url(self.backdrop)
+
+    @property
+    def trailer_url(self):
+        return self.get_trailer_url(self.trailer)
+
+    @staticmethod
+    def get_poster_url(poster, is_small=False):
+        if poster is None:
+            size_suffix = '-small' if is_small else ''
+            return static(f'images/default-poster{size_suffix}.png')
+        else:
+            size = 'w185' if is_small else 'w600_and_h900_bestv2'
+            return f'https://image.tmdb.org/t/p/{size}{poster}'
+
+    @staticmethod
+    def get_backdrop_url(backdrop):
+        if backdrop is None:
+            return static('images/default-backdrop.png')
+        else:
+            return f'https://image.tmdb.org/t/p/w400{backdrop}'
+
+    @staticmethod
+    def get_trailer_url(trailer):
+        return f'https://youtu.be/{trailer}' if trailer is not None else None
+
     @classmethod
-    def _get_trailer(cls, videos):
+    def _get_trailers_from_videos(cls, videos):
         finder = (video['key'] for video in videos if video['site'] == 'YouTube' and video['type'] == 'Trailer')
         return next(finder, None)
 
@@ -78,7 +111,7 @@ class Movie(models.Model):
                     release_date=found_movie['release_date'],
                     poster=found_movie['poster_path'],
                     backdrop=found_movie['backdrop_path'],
-                    trailer=cls._get_trailer(found_movie['videos']['results'])
+                    trailer=cls._get_trailers_from_videos(found_movie['videos']['results'])
                 )
                 movie.save()
 
