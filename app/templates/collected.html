@@ -5,26 +5,33 @@
 
     <div class="collected-list {{ type|lower }}">
         {% if user.is_authenticated %}
-            <div class="mdc-layout-grid">
-                <div class="mdc-layout-grid__inner">
-                    <h2 class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-typography--headline5">{{ type }} </h2>
+            {% if movies|length > 0 %}
+                <div class="mdc-layout-grid">
+                    <div class="mdc-layout-grid__inner">
+                        <h2 class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-typography--headline5">{{ type }}</h2>
 
-                    {% for collected in movies %}
-                        <div class="mdc-layout-grid__cell mdc-card movie-card" data-movie-id="{{ collected.movie.id }}">
-                        <img src="{{ collected.movie.backdrop_url }}">
-                        <div class="movie-card__content">
-                            <h3 class="mdc-typography--headline6">{{ collected.movie.title }}</h3>
-                            <p class="mdc-typography--body2">{{ collected.movie.description }}</p>
+                        {% for collected in movies %}
+                            <div class="mdc-layout-grid__cell mdc-card movie-card" data-movie-id="{{ collected.movie.id }}">
+                            <img src="{{ collected.movie.backdrop_url }}">
+                            <div class="movie-card__content">
+                                <h3 class="mdc-typography--headline6">{{ collected.movie.title }}</h3>
+                                <p class="mdc-typography--body2">{{ collected.movie.description }}</p>
+                            </div>
+                            <div class="movie-card__actions">
+                                <button class="mdc-icon-button material-icons movie-watched-button {% if type == "Watched" %}active{% endif %}">done</button>
+                                <button class="mdc-icon-button material-icons movie-favorite-button {% if type == "Favorites" %}active{% endif %}">favorite</button>
+                                <button class="mdc-icon-button material-icons movie-info-button">info</button>
+                            </div>
                         </div>
-                        <div class="movie-card__actions">
-                            <button class="mdc-icon-button material-icons movie-watched-button {% if type == "Watched" %}active{% endif %}">done</button>
-                            <button class="mdc-icon-button material-icons movie-favorite-button {% if type == "Favorites" %}active{% endif %}">favorite</button>
-                            <button class="mdc-icon-button material-icons movie-info-button">info</button>
-                        </div>
+                        {% endfor %}
                     </div>
-                    {% endfor %}
                 </div>
-            </div>
+            {% else %}
+                {% with image='images/empty-list.svg' title='Your list is empty' description="You don't have any movies collected. Ask the bot to recommend you a movie!" %}
+                    {% url 'chat' as primary_action %}
+                    {% include 'components/full-screen-message.html' with primary_button="Start chatting" %}
+                {% endwith %}
+            {% endif %}
         {% else %}
             {% with image='images/login-error.svg' title='Log in required' description='In order to see the list and add movies to it, you have to be logged in.' %}
                 {% url 'login' as primary_action %}
