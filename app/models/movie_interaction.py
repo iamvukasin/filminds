@@ -65,9 +65,4 @@ class ExpertPickMovie(models.Model):
 
     @classmethod
     def get(cls, category):
-        movies = ExpertPickMovie.objects\
-            .order_by('order')\
-            .prefetch_related('movie')\
-            .filter(category=category)\
-            .values_list('movie', flat=True)
-        return Movie.objects.filter(id__in=movies).values()
+        return ExpertPickMovie.objects.order_by('order').filter(category=category)

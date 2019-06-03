@@ -1,13 +1,17 @@
 import tmdbsimple as tmdb
+from django.contrib.auth.decorators import login_required
+from django.core import serializers
 from django.core.exceptions import ObjectDoesNotExist
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
+from django.utils.decorators import method_decorator
+from rest_framework.utils import json
 from rest_framework.views import APIView
 
 import config
+from api.serializers import MoviePickSerializer
 from app.models import Movie, User
 from app.models.expert_picks import ExpertPicksCategory
 from app.models.movie_interaction import ExpertPickMovie
-from app.views.utils import add_collected_data
 
 
 class AddExpertPick(APIView):
@@ -72,11 +76,10 @@ class SavePicks(APIView):
 
 
 class ExpertPicksResponseView(APIView):
+    @method_decorator(login_required)
     def post(self, request):
         category_id = request.POST.get('category', '')
-        picks = list(ExpertPickMovie.get(category_id))
+        picks = ExpertPickMovie.get(category_id)
+        serializer = MoviePickSerializer(instance=picks, user=User.get_user(request.user), many=True)
 
-        if request.user.is_authenticated:
-            add_collected_data(picks, User.get_user(request.user))
-
-        return JsonResponse({'picks': picks})
+        return JsonResponse(serializer.data, safe=False)

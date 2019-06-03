@@ -5,7 +5,7 @@ from django.views.generic import TemplateView
 
 from app.models import CollectedMovie, User, ExpertPicksCategory, ExpertPickMovie, Movie
 from app.models.user import AuthUser
-from app.views.utils import expert_required, admin_required, add_collected_data
+from app.views.utils import expert_required, admin_required
 
 
 class ChatView(TemplateView):
@@ -41,20 +41,11 @@ class ExpertPicksView(TemplateView):
 
     def get(self, request, *args, **kwargs):
         categories = ExpertPicksCategory.get_all()
-        picks = []
-        category_name = ''
         category = ExpertPicksCategory.get_first()
-
-        if category is not None:
-            picks = ExpertPickMovie.get(category)
-            category_name = category.name
-
-        if request.user.is_authenticated:
-            add_collected_data(picks, User.get_user(request.user))
+        category_name = category.name if category is not None else ''
 
         return render(request, self.template_name, {
             'categories': categories,
-            'picks': list(picks),
             'category_name': category_name
         })
 
