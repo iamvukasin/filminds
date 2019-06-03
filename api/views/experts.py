@@ -16,30 +16,29 @@ class AddExpertPick(APIView):
     def post(self, request):
         tmdb.API_KEY = config.TMDB_API_KEY
         title = request.POST.get('title', '')
-        year = request.POST.get('year', '0')
         search = tmdb.Search()
         search.movie(query=title)
         success = 0
         message = "Film with that title doesn't exist"
         for result in search.results:
-            message = "There is a film with that title but isn't released in that year"
             release_date = result['release_date']
             split = release_date.split('-')
-            if split[0] == year and result['title'] == title:
-                picture = Movie.get_poster_url(result['poster_path'], is_small=True)
-                id = result['id']
-                success = 1
-                message = "The film is successfully added"
-                return JsonResponse({
-                    'message': message,
-                    'success': success,
-                    'picture': picture,
-                    'id': id,
-                })
+            picture = Movie.get_poster_url(result['poster_path'], is_small=True)
+            id = result['id']
+            success = 1
+            message = "The film is successfully added"
+            return JsonResponse({
+                'message': message,
+                'success': success,
+                'picture': picture,
+                'year': split[0],
+                'id': id,
+            })
         return JsonResponse({
             'message': message,
             'success': success,
          })
+
 
 class SavePicks(APIView):
     def post(self, request):
@@ -81,3 +80,21 @@ class ExpertPicksResponseView(APIView):
         serializer = MoviePickSerializer(instance=picks, user=User.get_user(request.user), many=True)
 
         return JsonResponse(serializer.data, safe=False)
+
+
+class Autosuggest(APIView):
+    def post(self, request):
+        tmdb.API_KEY = config.TMDB_API_KEY
+        title = request.POST.get('title', '')
+        search = tmdb.Search()
+        search.movie(query=title)
+        message = []
+        i = 0
+        for result in search.results:
+            message.append(result['title'])
+            i += 1
+            if i == 10:
+                break
+        return JsonResponse({
+            'message': message
+        })
