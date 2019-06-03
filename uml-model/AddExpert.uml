@@ -2820,7 +2820,7 @@
 <XPD:ATTR name="LineColor" type="string">clMaroon</XPD:ATTR>
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
 <XPD:ATTR name="LineStyle" type="LineStyleKind">lsRectilinear</XPD:ATTR>
-<XPD:ATTR name="Points" type="Points">681,318;469,318</XPD:ATTR>
+<XPD:ATTR name="Points" type="Points">681,319;469,319</XPD:ATTR>
 <XPD:REF name="Model">SFs+FFt4q0anATPQ2L+XdQAA</XPD:REF>
 <XPD:REF name="Head">pu9QvdXlqk6rvrN2B6/U6QAA</XPD:REF>
 <XPD:REF name="Tail">gDUPXhX7xEKVyQsjECDAfQAA</XPD:REF>
@@ -2848,7 +2848,7 @@
 <XPD:OBJ name="Activation" type="UMLActivationView" guid="8pm4sFot9E681lXsTu5+8QAA">
 <XPD:ATTR name="Visible" type="boolean">False</XPD:ATTR>
 <XPD:ATTR name="Left" type="integer">469</XPD:ATTR>
-<XPD:ATTR name="Top" type="integer">318</XPD:ATTR>
+<XPD:ATTR name="Top" type="integer">319</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">14</XPD:ATTR>
 <XPD:ATTR name="Height" type="integer">29</XPD:ATTR>
 </XPD:OBJ>
@@ -3219,7 +3219,7 @@
 <XPD:ATTR name="Name" type="string">category</XPD:ATTR>
 <XPD:REF name="Sender">nlIRIkqYsUOSh6TlzXkSSQAA</XPD:REF>
 <XPD:REF name="Receiver">P9Rd3UnbFUKjMIunogUrBwAA</XPD:REF>
-<XPD:OBJ name="Action" type="UMLSendAction" guid="c517VusarUOnHOxwe9ISAQAA">
+<XPD:OBJ name="Action" type="UMLReturnAction" guid="EsMrULMjXEK4Jb7ysAyo3gAA">
 <XPD:REF name="Stimulus">SFs+FFt4q0anATPQ2L+XdQAA</XPD:REF>
 </XPD:OBJ>
 <XPD:REF name="InteractionInstanceSet">pbbV67XQfUKayBBW5/SpiwAA</XPD:REF>

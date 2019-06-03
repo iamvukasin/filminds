@@ -12,6 +12,7 @@
 <XPD:BODY>
 <XPD:OBJ name="DocumentElement" type="UMLProject" guid="FjefeRVHm06NWNYGCvzz2gAA">
 <XPD:ATTR name="Title" type="string">Statistics</XPD:ATTR>
+<XPD:ATTR name="Author" type="string">Nemanja Divnic</XPD:ATTR>
 <XPD:ATTR name="#OwnedElements" type="integer">4</XPD:ATTR>
 <XPD:OBJ name="OwnedElements[0]" type="UMLModel" guid="QBo1RZItqEaU2phqgxw6bwAA">
 <XPD:ATTR name="Name" type="string">Use Case View</XPD:ATTR>

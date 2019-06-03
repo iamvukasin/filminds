@@ -3080,7 +3080,7 @@
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
 <XPD:ATTR name="Left" type="integer">60</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">172</XPD:ATTR>
-<XPD:ATTR name="Width" type="integer">509</XPD:ATTR>
+<XPD:ATTR name="Width" type="integer">813</XPD:ATTR>
 <XPD:ATTR name="Height" type="integer">705</XPD:ATTR>
 <XPD:REF name="Model">oBd6SYUZLkOpr/n84TzzNwAA</XPD:REF>
 <XPD:OBJ name="NameLabel" type="LabelView" guid="S/L0f9F2QUei9CFrlvFl2gAA">
@@ -3096,7 +3096,7 @@
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
 <XPD:ATTR name="Left" type="integer">60</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">192</XPD:ATTR>
-<XPD:ATTR name="Width" type="integer">509</XPD:ATTR>
+<XPD:ATTR name="Width" type="integer">813</XPD:ATTR>
 <XPD:ATTR name="Height" type="integer">685</XPD:ATTR>
 <XPD:REF name="Model">XK5dKqYEhUGwWq5d1Oj2QgAA</XPD:REF>
 <XPD:REF name="ContainerView">y8K1HXzEHUm/25nmBoo9XwAA</XPD:REF>
@@ -3110,7 +3110,7 @@
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
 <XPD:ATTR name="Left" type="integer">92</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">196</XPD:ATTR>
-<XPD:ATTR name="Width" type="integer">441</XPD:ATTR>
+<XPD:ATTR name="Width" type="integer">757</XPD:ATTR>
 <XPD:ATTR name="Height" type="integer">337</XPD:ATTR>
 <XPD:REF name="Model">0Lj1jSj3AECtRPbkLds4WwAA</XPD:REF>
 <XPD:OBJ name="NameLabel" type="LabelView" guid="VmQylKoEIEaWEGEf7wuZ7QAA">
@@ -3126,7 +3126,7 @@
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
 <XPD:ATTR name="Left" type="integer">92</XPD:ATTR>
 <XPD:ATTR name="Top" type="integer">216</XPD:ATTR>
-<XPD:ATTR name="Width" type="integer">441</XPD:ATTR>
+<XPD:ATTR name="Width" type="integer">757</XPD:ATTR>
 <XPD:ATTR name="Height" type="integer">317</XPD:ATTR>
 <XPD:REF name="Model">FqxwTussxUKKA/9sIr3EBwAA</XPD:REF>
 <XPD:REF name="ContainerView">eBdjw0QGBUaYxULZ9C/YXgAA</XPD:REF>
@@ -3276,7 +3276,7 @@
 <XPD:ATTR name="FillColor" type="string">$00B9FFFF</XPD:ATTR>
 <XPD:ATTR name="ShowExtendedNotation" type="boolean">True</XPD:ATTR>
 <XPD:ATTR name="Left" type="integer">416</XPD:ATTR>
-<XPD:ATTR name="Top" type="integer">60</XPD:ATTR>
+<XPD:ATTR name="Top" type="integer">56</XPD:ATTR>
 <XPD:ATTR name="Width" type="integer">131</XPD:ATTR>
 <XPD:ATTR name="Height" type="integer">1137</XPD:ATTR>
 <XPD:ATTR name="StereotypeDisplay" type="UMLStereotypeDisplayKind">sdkIcon</XPD:ATTR>
