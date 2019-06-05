@@ -1,7 +1,6 @@
 import { MDCDialog } from "@material/dialog";
 import * as Cookies from "js-cookie";
 
-
 const allDialogs = document.querySelector(".mdc-dialog");
 var dialog = null;
 var expertPicksUpButtons = $(".expert-pick__up");
@@ -14,8 +13,10 @@ const addExpertButton = $("#add-expert-button");
 const savePicksButton = $("#save-picks-button");
 const changesMade = $("#changes-made");
 const picksCode = $("#picks-code");
-
 const time = 300;
+const addMovieButton = $("#addMovieButton");
+const addMovieTitle = $("#addMovieTitle");
+const addExpertPickTemplate = $("#template-expert-pick");
 
 function replaceMovieTitle(element, index, promote) {
     var movieTitle = $(element).find(".movie-title h3");
@@ -25,7 +26,6 @@ function replaceMovieTitle(element, index, promote) {
 
 function onUpButtonClick(element) {
     return function () {
-		
         var index = $(".expert-pick__up")?.index(element);
         var expertPicks = $(".expert-pick");
 		if (index>0)changesMade.val(1);
@@ -42,7 +42,6 @@ function onDownButtonClick(element) {
         var index = $(".expert-pick__down")?.index(element);
         var expertPicks = $(".expert-pick");
 		if (index<expertPicks.length-1) changesMade.val(1);
-
         if (expertPicks && index < expertPicks.length - 1) {
             replaceMovieTitle(expertPicks[index], index, false);
             replaceMovieTitle(expertPicks[index + 1], index + 1, true);
@@ -53,17 +52,14 @@ function onDownButtonClick(element) {
 
 function onDeleteButtonClick(element) {
     return function () {
-		//changesMade.setAttribute("value",1);
 		changesMade.val(1);
         var index = $(".expert-pick__delete")?.index(element);
         var expertPicks = $(".expert-pick");
         if (!expertPicks)
             return;
-			
         for (var i = index + 1; i < expertPicks.length; i++) {
             replaceMovieTitle(expertPicks[i], i, true);
         }
-		
         $(expertPicks[index]).remove();
 		expertPicksUpButtons = $(".expert-pick__up");
 		expertPicksDownButtons = $(".expert-pick__down");
@@ -76,7 +72,6 @@ function onAddButtonClick() {
     addMovieDialog.open();
 }
 
-
 expertPicksUpButtons.each((i, obj) => obj.onclick = onUpButtonClick(obj));
 expertPicksDownButtons.each((i, obj) => obj.onclick = onDownButtonClick(obj));
 expertPicksDeleteButtons.each((i, obj) => obj.onclick = onDeleteButtonClick(obj));
@@ -86,19 +81,11 @@ if (allDialogs) {
 }
 
 addPickButton?.click(() => {
-	// OVDE SE INICIJALNO DODAJE AUTOCOMPLETE:
 	autocomplete(document.getElementById("addMovieTitle"), null);
 	dialog?.open();
 });
 
-
-const addMovieButton = $("#addMovieButton");
-const addMovieTitle = $("#addMovieTitle");
-
-
-
 addMovieButton?.click( ()=>{
-	
 	if( addMovieTitle.val()==""){
 		addMovieYear.val("");
 		showAlertWithTimer("Please enter movie title",time);
@@ -117,17 +104,12 @@ addMovieButton?.click( ()=>{
 					addMovieTitle.val("");
 				}
 				else showAlertWithTimer(data.message,time);
-
 			}
         });
 	}
 });
 
-
-const addExpertPickTemplate = $("#template-expert-pick");
-
 function addExpertPick(message,picture, id,title,year){
-	
 	hiddenIDs = $(".hidden-id");
 	for (var i = 0 ; i < hiddenIDs.length;i++){
 		if (hiddenIDs[i].getAttribute("value")==id) {
@@ -135,7 +117,6 @@ function addExpertPick(message,picture, id,title,year){
 			return;
 		}
 	}
-	
 	const content = $(".expert-picks__content");
 	const newPick = addExpertPickTemplate.contents("div")[0].cloneNode(true);
 	newPick.querySelector(".expert-pick-img").setAttribute("src", picture);
@@ -143,10 +124,8 @@ function addExpertPick(message,picture, id,title,year){
 	var index = expertPicks.length+1;
     newPick.querySelector(".expert-pick-header").innerText = index+". "+title+ " ("+ year+ ") ";
 	newPick.querySelector(".hidden-id").setAttribute("value", id);
-	
 	content.append(newPick);
 	changesMade.val(1);
-
 	expertPicksUpButtons = $(".expert-pick__up");
 	expertPicksDownButtons = $(".expert-pick__down");
 	expertPicksDeleteButtons = $(".expert-pick__delete");
@@ -162,14 +141,11 @@ savePicksButton?.click( ()=>{
 		showAlert("There are no changes");
 		return;
 	}
-
 	var str = "";
 	hiddenIDs = $(".hidden-id");
-
 	for (var i = 0; i < hiddenIDs.length;i++) { 
 		str+=hiddenIDs[i].getAttribute("value")+",";
 	}
-	
 	if (picksCode.val()==str) {
 		showAlert("There are no changes");
 		return;
@@ -182,7 +158,6 @@ savePicksButton?.click( ()=>{
 			str+=hiddenIDs[i].getAttribute("value")+",";
 		}
 		str+=hiddenIDs[hiddenIDs.length-1].getAttribute("value");
-		
         $.ajax({
             type: "POST",
             url: "/api/expert_picks/save_picks",
@@ -200,10 +175,8 @@ savePicksButton?.click( ()=>{
 					str+=hiddenIDs[i].getAttribute("value")+",";
 				}
 				picksCode.val(str);
-
 			}
         });
-		
 	}
 });
 
@@ -214,23 +187,21 @@ function showAlertWithTimer(str,time){
 	setTimeout(function() { alert(str); }, time);
 }
 
-
 var ajax_process = 0;
-
+var global_arr = null;
 function autocomplete(inp, arr) {
-  var currentFocus;
-  inp.addEventListener("input", function(e) {
-      var a, b, i, val = this.value;
-      closeAllLists();
-      if (!val) { return false;}
-	 
+	var currentFocus;
+	inp.addEventListener("input", function(e) {
+		var a, b, i, val = this.value;
+		closeAllLists();
+		if (!val) { return false;}
 		currentFocus = -1;
         a = document.createElement("DIV");
         a.setAttribute("id", this.id + "autocomplete-list");
         a.setAttribute("class", "autocomplete-items");
         this.parentNode.appendChild(a);
-		
-		if (val.length>=4){	
+		if (val.length>=4 && ajax_process==0){	
+			ajax_process = 1;
 			$.ajax({
 				type: "POST",
 				url: "/api/expert-picks/autosuggest",
@@ -240,61 +211,79 @@ function autocomplete(inp, arr) {
 				},
 				success: (data) => {
 					arr = data.message;
-				  for (i = 0; i < arr.length; i++) {
-					if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
-					  b = document.createElement("DIV");
-					  b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
-					  b.innerHTML += arr[i].substr(val.length);
-					  b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
-						  b.addEventListener("click", function(e) {
-						  inp.value = this.getElementsByTagName("input")[0].value;
-						  closeAllLists();
-					  });
-					  a.appendChild(b);
+					global_arr = [...arr];
+					for (i = 0; i < arr.length; i++) {
+						if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+							b = document.createElement("DIV");
+							b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+							b.innerHTML += arr[i].substr(val.length);
+							b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+							b.addEventListener("click", function(e) {
+								inp.value = this.getElementsByTagName("input")[0].value;
+								closeAllLists();
+							});
+							a.appendChild(b);
+						}
 					}
-				  }
+					ajax_process = 0;
 				}
 			});
-		}	  
+		}	
+		else{
+			arr = global_arr;
+			for (i = 0; i < arr.length; i++) {
+				if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+					b = document.createElement("DIV");
+					b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+					b.innerHTML += arr[i].substr(val.length);
+					b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+					b.addEventListener("click", function(e) {
+						inp.value = this.getElementsByTagName("input")[0].value;
+						closeAllLists();
+					});
+					a.appendChild(b);
+				}
+			}
+		}
       
-  });
-  inp.addEventListener("keydown", function(e) {
-      var x = document.getElementById(this.id + "autocomplete-list");
-      if (x) x = x.getElementsByTagName("div");
-      if (e.keyCode == 40) {
-        currentFocus++;
-        addActive(x);
-      } else if (e.keyCode == 38) {
-        currentFocus--;
-        addActive(x);
-      } else if (e.keyCode == 13) {
-        e.preventDefault();
-        if (currentFocus > -1) {
-          if (x) x[currentFocus].click();
-        }
-      }
-  });
-  function addActive(x) {
+	});
+	inp.addEventListener("keydown", function(e) {
+		var x = document.getElementById(this.id + "autocomplete-list");
+		if (x) x = x.getElementsByTagName("div");
+		if (e.keyCode == 40) {
+			currentFocus++;
+			addActive(x);
+		} else if (e.keyCode == 38) {
+			currentFocus--;
+			addActive(x);
+		} else if (e.keyCode == 13) {
+			e.preventDefault();
+			if (currentFocus > -1) {
+				if (x) x[currentFocus].click();
+			}
+		}
+	});
+function addActive(x) {
     if (!x) return false;
     removeActive(x);
     if (currentFocus >= x.length) currentFocus = 0;
     if (currentFocus < 0) currentFocus = (x.length - 1);
     x[currentFocus].classList.add("autocomplete-active");
-  }
-  function removeActive(x) {
+}
+function removeActive(x) {
     for (var i = 0; i < x.length; i++) {
       x[i].classList.remove("autocomplete-active");
     }
-  }
-  function closeAllLists(elmnt) {
+}
+function closeAllLists(elmnt) {
     var x = document.getElementsByClassName("autocomplete-items");
     for (var i = 0; i < x.length; i++) {
-      if (elmnt != x[i] && elmnt != inp) {
-      x[i].parentNode.removeChild(x[i]);
-    }
-  }
+		if (elmnt != x[i] && elmnt != inp) {
+			x[i].parentNode.removeChild(x[i]);
+		}
+	}
 }
 document.addEventListener("click", function (e) {
     closeAllLists(e.target);
-});
+	});
 }

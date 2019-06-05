@@ -75,9 +75,10 @@ class MostSearched(APIView):
         for result in genres_counter:
             item = [genres_counter[result], result]
             top_genres.append(item)
-        def getKey(item):
+
+        def get_key(item):
             return item[0]
-        top_genres_sorted = sorted(top_genres, key=getKey)
+        top_genres_sorted = sorted(top_genres, key=get_key)
         top_genres_sorted.reverse()
 
         i = 0

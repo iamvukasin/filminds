@@ -36,17 +36,17 @@
     </div>
 
 <template id="template-expert-pick">
-                <div class="expert-pick table__row">
-                    <div class="movie-poster table__column--shrinked">
-                        <img class ="expert-pick-img"/>
-                    </div>
-                    <div class="movie-title">
-                        <h3 class="expert-pick-header"></h3>
-                    </div>
-                    <input type="hidden" class="hidden-id">
-                     {% include 'components/add-expert-picks-buttons.html' %}
-                </div>
-            </template>
+    <div class="expert-pick table__row">
+        <div class="movie-poster table__column--shrinked">
+            <img class ="expert-pick-img"/>
+        </div>
+        <div class="movie-title">
+             <h3 class="expert-pick-header"></h3>
+        </div>
+        <input type="hidden" class="hidden-id">
+        {% include 'components/add-expert-picks-buttons.html' %}
+    </div>
+</template>
 
 {% endblock %}
 

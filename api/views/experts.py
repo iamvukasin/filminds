@@ -78,7 +78,6 @@ class ExpertPicksResponseView(APIView):
         category_id = request.POST.get('category', '')
         picks = ExpertPickMovie.get(category_id)
         serializer = MoviePickSerializer(instance=picks, user=User.get_user(request.user), many=True)
-
         return JsonResponse(serializer.data, safe=False)
 
 
@@ -93,7 +92,7 @@ class Autosuggest(APIView):
         for result in search.results:
             message.append(result['title'])
             i += 1
-            if i == 10:
+            if i == 5:
                 break
         return JsonResponse({
             'message': message

@@ -29,7 +29,6 @@ def _remove_expert(username):
 class DeleteUser(APIView):
     def post(self, request):
         username = request.POST.get('message', '')
-
         try:
             if '@' in username:
                 user = AuthUser.objects.get(email=username)
