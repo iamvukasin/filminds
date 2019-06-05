@@ -83,3 +83,13 @@
   background-color: DodgerBlue !important; 
   color: #ffffff; 
 }
+
+.mdc-dialog__surface{
+height:430px;
+}
+
+.mdc-dialog__actions{
+position:absolute;
+bottom:10px;
+right:20px;
+}
