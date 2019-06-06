@@ -8,6 +8,12 @@ from datetime import date, timedelta
 
 
 def _get_data(type):
+    """
+    Using given argument (favoured or watched movies) this method returns number of
+    movies of that type, their titles and number of users that (like or watched)
+    the movie. Used for stats.
+    """
+
     results_filter = CollectedMovie.objects.filter(type=type)
     results = results_filter.values('movie_id').annotate(count=Count('movie_id')).order_by('-count')[:7]
 
@@ -23,6 +29,13 @@ def _get_data(type):
 
 
 class MostSearched(APIView):
+    """
+    This method is used when statistics page is loaded. It returns
+    all information about most searched movies, most favoured movies,
+    most watched movies, most popular genres and new users per day in
+    last 10 days.
+    """
+
     def post(self, request):
 
         results = SearchedMovie.objects.values('movie_id').annotate(dcount=Sum('count')).order_by('-dcount')[:7]
@@ -109,4 +122,3 @@ class MostSearched(APIView):
             'per_day_dates': dates,
             'per_day_counts': user_counts,
         })
-

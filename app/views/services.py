@@ -68,6 +68,10 @@ class ExpertPicksView(TemplateView):
 
 
 class AddExpertPicksView(TemplateView):
+    """
+    View where expert can see picks he posted or add new picks.
+    """
+
     template_name = "add-expert-picks.html"
 
     @method_decorator(expert_required)
@@ -117,6 +121,10 @@ class StatisticsView(TemplateView):
 
 
 class AdminDashboardView(TemplateView):
+    """
+    View for admin user to maintain the site.
+    """
+
     template_name = "admin-dashboard.html"
 
     @method_decorator(admin_required)

@@ -13,6 +13,12 @@ from app.models.movie_interaction import ExpertPickMovie
 
 
 class AddExpertPick(APIView):
+    """
+    This method check for a movie with given title. If there is a film, it returns
+    a message, information about success and movie info, so it can be put on a page
+    instantly, with no need to reload page. Else, it returns a message of failure.
+    """
+
     def post(self, request):
         tmdb.API_KEY = config.TMDB_API_KEY
         title = request.POST.get('title', '')
@@ -41,6 +47,12 @@ class AddExpertPick(APIView):
 
 
 class SavePicks(APIView):
+    """
+    When expert user makes changes, this method is called to save them.
+    It deletes all his picks and then rewrites all new picks. The advantage
+    od this way is when many changes are made.
+    """
+
     def post(self, request):
         tmdb.API_KEY = config.TMDB_API_KEY
         try:
@@ -86,6 +98,11 @@ class ExpertPicksResponseView(APIView):
 
 
 class Autosuggest(APIView):
+    """
+    This method returns no more than 5 movies with a title like
+    given argument.
+    """
+
     def post(self, request):
         tmdb.API_KEY = config.TMDB_API_KEY
         title = request.POST.get('title', '')
