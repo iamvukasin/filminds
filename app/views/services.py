@@ -9,10 +9,18 @@ from app.views.utils import expert_required, admin_required
 
 
 class ChatView(TemplateView):
+    """
+    View where user can send text messages to the bot.
+    """
+
     template_name = "chat.html"
 
 
 class FavoritesView(TemplateView):
+    """
+    View where user can see a list of movies saved to watch.
+    """
+
     template_name = "collected.html"
 
     def get(self, request, *args, **kwargs):
@@ -25,6 +33,10 @@ class FavoritesView(TemplateView):
 
 
 class WatchedView(TemplateView):
+    """
+    View where user can see a list of movies marked as watched.
+    """
+
     template_name = "collected.html"
 
     def get(self, request, *args, **kwargs):
@@ -37,6 +49,11 @@ class WatchedView(TemplateView):
 
 
 class ExpertPicksView(TemplateView):
+    """
+    View where user can see a list of movies from specific categories
+    recommended by experts.
+    """
+
     template_name = "expert-picks.html"
 
     def get(self, request, *args, **kwargs):

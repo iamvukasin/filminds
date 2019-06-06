@@ -73,6 +73,10 @@ class SavePicks(APIView):
 
 
 class ExpertPicksResponseView(APIView):
+    """
+    View that returns expert picks from requested category.
+    """
+
     @method_decorator(login_required)
     def post(self, request):
         category_id = request.POST.get('category', '')

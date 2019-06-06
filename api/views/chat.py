@@ -47,8 +47,19 @@ def _increment_date(date, grain):
 
 
 class ChatReply(APIView):
+    """
+    View that creates bot response based on user request.
+    """
+
     @staticmethod
     def _parse_response(response):
+        """
+        Parses data got from Wit as response to user message.
+
+        :param response: Wit response
+        :return: Dictionary of parsed data from Wit response
+        """
+
         entities = response['entities']
 
         if 'greetings' in entities:
@@ -134,6 +145,10 @@ class ChatReply(APIView):
 
 
 class ChatLoad(APIView):
+    """
+    View that returns messages for current user when presenting chat.
+    """
+
     def post(self, request):
         if request.user.is_authenticated:
             user = User.get_user(request.user)
