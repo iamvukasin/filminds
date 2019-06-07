@@ -1,0 +1,120 @@
+\section{Језици и радни оквири}
+
+\subsection{\textit{Front-end}}
+
+Изглед сервиса је базиран на радном оквиру \textit{Material Web Components},
+уз прилагођавања и стилске модификације како би се прилагодио захтевима и
+потребама пројекта.
+
+\textit{Build system} који је коришћен је \textit{Gulp} 4.0.0 , који је задужен
+за превођење \textit{Sass} стилова, минификацију и спајање \textit{JavaScript} и
+CSS скрипти, као и за компресију слика и покретање локалног сервера са опцијом
+аутоматског учитавања станица приликом сваке промене HTML, CSS или
+\textit{JavaScript} фајлова.
+
+\textit{Yarn} 1.16.0 је коришћен као \textit{dependency manager}, како за
+библиотеке коришћене на страницама, тако и за библиотеке коришћене за развој
+\textit{front-end} дела пројекта.
+
+Списак свих библиотека (ажурна верзија је у \verb|packages.json| у кореном
+фолдеру пројекта):
+
+\vspace{0.2cm}
+\setlist{nolistsep}
+\begin{itemize}[noitemsep]
+    \item \verb|@material/button| (2.0.0) -- \textit{Material Web Components},
+    \item \verb|@material/card| (2.0.0) -- \textit{Material Web Components},
+    \item \verb|@material/dialog| (2.0.0) -- \textit{Material Web Components},
+    \item \verb|@material/drawer| (2.0.0) -- \textit{Material Web Components},
+    \item \verb|@material/elevation| (1.1.0) --
+        \textit{Material Web Components},
+    \item \verb|@material/icon-button| (2.0.0) --
+        \textit{Material Web Components},
+    \item \verb|@material/layout-grid| (0.41.0) --
+        \textit{Material Web Components},
+    \item \verb|@material/select| (2.2.0) -- \textit{Material Web Components},
+    \item \verb|@material/textfield| (2.1.0) --
+        \textit{Material Web Components},
+    \item \verb|@material/theme| (1.1.0) -- \textit{Material Web Components},
+    \item \verb|@material/toolbar| (2.0.0) -- \textit{Material Web Components},
+    \item \verb|@material/top-app-bar| (2.1.0) --
+        \textit{Material Web Components},
+    \item \verb|@material/typography| (1.0.0) --
+        \textit{Material Web Components},
+    \item \verb|chartist| (0.11.0) -- графикони,
+    \item \verb|js-cookie| (2.2.0) -- рад са колачићима
+\end{itemize}
+
+\vspace{0.4cm}
+
+Списак коришћених библиотека за развој (углавном додаци за \textit{Gulp} и
+\textit{Babel}; ажурна верзија је у \verb|packages.json| у кореном фолдеру
+пројекта):
+
+\vspace{0.2cm}
+\setlist{nolistsep}
+\begin{itemize}[noitemsep]
+    \item \verb|@babel/core| (7.3.4) -- модерни \textit{JavaScript} преводилац,
+    \item \verb|@babel/plugin-proposal-optional-chaining| (7.2.0) --
+        подршка за \textit{JavaScript optional chaining},
+    \item \verb|@babel/preset-env| (7.3.4) -- подразумено \textit{Babel}
+        окружење,
+    \item \verb|babelify| (10.0.0) -- \textit{browserify} за \textit{Babel},
+    \item \verb|browser-sync| (2.26.3) -- поново учитавање станица после
+        промене,
+    \item \verb|browserify| (16.2.3) -- \textit{Node.JS} стил писања,
+    \item \verb|del| (4.0.0) -- брисање фолдера,
+    \item \verb|gulp| (4.0.0) -- \textit{build system},
+    \item \verb|gulp-autoprefixer| (6.1.0) -- \textit{Gulp} додатак за
+        \textit{Autoprefixer},
+    \item \verb|gulp-babel| (8.0.0-beta.2) -- \textit{Gulp} додатак за
+        \textit{Babel},
+    \item \verb|gulp-csso| (3.0.1) -- \textit{Gulp} додатак за оптимизацију
+        CSS-а,
+    \item \verb|gulp-sass| (4.0.2) -- \textit{Gulp} додатак за \textit{Sass},
+    \item \verb|gulp-svgo| (2.1.0) -- \textit{Gulp} додатак за оптимизацију
+        SVG-а,
+    \item \verb|gulp-uglify| (3.0.2) -- \textit{Gulp} додатак за минификацију,
+    \item \verb|vinyl-buffer| (1.0.1) -- спајање више скрипти,
+    \item \verb|vinyl-source-stream| (2.0.0) -- спајање више скрипти
+\end{itemize}
+
+\subsection{\textit{Back-end}}
+
+Као језик за \textit{back-end} коришћен је \textit{Python} 3.6, док је као радни
+оквир коришћен \textit{Django} 2.2.1. \textit{Pipenv} је коришћен као
+\textit{dependency manager} за \textit{Python} библиотеке.
+
+Списак свих библиотека (ажурна верзија је у \verb|Pipenv.lock| у кореном
+фолдеру пројекта):
+
+\vspace{0.2cm}
+\setlist{nolistsep}
+\begin{itemize}[noitemsep]
+    \item \verb|django| (2.2.1) -- \textit{back-end} радни оквир,
+    \item \verb|psycopg2-binary| (2.8.2) -- подршка за рад са \textit{Postgres}
+        базом,
+    \item \verb|tmdbsimple| (2.2.0) -- омотач за \textit{The Movie Database}
+        API,
+    \item \verb|django-widget-tweaks| (1.4.3) -- додатни \textit{Django} тагови,
+    \item \verb|djangorestframework| (3.9.4) -- \textit{Django} подршка за REST,
+    \item \verb|wit| (5.1.0) -- препознавање писаног језика
+\end{itemize}
+
+\vspace{0.4cm}
+
+Списак коришћених библиотека за развој (ажурна верзија је у \verb|Pipenv.lock| у
+кореном фолдеру пројекта):
+
+\vspace{0.2cm}
+\setlist{nolistsep}
+\begin{itemize}[noitemsep]
+    \item \verb|pytest| (4.5.0) -- радни оквир за тестирање,
+    \item \verb|pytest-flake8| (1.0.4) -- додатак за \textit{Pytest} за проверу
+        стила кода (PEP8)
+\end{itemize}
+
+\subsection{База података}
+
+\textit{Postgres} 11.3 је база података коришћена за чување корисничких
+података.

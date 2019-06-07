@@ -1,0 +1,67 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[serbianc]{babel}
+\usepackage{fullwidth}
+\usepackage{tabularx}
+\usepackage{makecell}
+\usepackage{enumitem}
+
+% section prefixes
+\makeatletter
+\renewcommand{\@seccntformat}[1]{%
+  \ifcsname prefix@#1\endcsname
+    \csname prefix@#1\endcsname
+  \else
+    \csname the#1\endcsname\quad
+  \fi}
+% define \prefix@section
+\newcommand\prefix@section{\thesection. }
+\makeatother
+
+\begin{document}
+
+\begin{titlepage}
+\begin{center}
+  Универзитет у Београду \\
+  Електротехнички факултет \\
+  Катедра за рачунарску технику и информатику \\
+  \vfill
+
+  {\fontsize{50}{60}\selectfont Списак коришћених алата за пројекат Filminds}
+  \vskip 0.6cm
+
+  {\large Тим: Super Trio Mario}
+  \vskip 0.3cm
+
+  \vfill
+  \vfill
+
+  Јун 2019.
+\hfill
+
+\end{center}
+\end{titlepage}
+
+\section*{Историја измена}
+\noindent
+\setcellgapes{4pt}
+\makegapedcells
+\begin{tabularx}{\linewidth}{|l|l|X|X|}
+    \hline
+    \textbf{Датум} & \textbf{Верзија} & \textbf{Кратак опис} & \textbf{Аутор} \\
+    \hline
+    4.6.2019. & 1.0 & Иницијална верзија документа & Вукашин Манојловић \\
+    \hline
+    & & & \\
+    \hline
+\end{tabularx}
+\newpage
+
+\tableofcontents
+\newpage
+
+\input{_dev.tex}
+\input{_other.tex}
+
+\end{document}
