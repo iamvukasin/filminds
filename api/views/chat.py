@@ -13,6 +13,8 @@ from app.views.utils import add_collected_data
 
 RESPONSE_BUILDERS = {
     'greetings': chat_responses.ResponseGreeting,
+    'thanks': chat_responses.ResponseThanks,
+    'bye': chat_responses.ResponseBye,
     'recommend_movies': chat_responses.ResponseRecommendMovie,
     'popular_movies': chat_responses.ResponsePopularMovie,
     'help': chat_responses.ResponseHelp,
@@ -62,8 +64,12 @@ class ChatReply(APIView):
 
         entities = response['entities']
 
-        if 'greetings' in entities:
+        if 'bye' in entities:
+            return {'type': 'bye'}
+        elif 'greetings' in entities:
             return {'type': 'greetings'}
+        elif 'thanks' in entities:
+            return {'type': 'thanks'}
         elif 'intent' in entities:
             summary = {}
 
