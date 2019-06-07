@@ -104,10 +104,6 @@ class MovieInfo(APIView):
         serializer = MovieSerializer(movie)
         data = serializer.data
 
-        # create trailer URL
-        if data['trailer'] is not None:
-            data['trailer'] = f'https://youtu.be/{data["trailer"]}'
-
         # get actors from TMDB
         movie_credits = tmdb.Movies(pk).credits()
         data['cast'] = []
