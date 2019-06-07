@@ -5,7 +5,7 @@ from django.views.generic import TemplateView
 
 from app.models import CollectedMovie, User, ExpertPicksCategory, ExpertPickMovie, Movie
 from app.models.user import AuthUser
-from app.views.utils import expert_required, admin_required
+from app.views.utils import expert_required, admin_required, expert_or_admin_required
 
 
 class ChatView(TemplateView):
@@ -115,9 +115,11 @@ class AddExpertPicksView(TemplateView):
 class StatisticsView(TemplateView):
     template_name = "statistics.html"
 
-    @method_decorator(admin_required)
+    @method_decorator(expert_or_admin_required)
     def get(self, request, *args, **kwargs):
-        return render(request, self.template_name)
+        return render(request, self.template_name, {
+            'is_admin': User.is_auth_user_admin(request.user)
+        })
 
 
 class AdminDashboardView(TemplateView):
