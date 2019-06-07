@@ -113,6 +113,9 @@ class AddExpertPicksView(TemplateView):
 
 
 class StatisticsView(TemplateView):
+    """
+    View for admin and expert user to have a look at various statistics.
+    """
     template_name = "statistics.html"
 
     @method_decorator(expert_or_admin_required)
