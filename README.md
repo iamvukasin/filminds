@@ -1,5 +1,7 @@
 # Filminds
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/35d44710dc094c6593f91597bebab237)](https://app.codacy.com/app/iamvukasin/filminds?utm_source=github.com&utm_medium=referral&utm_content=iamvukasin/filminds&utm_campaign=Badge_Grade_Dashboard)
+
 ## Table of contents
 
   * [Getting started](#getting-started)
