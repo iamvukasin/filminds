@@ -21,8 +21,10 @@ addExpertButton?.click(() => {
     $.ajax({
         type: "POST",
         url: "/api/admin_dashboard/get_categories",
-        headers: {"X-CSRFToken": Cookies.get("csrftoken")},
-        success: (data) =>{
+        headers: {
+            "X-CSRFToken": Cookies.get("csrftoken")
+        },
+        success: (data) => {
             var values = data.values;
             var categories = data.message;        
             var split_values = values.split(",");
@@ -43,8 +45,11 @@ function deleteButtonClick(element) {
     return function () {
         var index = $(".remove-expert")?.index(element);
         var experts = $(".expert-content");
-        if (!experts)
+
+        if (!experts) {
             return;
+        }
+
         var expertUsername = $(".expertUsername");
         $.ajax({
             type: "POST",
@@ -55,12 +60,13 @@ function deleteButtonClick(element) {
             },
         });
         $(experts[index]).remove();
-    }
+    };
 }
+
 deleteButtons.each((i, obj) => obj.onclick = deleteButtonClick(obj));
 
 removeUserButton?.click(() => {
-    if( removeUserTextField.val()==""){
+    if (removeUserTextField.val() === "") {
         showAlert("Please enter valid data");
     }
     else{
@@ -75,7 +81,7 @@ removeUserButton?.click(() => {
         });
         var experts = $(".expert-content");
         for (var i = 0 ; i < experts.length;i++){
-            if (experts[i].querySelector(".expertUsername").innerText== removeUserTextField.val()){
+            if (experts[i].querySelector(".expertUsername").innerText === removeUserTextField.val()) {
                 $(experts[i]).remove();
                 break;
             }
@@ -84,22 +90,25 @@ removeUserButton?.click(() => {
     }
 });
 
-confirmExpertButton?.click( ()=>{
-    var category = categorySelect.options[categorySelect.selectedIndex].text
-    if( addExpertTextField.val()==""){
+confirmExpertButton?.click(() => {
+    var category = categorySelect.options[categorySelect.selectedIndex].text;
+
+    if (addExpertTextField.val() === "") {
         showAlertWithTimer("Please enter username or email",time);
     }
     else {
         $.ajax({
             type: "POST",
             url: "/api/admin_dashboard/add_expert",
-            headers: {"X-CSRFToken": Cookies.get("csrftoken")},
+            headers: {
+                "X-CSRFToken": Cookies.get("csrftoken")
+            },
             data: {
                 expert: addExpertTextField.val(),
                 category : category,
             },
             success: (data) => {
-                if (data.success == 0)
+                if (data.success === 0)
                     showAlertWithTimer(data.message,time);
                 else{
                     const content = $(".expert__content");
@@ -121,6 +130,7 @@ confirmExpertButton?.click( ()=>{
 function showAlert(str){
     alert(str);
 }
-function showAlertWithTimer(str,time){
+
+function showAlertWithTimer(str, time){
     setTimeout(function() { alert(str); }, time);
 }

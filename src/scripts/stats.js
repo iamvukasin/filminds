@@ -1,4 +1,4 @@
-import * as Chartist from 'chartist';
+import * as Chartist from "chartist";
 import * as Cookies from "js-cookie";
 
 /**
@@ -8,8 +8,9 @@ import * as Cookies from "js-cookie";
  * @param {Object} data Data to show on a chart.
  */
 function createHorizontalBarChart(selector, data) {
-    if (!$(selector).length)
+    if (!$(selector).length) {
         return;
+    }
 
     var options = {
         reverseData: true,
@@ -29,8 +30,9 @@ function createHorizontalBarChart(selector, data) {
  * @param {Object} data Data to show on a chart.
  */
 function createDonutChart(selector, data) {
-    if (!$(selector).length)
+    if (!$(selector).length) {
         return;
+    }
 
     var options = {
         donut: true,
@@ -49,8 +51,9 @@ function createDonutChart(selector, data) {
  * @param {Object} data Data to show on a chart.
  */
 function createLineChart(selector, data) {
-    if (!$(selector).length)
+    if (!$(selector).length) {
         return;
+    }
 
     var options = {
         low: 0,
@@ -64,7 +67,9 @@ function createSampleData() {
     $.ajax({
         type: "POST",
         url: "/api/stats/most_searched",
-        headers: {"X-CSRFToken": Cookies.get("csrftoken")},
+        headers: {
+            "X-CSRFToken": Cookies.get("csrftoken")
+        },
         success: (data) => {
             mostSearched(data);
             mostFavoured(data);
@@ -82,7 +87,7 @@ function mostPopularGenres(data){
     var split_counts = counts.split(",");
     split_titles.pop();
     var ints = [];
-    for (var i = 0 ; i < data.top_genres_number;i++){
+    for (var i = 0; i < data.top_genres_number; i++) {
         var str = "statistics__item--"+i;
         var num = Number(split_counts[i]);
         var item = {
@@ -105,7 +110,7 @@ function mostSearched(data){
     var split_counts = counts.split(",");
     split_titles.pop();
     var ints = [];
-    for (var i = 0 ; i < data.most_searched_number;i++){
+    for (var i = 0; i < data.most_searched_number; i++) {
         ints.push(Number(split_counts[i]));
     }
     var statisticsSearchedData = {
@@ -122,7 +127,7 @@ function mostFavoured(data){
     var split_counts = counts.split(",");
     split_titles.pop();
     var ints = [];
-    for (var i = 0 ; i < data.most_favoured_number;i++){
+    for (var i = 0; i < data.most_favoured_number; i++) {
         ints.push(Number(split_counts[i]));
     }
     var statisticsWishListData = {
@@ -139,7 +144,7 @@ function mostWatched(data){
     var split_counts = counts.split(",");
     split_titles.pop();
     var ints = [];
-    for (var i = 0 ; i < data.most_watched_number;i++){
+    for (var i = 0; i < data.most_watched_number; i++) {
         ints.push(Number(split_counts[i]));
     }
     var statisticsWatchListData = {
@@ -157,7 +162,7 @@ function perDayUsers(data){
     split_dates.pop();
     split_counts.pop();
     var ints = [];
-    for (var i = 0 ; i < split_counts.length;i++){
+    for (var i = 0; i < split_counts.length; i++) {
         ints.push(Number(split_counts[i]));
     }
     var statisticsPerDayData = {
@@ -166,6 +171,7 @@ function perDayUsers(data){
     };
     createLineChart(".statistics__users", statisticsPerDayData);
 }
+
 $(() => {
     if ($(".statistics").length) {
         createSampleData();

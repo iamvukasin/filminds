@@ -126,10 +126,10 @@ function onCollectedMovieButtonClick(type, event) {
 }
 
 // add or remove favorites movie
-$("body").on("click", ".movie-favorite-button", e => onCollectedMovieButtonClick("favorites", e));
+$("body").on("click", ".movie-favorite-button", (e) => onCollectedMovieButtonClick("favorites", e));
 
 // add or remove watched movie
-$("body").on("click", ".movie-watched-button", e => onCollectedMovieButtonClick("watched", e));
+$("body").on("click", ".movie-watched-button", (e) => onCollectedMovieButtonClick("watched", e));
 
 // open movie info overlay
 $("body").on("click", ".movie-info-button", (e) => {
@@ -139,7 +139,9 @@ $("body").on("click", ".movie-info-button", (e) => {
     $.ajax({
         type: "GET",
         url: "/api/movies/info/" + movieId,
-        headers: {"X-CSRFToken": Cookies.get("csrftoken")},
+        headers: {
+            "X-CSRFToken": Cookies.get("csrftoken")
+        },
         success: showMovie
     });
 });

@@ -1,9 +1,9 @@
 const { src, dest, parallel, series, watch } = require("gulp");
-const autoprefixer = require('gulp-autoprefixer');
+const autoprefixer = require("gulp-autoprefixer");
 const sass = require("gulp-sass");
 const minifyCSS = require("gulp-csso");
 const svgo = require("gulp-svgo");
-const babelify = require("babelify")
+const babelify = require("babelify");
 const browserify = require("browserify");
 const source = require("vinyl-source-stream");
 const buffer = require("vinyl-buffer");
@@ -16,13 +16,13 @@ const destinationFolder = "app/static";
 
 function css() {
     return src("src/sass/*.scss")
-        .pipe(sass({ includePaths: ['node_modules/'] }))
+        .pipe(sass({ includePaths: ["node_modules/"] }))
         .pipe(autoprefixer({
-            browsers: ['last 3 versions'],
+            browsers: ["last 3 versions"],
             cascade: false
         }))
         .pipe(minifyCSS())
-        .pipe(dest(destinationFolder + "/css"))
+        .pipe(dest(destinationFolder + "/css"));
 }
 
 function scripts() {

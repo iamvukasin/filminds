@@ -9,7 +9,6 @@ var expertPicksDeleteButtons = $(".expert-pick__delete");
 var hiddenIDs = $(".hidden-id");
 
 const addPickButton = $("#add-pick-button");
-const addExpertButton = $("#add-expert-button");
 const savePicksButton = $("#save-picks-button");
 const changesMade = $("#changes-made");
 const picksCode = $("#picks-code");
@@ -28,7 +27,11 @@ function onUpButtonClick(element) {
     return function () {
         var index = $(".expert-pick__up")?.index(element);
         var expertPicks = $(".expert-pick");
-		if (index>0)changesMade.val(1);
+
+        if (index > 0) {
+        	changesMade.val(1);
+		}
+
         if (expertPicks && index > 0) {
             replaceMovieTitle(expertPicks[index], index, true);
             replaceMovieTitle(expertPicks[index - 1], index - 1, false);
@@ -41,7 +44,11 @@ function onDownButtonClick(element) {
     return function () {
         var index = $(".expert-pick__down")?.index(element);
         var expertPicks = $(".expert-pick");
-		if (index<expertPicks.length-1) changesMade.val(1);
+
+        if (index < expertPicks.length - 1) {
+			changesMade.val(1);
+		}
+
         if (expertPicks && index < expertPicks.length - 1) {
             replaceMovieTitle(expertPicks[index], index, false);
             replaceMovieTitle(expertPicks[index + 1], index + 1, true);
@@ -55,17 +62,21 @@ function onDeleteButtonClick(element) {
 		changesMade.val(1);
         var index = $(".expert-pick__delete")?.index(element);
         var expertPicks = $(".expert-pick");
-        if (!expertPicks)
-            return;
+
+        if (!expertPicks) {
+			return;
+		}
+
         for (var i = index + 1; i < expertPicks.length; i++) {
             replaceMovieTitle(expertPicks[i], i, true);
         }
+
         $(expertPicks[index]).remove();
 		expertPicksUpButtons = $(".expert-pick__up");
 		expertPicksDownButtons = $(".expert-pick__down");
 		expertPicksDeleteButtons = $(".expert-pick__delete");
 		hiddenIDs = $(".hidden-id");
-    }
+    };
 }
 
 function onAddButtonClick() {
@@ -85,12 +96,11 @@ addPickButton?.click(() => {
 	dialog?.open();
 });
 
-addMovieButton?.click( ()=>{
-	if( addMovieTitle.val()==""){
+addMovieButton?.click(() => {
+	if (addMovieTitle.val() === "") {
 		addMovieYear.val("");
 		showAlertWithTimer("Please enter movie title",time);
-	}
-	else {
+	} else {
         $.ajax({
             type: "POST",
             url: "/api/expert_picks/expert_pick",
@@ -99,20 +109,21 @@ addMovieButton?.click( ()=>{
                 title: addMovieTitle.val()
             },
             success: (data) => {
-				if (data.success==1){
+				if (data.success === 1) {
 					addExpertPick(data.message,data.picture,data.id,addMovieTitle.val(),data.year);
 					addMovieTitle.val("");
+				} else {
+					showAlertWithTimer(data.message,time);
 				}
-				else showAlertWithTimer(data.message,time);
 			}
         });
 	}
 });
 
-function addExpertPick(message,picture, id,title,year){
+function addExpertPick(message,picture, id, title, year) {
 	hiddenIDs = $(".hidden-id");
-	for (var i = 0 ; i < hiddenIDs.length;i++){
-		if (hiddenIDs[i].getAttribute("value")==id) {
+	for (var i = 0; i < hiddenIDs.length; i++) {
+		if (hiddenIDs[i].getAttribute("value") === id) {
 			showAlertWithTimer("The movie is already on the list",time);
 			return;
 		}
@@ -122,7 +133,7 @@ function addExpertPick(message,picture, id,title,year){
 	newPick.querySelector(".expert-pick-img").setAttribute("src", picture);
 	var expertPicks = $(".expert-pick"); 
 	var index = expertPicks.length+1;
-    newPick.querySelector(".expert-pick-header").innerText = index+". "+title+ " ("+ year+ ") ";
+    newPick.querySelector(".expert-pick-header").innerText = index + ". " + title + " (" + year + ") ";
 	newPick.querySelector(".hidden-id").setAttribute("value", id);
 	content.append(newPick);
 	changesMade.val(1);
@@ -136,8 +147,8 @@ function addExpertPick(message,picture, id,title,year){
 }
 
 
-savePicksButton?.click( ()=>{
-	if (changesMade.val()==0){
+savePicksButton?.click(() => {
+	if (changesMade.val() === 0) {
 		showAlert("There are no changes");
 		return;
 	}
@@ -146,22 +157,25 @@ savePicksButton?.click( ()=>{
 	for (var i = 0; i < hiddenIDs.length;i++) { 
 		str+=hiddenIDs[i].getAttribute("value")+",";
 	}
-	if (picksCode.val()==str) {
+	if (picksCode.val() === str) {
 		showAlert("There are no changes");
 		return;
 	}
 	hiddenIDs = $(".hidden-id");
-	if(hiddenIDs.length==0) showAlert("There are no movies to save");
-	else{
+	if (hiddenIDs.length === 0) {
+		showAlert("There are no movies to save");
+	} else {
 		str = "";
-		for (var i = 0; i < hiddenIDs.length-1;i++) { 
+		for (var i = 0; i < hiddenIDs.length-1; i++) {
 			str+=hiddenIDs[i].getAttribute("value")+",";
 		}
-		str+=hiddenIDs[hiddenIDs.length-1].getAttribute("value");
+		str += hiddenIDs[hiddenIDs.length-1].getAttribute("value");
         $.ajax({
             type: "POST",
             url: "/api/expert_picks/save_picks",
-            headers: {"X-CSRFToken": Cookies.get("csrftoken")},
+            headers: {
+            	"X-CSRFToken": Cookies.get("csrftoken")
+			},
             data: {
                 message: str,
             },
@@ -171,8 +185,8 @@ savePicksButton?.click( ()=>{
 				var str = "";
 				hiddenIDs = $(".hidden-id");
 
-				for (var i = 0; i < hiddenIDs.length;i++) { 
-					str+=hiddenIDs[i].getAttribute("value")+",";
+				for (var i = 0; i < hiddenIDs.length; i++) {
+					str += hiddenIDs[i].getAttribute("value") + ",";
 				}
 				picksCode.val(str);
 			}
@@ -180,27 +194,33 @@ savePicksButton?.click( ()=>{
 	}
 });
 
-function showAlert(str){
+function showAlert(str) {
 	alert(str);
 }
-function showAlertWithTimer(str,time){
-	setTimeout(function() { alert(str); }, time);
+
+function showAlertWithTimer(str, time) {
+	setTimeout(function() {
+		alert(str);
+	}, time);
 }
 
 var ajax_process = 0;
 var global_arr = null;
+
 function autocomplete(inp, arr) {
 	var currentFocus;
 	inp.addEventListener("input", function(e) {
 		var a, b, i, val = this.value;
 		closeAllLists();
-		if (!val) { return false;}
+		if (!val) {
+			return false;
+		}
 		currentFocus = -1;
         a = document.createElement("DIV");
         a.setAttribute("id", this.id + "autocomplete-list");
         a.setAttribute("class", "autocomplete-items");
         this.parentNode.appendChild(a);
-		if (val.length>=4 && ajax_process==0){	
+		if (val.length >= 4 && ajax_process === 0) {
 			ajax_process = 1;
 			$.ajax({
 				type: "POST",
@@ -213,7 +233,7 @@ function autocomplete(inp, arr) {
 					arr = data.message;
 					global_arr = [...arr];
 					for (i = 0; i < arr.length; i++) {
-						if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+						if (arr[i].substr(0, val.length).toUpperCase() === val.toUpperCase()) {
 							b = document.createElement("DIV");
 							b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
 							b.innerHTML += arr[i].substr(val.length);
@@ -232,7 +252,7 @@ function autocomplete(inp, arr) {
 		else{
 			arr = global_arr;
 			for (i = 0; i < arr.length; i++) {
-				if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+				if (arr[i].substr(0, val.length).toUpperCase() === val.toUpperCase()) {
 					b = document.createElement("DIV");
 					b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
 					b.innerHTML += arr[i].substr(val.length);
@@ -247,43 +267,48 @@ function autocomplete(inp, arr) {
 		}
       
 	});
+
 	inp.addEventListener("keydown", function(e) {
 		var x = document.getElementById(this.id + "autocomplete-list");
 		if (x) x = x.getElementsByTagName("div");
-		if (e.keyCode == 40) {
+		if (e.keyCode === 40) {
 			currentFocus++;
 			addActive(x);
-		} else if (e.keyCode == 38) {
+		} else if (e.keyCode === 38) {
 			currentFocus--;
 			addActive(x);
-		} else if (e.keyCode == 13) {
+		} else if (e.keyCode === 13) {
 			e.preventDefault();
 			if (currentFocus > -1) {
 				if (x) x[currentFocus].click();
 			}
 		}
 	});
-function addActive(x) {
-    if (!x) return false;
-    removeActive(x);
-    if (currentFocus >= x.length) currentFocus = 0;
-    if (currentFocus < 0) currentFocus = (x.length - 1);
-    x[currentFocus].classList.add("autocomplete-active");
-}
-function removeActive(x) {
-    for (var i = 0; i < x.length; i++) {
-      x[i].classList.remove("autocomplete-active");
-    }
-}
-function closeAllLists(elmnt) {
-    var x = document.getElementsByClassName("autocomplete-items");
-    for (var i = 0; i < x.length; i++) {
-		if (elmnt != x[i] && elmnt != inp) {
-			x[i].parentNode.removeChild(x[i]);
+
+	function addActive(x) {
+		if (!x) return false;
+		removeActive(x);
+		if (currentFocus >= x.length) currentFocus = 0;
+		if (currentFocus < 0) currentFocus = (x.length - 1);
+		x[currentFocus].classList.add("autocomplete-active");
+	}
+
+	function removeActive(x) {
+		for (var i = 0; i < x.length; i++) {
+		  x[i].classList.remove("autocomplete-active");
 		}
 	}
-}
-document.addEventListener("click", function (e) {
-    closeAllLists(e.target);
+
+	function closeAllLists(elmnt) {
+		var x = document.getElementsByClassName("autocomplete-items");
+		for (var i = 0; i < x.length; i++) {
+			if (elmnt !== x[i] && elmnt !== inp) {
+				x[i].parentNode.removeChild(x[i]);
+			}
+		}
+	}
+
+	document.addEventListener("click", function (e) {
+		closeAllLists(e.target);
 	});
 }

@@ -11,7 +11,7 @@ $(document).ready(() => {
     scrollContent();
 });
 
-$("#chat-form").on('submit', e => {
+$("#chat-form").on("submit", (e) => {
     e.preventDefault();
     let message = sendMessageTextField.val().trim();
     presentUserMessage(message);
@@ -22,10 +22,11 @@ sendMessageTextField.on("keyup", () => {
     const textToSend = sendMessageTextField.val().trim();
 
     // enable sending only when text is valid
-    if (textToSend !== "")
+    if (textToSend !== "") {
         sendMessageButton.prop("disabled", false);
-    else
+    } else {
         sendMessageButton.prop("disabled", true);
+    }
 });
 
 /**
@@ -42,7 +43,8 @@ function presentBotMessage(message) {
         messageElement.querySelector(".message").innerText = message.content;
         messageElement = messageElement.outerHTML;
     } else {
-        let content = ``;
+        let content = "";
+
         for (const movie of message.content) {
             const movieElement = $("#template-movie-card").contents("div")[0].cloneNode(true);
 
@@ -146,11 +148,13 @@ function loadMessages() {
         success: function (result) {
             for (const message of result) {
                 if (message.sender_type === "U") {
-                    for (const singleMessage of message.content.messages)
+                    for (const singleMessage of message.content.messages) {
                         appendUserMessage(singleMessage.content);
+                    }
                 } else {
-                    for (const singleMessage of message.content.messages)
+                    for (const singleMessage of message.content.messages) {
                         presentBotMessage(singleMessage);
+                    }
                 }
             }
         }

@@ -1,6 +1,6 @@
 import * as Cookies from "js-cookie";
 
-const categorySelect = $('select.select-category');
+const categorySelect = $("select.select-category");
 
 categorySelect.change(function () {
     sendRequest();
@@ -20,7 +20,9 @@ function sendRequest() {
     $.ajax({
         type: "POST",
         url: "/api/expert-picks/response",
-        headers: {"X-CSRFToken": Cookies.get("csrftoken")},
+        headers: {
+            "X-CSRFToken": Cookies.get("csrftoken")
+        },
         data: {
             category: categoryId
         },
@@ -35,9 +37,9 @@ function sendRequest() {
                 messageElement.querySelector(".movie-title > h3").innerHTML = pick.movie.title;
 
                 if (pick.favorite) {
-                    messageElement.querySelector('.movie-favorite-button').classList.add('active');
+                    messageElement.querySelector(".movie-favorite-button").classList.add("active");
                 } else if (pick.watched) {
-                    messageElement.querySelector('.movie-watched-button').classList.add('active');
+                    messageElement.querySelector(".movie-watched-button").classList.add("active");
                 }
 
                 html += messageElement.outerHTML;
