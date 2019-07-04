@@ -19,9 +19,9 @@ SIDE_MENU = [
     MenuItem(item_type='item', url='expert_picks', title='Expert picks', icon='stars'),
     MenuItem(item_type='divider', visible_if=lambda u: User.is_auth_user_expert(u) or User.is_auth_user_admin(u)),
     MenuItem(item_type='item', url='add_expert_picks', title='Add expert picks', icon='library_add',
-             visible_if=lambda u: User.is_auth_user_expert(u)),
+             visible_if=User.is_auth_user_expert),
     MenuItem(item_type='item', url='statistics', title='Statistics', icon='bar_chart',
              visible_if=lambda u: User.is_auth_user_expert(u) or User.is_auth_user_admin(u)),
     MenuItem(item_type='item', url='admin_dashboard', title='Admin dashboard', icon='supervised_user_circle',
-             visible_if=lambda u: User.is_auth_user_admin(u))
+             visible_if=User.is_auth_user_admin)
 ]
