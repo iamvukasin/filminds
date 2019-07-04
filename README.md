@@ -4,10 +4,11 @@
 
 ## Table of contents
 
-  * [Getting started](#getting-started)
+* [Getting started](#getting-started)
     * [Front-end](#front-end)
     * [Backend-end](#back-end)
-  * [License](#license)
+    * [Configuration](#configuration)
+* [License](#license)
 
 ## Getting started
 
@@ -46,6 +47,16 @@ To run the project, make sure you're in the project's root and type:
 
 ```bash
 $ python manage.py runserver
+```
+
+### Configuration
+
+All project configuration is controlled in the `config.py` file. Make sure you have added API keys here or via
+environment variables:
+
+```python
+TMDB_API_KEY = <<TMDB_API_KEY>>
+WIT_ACCESS_TOKEN = <<WIT_ACCESS_TOKEN>>
 ```
 
 ## License
