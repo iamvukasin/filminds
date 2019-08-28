@@ -1,0 +1,9 @@
+$base-colors: (#3a86f1, #00bff6, #22d1da, #6f40e0, #080942);
+$ct-series-colors: ();
+
+// colors for series graphs
+@each $base-color in $base-colors {
+    $ct-series-colors: append($ct-series-colors, lighten($base-color, 10%));
+    $ct-series-colors: append($ct-series-colors, $base-color);
+    $ct-series-colors: append($ct-series-colors, darken($base-color, 10%));
+}

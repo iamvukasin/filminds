@@ -1,7 +1,7 @@
 from django.urls import path, re_path
 
 from api.views import MovieAddToFavorites, MovieAddToWatched, RemoveCollectedMovie, MovieInfo, ChatLoad, ChatReply,\
-    DeleteUser, AddExpert, RemoveExpert, AddExpertPick, SavePicks, ExpertPicksResponseView, MostSearched,\
+    DeleteUser, AddExpert, RemoveExpert, AddExpertPick, SavePicks, ExpertPicksResponseView, Statistics,\
     GetCategories, Autosuggest
 
 urlpatterns = [
@@ -19,5 +19,5 @@ urlpatterns = [
     path('expert_picks/save_picks', SavePicks.as_view()),
     path('expert-picks/response', ExpertPicksResponseView.as_view()),
     path('expert-picks/autosuggest', Autosuggest.as_view()),
-    path('stats/most_searched', MostSearched.as_view()),
+    path('statistics', Statistics.as_view()),
 ]

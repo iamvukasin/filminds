@@ -1,124 +1,111 @@
-from django.http import JsonResponse
-from rest_framework.views import APIView
-from django.db.models import Sum, Count
-from app.models.user import AuthUser
-from app.models.movie_interaction import SearchedMovie, CollectedMovie
-from app.models.movie import Movie
 from datetime import date, timedelta
 
+from django.db.models import Sum, Count
+from django.http import JsonResponse
+from django.utils.decorators import method_decorator
+from rest_framework.views import APIView
 
-def _get_data(type):
+from app.models import User, SearchedMovie, CollectedMovie
+from app.views.utils import expert_or_admin_required
+
+NUM_RETURNED_MOVIES = 7
+STATS_FOR_LAST_N_DAYS = 10
+
+
+def _create_statistics_data(data_list, is_multi_series=False):
     """
-    Using given argument (favoured or watched movies) this method returns number of
-    movies of that type, their titles and number of users that (like or watched)
-    the movie. Used for stats.
+    Transforms the given list of data to the format suitable for
+    presenting it on the front-end. Supports multi series charts (like
+    line and bar charts) and or single series ones (like pie/donut
+    charts).
+
+    :param data_list: a list of pairs (label, value)
+    :param is_multi_series: true if data will be shown on multi series
+    charts
+    :return: a dictionary of formatted input data
     """
 
-    results_filter = CollectedMovie.objects.filter(type=type)
-    results = results_filter.values('movie_id').annotate(count=Count('movie_id')).order_by('-count')[:7]
+    statistics_data = {
+        'labels': [],
+        'series': [[]] if is_multi_series else []
+    }
 
-    favoured_movies = ""
-    favoured_counts = ""
-    favoured_number = results.count()
-    for result in results:
-        movie = Movie.objects.get(pk=result['movie_id'])
-        favoured_movies += movie.title + ","
-        favoured_counts += str(result['count']) + ","
+    for data in data_list:
+        statistics_data['labels'].append(data[0])
 
-    return favoured_number, favoured_movies, favoured_counts
+        if is_multi_series:
+            statistics_data['series'][0].append(data[1])
+        else:
+            statistics_data['series'].append(data[1])
+
+    return statistics_data
 
 
-class MostSearched(APIView):
+def _get_most_searched_movies():
+    most_searched_movies = SearchedMovie.objects \
+        .annotate(searches=Sum('count')) \
+        .order_by('-searches') \
+        .values_list('movie__title', 'searches')[:NUM_RETURNED_MOVIES]
+    return _create_statistics_data(most_searched_movies, is_multi_series=True)
+
+
+def _get_most_collected_movies(collection_type):
+    most_collected_movies = CollectedMovie.objects \
+        .filter(type=collection_type) \
+        .values('movie_id') \
+        .annotate(num_collected=Count('movie_id')) \
+        .order_by('-num_collected') \
+        .values_list('movie__title', 'num_collected')[:NUM_RETURNED_MOVIES]
+    return _create_statistics_data(most_collected_movies, is_multi_series=True)
+
+
+def _get_most_popular_genres():
+    most_searched_genres = SearchedMovie.objects \
+        .annotate(searches=Sum('count')) \
+        .values_list('movie__genres__name', 'searches')
+    most_collected_genres = CollectedMovie.objects \
+        .annotate(num_collected=Count('movie_id')) \
+        .values_list('movie__genres__name', 'num_collected')
+
+    genres_count = {}
+
+    for genre, count in list(most_searched_genres) + list(most_collected_genres):
+        genres_count[genre] = genres_count.get(genre, 0) + count
+
+    return _create_statistics_data(genres_count.items())
+
+
+def _get_registered_users_number():
+    result = []
+    today = date.today()
+
+    for delta in reversed(range(STATS_FOR_LAST_N_DAYS)):
+        day = today - timedelta(days=delta)
+        num_users = User.objects \
+            .filter(user__date_joined__date=day) \
+            .count()
+        result.append((day, num_users))
+
+    return _create_statistics_data(result, is_multi_series=True)
+
+
+class Statistics(APIView):
     """
-    This method is used when statistics page is loaded. It returns
-    all information about most searched movies, most favoured movies,
-    most watched movies, most popular genres and new users per day in
+    Returns statistics about most searched, favoured and watched
+    movies, most popular genres and number of new users per day in
     last 10 days.
     """
 
-    def post(self, request):
+    @method_decorator(expert_or_admin_required)
+    def get(self, request):
+        result = {
+            'searched': _get_most_searched_movies(),
+            'watched': _get_most_collected_movies(CollectedMovie.TYPE_WATCH),
+            'favorite': _get_most_collected_movies(CollectedMovie.TYPE_WISH),
+            'genres': _get_most_popular_genres()
+        }
 
-        results = SearchedMovie.objects.values('movie_id').annotate(dcount=Sum('count')).order_by('-dcount')[:7]
-        searched_titles = ""
-        searched_counts = ""
-        searched_number = len(results)
-        for result in results:
-            movie = Movie.objects.get(pk=result['movie_id'])
-            searched_titles += movie.title+","
-            searched_counts += str(result['dcount'])+","
+        if User.is_auth_user_admin(request.user):
+            result['users'] = _get_registered_users_number()
 
-        today = date.today()
-        dates = ""
-        user_counts = ""
-        for i in reversed(range(10)):
-            min_date = today - timedelta(days=i)
-            result = AuthUser.objects.filter(date_joined__date=min_date)
-            dates += str(min_date) + ","
-            user_counts += str(result.count()) + ","
-
-        favoured_number, favoured_movies, favoured_counts = _get_data(CollectedMovie.TYPE_WISH)
-        watched_number, watched_movies, watched_counts = _get_data(CollectedMovie.TYPE_WATCH)
-
-        searched_results = SearchedMovie.objects.values('movie_id')\
-            .annotate(count=Sum('count')).order_by('-movie_id')
-
-        collected_results = CollectedMovie.objects.values('movie_id')\
-            .annotate(count=Count('movie_id')).order_by('-movie_id')
-
-        all_results = {}
-
-        for result in searched_results:
-            all_results[result['movie_id']] = result['count']
-        for result in collected_results:
-            if result['movie_id'] in all_results:
-                all_results[result['movie_id']] += result['count']
-            else:
-                all_results[result['movie_id']] = result['count']
-
-        genres_counter = {}
-        for result in all_results:
-            movie = Movie.objects.get(pk=result)
-            for genre in movie.genres.all():
-                if genre.name in genres_counter:
-                    genres_counter[genre.name] += all_results[result]
-                else:
-                    genres_counter[genre.name] = all_results[result]
-
-        top_genres = list()
-        for result in genres_counter:
-            item = [genres_counter[result], result]
-            top_genres.append(item)
-
-        def get_key(item):
-            return item[0]
-        top_genres_sorted = sorted(top_genres, key=get_key)
-        top_genres_sorted.reverse()
-
-        i = 0
-        genres_names = ""
-        genres_counter = ""
-
-        for result in top_genres_sorted:
-            genres_names += result[1] + ","
-            genres_counter += str(result[0]) + ","
-            i += 1
-            if i == 7:
-                break
-        genres_number = i
-
-        return JsonResponse({
-            'most_searched_titles': searched_titles,
-            'most_searched_counts': searched_counts,
-            'most_searched_number': searched_number,
-            'most_favoured_titles': favoured_movies,
-            'most_favoured_counts': favoured_counts,
-            'most_favoured_number': favoured_number,
-            'most_watched_titles': watched_movies,
-            'most_watched_counts': watched_counts,
-            'most_watched_number': watched_number,
-            'top_genres_names': genres_names,
-            'top_genres_counter': genres_counter,
-            'top_genres_number': genres_number,
-            'per_day_dates': dates,
-            'per_day_counts': user_counts,
-        })
+        return JsonResponse(result)

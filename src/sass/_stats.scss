@@ -1,6 +1,5 @@
+@import "variables";
 @import "chartist/dist/scss/chartist";
-
-$color-collection: ("#6f40e0", "#656be8", "#3a86f1", "#00bff6", "#22d1da", $mdc-theme-primary, "#080942");
 
 .statistics {
     height: 100%;
@@ -24,16 +23,8 @@ $color-collection: ("#6f40e0", "#656be8", "#3a86f1", "#00bff6", "#22d1da", $mdc-
     }
 }
 
-@for $i from 0 to length($color-collection) {
-    $color: unquote(nth($color-collection, $i+1));
-
-    .statistics__item--#{$i} {
-        fill: $color;
-    }
-
-    .ct-label {
-        fill: rgba(255, 255, 255, 0.8);
-    }
+.ct-label {
+    fill: rgba(255, 255, 255, 0.8);
 }
 
 .statistics__users {
@@ -47,9 +38,9 @@ $color-collection: ("#6f40e0", "#656be8", "#3a86f1", "#00bff6", "#22d1da", $mdc-
 .ct-series-a .ct-line,
 .ct-series-a .ct-bar,
 .ct-series-a .ct-point {
-    stroke: unquote(nth($color-collection, 3));
+    stroke: nth($base-colors, 1);
 }
 
 .ct-series-a .ct-area {
-    fill: unquote(nth($color-collection, 3));
+    fill: nth($base-colors, 1);
 }
