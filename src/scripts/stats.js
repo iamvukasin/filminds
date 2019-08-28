@@ -1,6 +1,11 @@
 import * as Chartist from "chartist";
 import * as Cookies from "js-cookie";
 
+function onlyIntegerLabelInterpolation(value) {
+    // returns a space to keep grid lines for non-integer values on the axis
+    return (isNaN(value) || value % 1 === 0) ? value : ' ';
+}
+
 /**
  * Creates a horizontal bar chart inside the element selected with the
  * selector with provided data.
@@ -15,6 +20,9 @@ function createHorizontalBarChart(selector, data) {
     const options = {
         reverseData: true,
         horizontalBars: true,
+        axisX: {
+            labelInterpolationFnc: onlyIntegerLabelInterpolation
+        },
         axisY: {
             offset: 70
         }
@@ -57,7 +65,11 @@ function createLineChart(selector, data) {
 
     const options = {
         low: 0,
-        showArea: true
+        step: 1,
+        showArea: true,
+        axisY: {
+            labelInterpolationFnc: onlyIntegerLabelInterpolation
+        }
     };
 
     new Chartist.Line(selector, data, options);
