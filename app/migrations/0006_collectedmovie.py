@@ -5,7 +5,6 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('app', '0005_searchedmovie'),
     ]
@@ -16,7 +15,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('date', models.DateField()),
-                ('type', models.CharField(choices=[('WA', 'Watch list'), ('WI', 'Wish list')], default='WI', max_length=2)),
+                ('type',
+                 models.CharField(choices=[('WA', 'Watch list'), ('WI', 'Wish list')], default='WI', max_length=2)),
                 ('movie', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='app.Movie')),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='app.User')),
             ],
